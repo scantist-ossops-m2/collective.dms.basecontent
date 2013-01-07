@@ -38,6 +38,11 @@ setup(name='collective.dms.basecontent',
           'setuptools',
           # -*- Extra requirements: -*-
       ],
+      extras_require={
+          'test': ['plone.app.testing',
+                   'ecreall.helpers.testing',
+                   ],
+          },
       entry_points="""
       # -*- Entry points: -*-
       """,
