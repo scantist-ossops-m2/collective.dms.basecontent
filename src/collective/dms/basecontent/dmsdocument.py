@@ -15,7 +15,7 @@ from . import _
 class IDmsDocument(model.Schema):
     """ """
 
-    notes = schema.TextLine(
+    notes = schema.Text(
         title=_(u"Notes"),
         required=False
         )
