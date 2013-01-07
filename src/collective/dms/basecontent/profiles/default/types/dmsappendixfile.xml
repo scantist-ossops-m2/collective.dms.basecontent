@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<object name="dmsmainfile" meta_type="Dexterity FTI" i18n:domain="plone"
+<object name="dmsappendixfile" meta_type="Dexterity FTI" i18n:domain="plone"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">DmsMainFile</property>
+ <property name="title" i18n:translate="">DmsAppendixFile</property>
  <property name="description" i18n:translate="">None</property>
  <property name="icon_expr">string:${portal_url}/file_icon.png</property>
- <property name="factory">dmsmainfile</property>
- <property name="add_view_expr">string:${folder_url}/++add++dmsmainfile</property>
+ <property name="factory">dmsappendixfile</property>
+ <property name="add_view_expr">string:${folder_url}/++add++dmsappendixfile</property>
  <property name="link_target"></property>
  <property name="immediate_view">view</property>
  <property name="global_allow">False</property>
