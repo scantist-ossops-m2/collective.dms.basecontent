@@ -45,5 +45,7 @@ setup(name='collective.dms.basecontent',
           },
       entry_points="""
       # -*- Entry points: -*-
+      [z3c.autoinclude.plugin]
+      target = plone
       """,
       )
