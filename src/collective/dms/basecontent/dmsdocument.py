@@ -7,13 +7,12 @@ from plone.app.content.interfaces import INameFromTitle
 from plone.dexterity.content import Container
 from plone.dexterity.schema import DexteritySchemaPolicy
 
-from plone.namedfile.field import NamedImage
 from plone.supermodel import model
 
 from . import _
 
 
-class IBaseContent(model.Schema):
+class IDmsDocument(model.Schema):
     """ """
 
     notes = schema.TextLine(
@@ -21,13 +20,13 @@ class IBaseContent(model.Schema):
         required=False
         )
 
-class BaseContent(Container):
+class DmsDocument(Container):
     """ """
-    implements(IBaseContent)
+    implements(IDmsDocument)
 
 
-class BaseContentSchemaPolicy(DexteritySchemaPolicy):
+class DmsDocumentSchemaPolicy(DexteritySchemaPolicy):
     """ """
 
     def bases(self, schemaName, tree):
-        return (IBaseContent, )
+        return (IDmsDocument, )

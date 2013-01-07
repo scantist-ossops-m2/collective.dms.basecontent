@@ -17,13 +17,13 @@
       name="default"
       title="collective.dms.basecontent"
       directory="profiles/default"
-      description="Installs the collective.dms.content package"
+      description="Installs the collective.dms.basecontent package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
   <utility
-      factory=".basecontent.BaseContentSchemaPolicy"
-      name="schema_policy_dmsbasecontent"
+      factory=".dmsdocument.DmsDocumentSchemaPolicy"
+      name="schema_policy_dmsdocument"
       />
 
 </configure>
