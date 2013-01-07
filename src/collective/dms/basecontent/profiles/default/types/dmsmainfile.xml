@@ -1,18 +1,14 @@
 <?xml version="1.0"?>
-<object name="dmsdocument" meta_type="Dexterity FTI" i18n:domain="plone"
+<object name="dmsmainfile" meta_type="Dexterity FTI" i18n:domain="plone"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">DmsDocument</property>
+ <property name="title" i18n:translate="">DmsMainFile</property>
  <property name="description" i18n:translate="">None</property>
- <property name="icon_expr">string:${portal_url}/folder_icon.png</property>
- <property name="factory">dmsdocument</property>
- <property name="add_view_expr">string:${folder_url}/++add++dmsdocument</property>
+ <property name="icon_expr">string:${portal_url}/file_icon.png</property>
+ <property name="factory">dmsmainfile</property>
+ <property name="add_view_expr">string:${folder_url}/++add++dmsmainfile</property>
  <property name="link_target"></property>
  <property name="immediate_view">view</property>
- <property name="global_allow">True</property>
- <property name="filter_content_types">True</property>
- <property name="allowed_content_types">
-  <element value="dmsmainfile"/>
- </property>
+ <property name="global_allow">False</property>
  <property name="allow_discussion">False</property>
  <property name="default_view">view</property>
  <property name="view_methods">
@@ -20,16 +16,16 @@
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
- <property name="klass">collective.dms.basecontent.dmsdocument.DmsDocument</property>
+ <property name="klass">collective.dms.basecontent.dmsfile.DmsFile</property>
  <property name="behaviors">
   <element value="plone.app.content.interfaces.INameFromTitle"/>
-  <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
+  <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
   <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" />
 </property>
  <property name="schema" />
  <!-- DO NOT use a model_source or it removes manually added fields while reapplying the profile -->
  <!--property name="model_source" /-->
- <property name="schema_policy">schema_policy_dmsdocument</property>
+ <property name="schema_policy">schema_policy_dmsfile</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="@@edit"/>
  <alias from="sharing" to="@@sharing"/>
