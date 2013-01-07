@@ -37,6 +37,10 @@ setup(name='collective.dms.basecontent',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'five.grok',
+          'plone.app.dexterity',
+          'plone.namedfile',
+          'z3c.blobfile',
       ],
       extras_require={
           'test': ['plone.app.testing',
