@@ -9,7 +9,7 @@ from z3c.form.widget import FieldWidget
 from z3c.relationfield.interfaces import IRelationList
 from z3c.relationfield.schema import RelationChoice, RelationList
 
-from plone.formwidget.autocomplete.widget import AutocompleteMultiSelectionWidget
+from plone.formwidget.contenttree.widget import MultiContentTreeWidget
 from plone.formwidget.contenttree import ObjPathSourceBinder
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -17,7 +17,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 class IRelatedDocs(IRelationList):
     """"""
 
-class RelatedDocsWidget(AutocompleteMultiSelectionWidget):
+class RelatedDocsWidget(MultiContentTreeWidget):
     display_template = ViewPageTemplateFile('related-docs-display.pt')
     
     def __init__(self, display_backrefs, request):
@@ -39,11 +39,12 @@ class RelatedDocsWidget(AutocompleteMultiSelectionWidget):
             try:
                 doc_intid = intids.getId(self.context)
             except KeyError:
-                backrefs = []
+                pass
             else:
-                backrefs = [(x.from_path, x.from_object.Title()) for x in
-                            catalog.findRelations({'to_id': doc_intid})]
-            refs.extend(backrefs)
+                for ref in catalog.findRelations({'to_id': doc_intid}):
+                    tp = (ref.from_path, ref.from_object.Title())
+                    if tp not in refs:
+                        refs.append(tp)
         return refs
 
 @adapter(IRelatedDocs, IFormLayer)
