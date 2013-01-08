@@ -1,6 +1,5 @@
 #! -*- coding: utf8 -*-
 from setuptools import setup, find_packages
-import os
 
 version = '1.0'
 
@@ -45,6 +44,7 @@ setup(name='collective.dms.basecontent',
       extras_require={
           'test': ['plone.app.testing',
                    'ecreall.helpers.testing',
+                   'plone.app.vocabularies'
                    ],
           },
       entry_points="""

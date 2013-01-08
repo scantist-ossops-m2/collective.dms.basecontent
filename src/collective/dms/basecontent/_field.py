@@ -2,8 +2,10 @@
 from zope.component import adapts
 from zope.interface import implementer
 from zope.interface import Interface
+
 from zope.schema.interfaces import IList
 from zope.schema import List, Choice, Tuple
+from zope.schema.interfaces import RequiredMissing, InvalidValue
 
 from z3c.form.datamanager import AttributeField
 
@@ -34,6 +36,20 @@ class LocalRolesToPrincipals(List):
         # pass default value of value_type to super constructor
         kw['value_type'] = value_type
         super(LocalRolesToPrincipals, self).__init__(**kw) 
+
+    def validate(self, value):
+        """Check that we have roles to assign, this is mendatory and
+           that roles we want to assign actually exist."""
+        super(LocalRolesToPrincipals, self)._validate(value)
+        # the roles_to_assign is mandatory
+        if not self.roles_to_assign:
+            raise RequiredMissing
+
+        # check that roles we want to assign actually exist
+        existingRoles = [role for role in self.context.acl_users.portal_role_manager.listRoleIds()]
+        for role_to_assign in self.roles_to_assign:
+            if not role_to_assign in existingRoles:
+                raise InvalidValue
 
 
 class LocalRolesToPrincipalsDataManager(AttributeField):
