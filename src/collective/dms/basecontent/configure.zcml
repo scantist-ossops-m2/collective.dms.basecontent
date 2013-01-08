@@ -31,4 +31,8 @@
       name="schema_policy_dmsfile"
       />
 
+  <adapter
+      factory="._field.LocalRolesToPrincipalsDataManager"
+      />
+
 </configure>
