@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Shell script to manage locales, languages, .po files...
 #
@@ -9,13 +9,11 @@
 CATALOGNAME="collective.dms.basecontent"
 
 # List of managed languages (separated by space)
-LANGUAGES="en fr nl"
+# Ex LANGUAGES="fr|French|fr-fr;fr-be;fr-ca nl|Dutch|nl-be;nl-nl"
+LANGUAGES="en|English|en-au;en-ca;en-gb;en-us fr|French|fr-fr;fr-be;fr-ca nl|Dutch|nl-be;nl-nl"
 
 # Create locales folder structure for languages
 install -d locales
-for lang in $LANGUAGES; do
-    install -d locales/$lang/LC_MESSAGES
-done
 
 # Rebuild .pot
 if ! test -f locales/$CATALOGNAME.pot; then
@@ -24,25 +22,43 @@ fi
 
 # Finding pot files
 for pot in $(find locales -mindepth 1 -maxdepth 1 -type f -name "*.pot" ! -name generated.pot); do
-    catalog=`echo $pot | cut -d "/" -f 2 | cut -d "." -f 1`
+    #finding pot basename as catalog
+    catalog=`basename $pot .pot`
     echo "=> Found pot $pot"
     # Compile po files
-    for lang in $(find locales -mindepth 1 -maxdepth 1 -type d); do
+    for infos in $LANGUAGES; do
+        arr=(`echo $infos | cut -d "|"  --output-delimiter=" " -f 1-`)
+        lang=${arr[0]}
+        install -d locales/$lang/LC_MESSAGES
+
+        if test -d locales/$lang/LC_MESSAGES; then
     
-        if test -d $lang/LC_MESSAGES; then
-    
-            PO=$lang/LC_MESSAGES/$catalog.po
+            PO=locales/$lang/LC_MESSAGES/$CATALOGNAME.po
             # Create po file if not exists
-            touch $PO
-    
-            # Sync po file
-            echo " -> Syncing $PO"
-            i18ndude sync --pot $pot $PO
+            if ! test -f $PO; then
+                touch $PO
+                echo " -> Syncing $PO"
+                i18ndude sync --pot $pot $PO
+                sed -i -e "/^\\\"Domain: DOMAIN/ s/DOMAIN/$catalog/" $PO
+                sed -i -e "/^\\\"Language-Code: en/ s/en/$lang/" $PO                
+                langname=${arr[1]}
+                if [ -n "$langname" ]; then
+                    sed -i -e "/^\\\"Language-Name: English/ s/English/$langname/" $PO                
+                fi
+                fallbackstr=${arr[2]}
+                if [ -n "$fallbackstr" ]; then
+                    fallbacklist=`echo $fallbackstr | cut -d ";"  --output-delimiter=" " -f 1-`
+                    echo $fallbacklist
+                    sed -i -e "/^\\\"Language-Name:/ a\"X-is-fallback-for: $fallbacklist\\\n\"" $PO                
+                fi
+            else
+                i18ndude sync --pot $pot $PO                
+            fi
     
             # Compile .po to .mo (msgfmt is in package gettext)
-            MO=$lang/LC_MESSAGES/$catalog.mo
+            MO=locales/$lang/LC_MESSAGES/$catalog.mo
             echo " -> Compiling $MO"
-            msgfmt -o $MO $lang/LC_MESSAGES/$catalog.po
+            #msgfmt -o $MO locales/$lang/LC_MESSAGES/$catalog.po
         fi
     done
 done
