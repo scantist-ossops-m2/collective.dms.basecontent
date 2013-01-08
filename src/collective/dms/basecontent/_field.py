@@ -63,7 +63,7 @@ class LocalRolesToPrincipalsDataManager(AttributeField):
         # ---1 --- first find assigned roles to remove
         # it is not that easy to remove local roles because no helper method exists for removing
         # some specific local roles, only a method for removing every local roles for a list of principals...
-        old_value = self.field.get(self.context)
+        old_value = self.field.get(self.context) or ()
         # now check between old_value and value (new value) what is missing
         removed_principals = set(old_value).difference(set(value))
         # remove local_roles for removed_principals
