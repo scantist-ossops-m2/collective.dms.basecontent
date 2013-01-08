@@ -79,14 +79,13 @@ class LocalRolesToPrincipalsDataManager(AttributeField):
                         # if a role to remove was already removed (???) pass
                         logger.warn("Failed to remove role '%s' for principal '%s' on object '%s'" \
                                     % (role_to_assign, principal, '/'.join(self.context.getPhysicalPath())))
-                import ipdb; ipdb.set_trace()
                 # if there are still some local_roles, use manage_setLocalRoles
                 if cleaned_local_roles:
                     self.context.manage_setLocalRoles(principal, cleaned_local_roles)
                 else:
                     # either use manage_delLocalRoles
                     self.context.manage_delLocalRoles((principal,))
-        # ---2 --- now add new roles
+        # ---2 --- now add new local roles
         added_principals = set(value).difference(set(old_value))
         for added_principal in added_principals:
             self.context.manage_addLocalRoles(added_principal, roles_to_assign)
