@@ -40,19 +40,19 @@ for pot in $(find locales -mindepth 1 -maxdepth 1 -type f -name "*.pot" ! -name 
                 echo " -> Syncing $PO"
                 i18ndude sync --pot $pot $PO
                 sed -i -e "/^\\\"Domain: DOMAIN/ s/DOMAIN/$catalog/" $PO
-                sed -i -e "/^\\\"Language-Code: en/ s/en/$lang/" $PO                
+                sed -i -e "/^\\\"Language-Code: en/ s/en/$lang/" $PO
                 langname=${arr[1]}
                 if [ -n "$langname" ]; then
-                    sed -i -e "/^\\\"Language-Name: English/ s/English/$langname/" $PO                
+                    sed -i -e "/^\\\"Language-Name: English/ s/English/$langname/" $PO
                 fi
                 fallbackstr=${arr[2]}
                 if [ -n "$fallbackstr" ]; then
                     fallbacklist=`echo $fallbackstr | cut -d ";"  --output-delimiter=" " -f 1-`
                     echo $fallbacklist
-                    sed -i -e "/^\\\"Language-Name:/ a\"X-is-fallback-for: $fallbacklist\\\n\"" $PO                
+                    sed -i -e "/^\\\"Language-Name:/ a\"X-is-fallback-for: $fallbacklist\\\n\"" $PO
                 fi
             else
-                i18ndude sync --pot $pot $PO                
+                i18ndude sync --pot $pot $PO
             fi
     
             # Compile .po to .mo (msgfmt is in package gettext)
