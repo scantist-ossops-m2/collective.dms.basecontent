@@ -13,6 +13,8 @@
   <include package="plone.app.relationfield" />
   <include package="plone.supermodel" />
 
+  <adapter factory=".relateddocs.RelatedDocsFieldWidget" />
+
   <genericsetup:registerProfile
       name="default"
       title="collective.dms.basecontent"

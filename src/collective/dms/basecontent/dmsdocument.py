@@ -6,6 +6,8 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 
 from plone.supermodel import model
 
+from collective.dms.basecontent.relateddocs import RelatedDocs
+
 from . import _
 from ._field import LocalRolesToPrincipals
 
@@ -30,8 +32,15 @@ class IDmsDocument(model.Schema):
         roles_to_assign=('Reader',)
         )
 
+    related_docs = RelatedDocs(
+        title=_(u"Related documents"),
+        required=False,
+        display_backrefs=True)
+
+
 class DmsDocument(Container):
     """ """
+
     implements(IDmsDocument)
 
 
