@@ -1,25 +1,7 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-# Copyright (c) 2002 Zope Foundation and Contributors.
-# All Rights Reserved.
-#
-# This software is subject to the provisions of the Zope Public License,
-# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
-# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
-# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
-# FOR A PARTICULAR PURPOSE.
-#
-##############################################################################
-"""Schema Fields
-"""
-__docformat__ = 'restructuredtext'
-
-
 from zope.component import adapts
 from zope.interface import implementer
 from zope.interface import Interface
-
 from zope.schema.interfaces import IList
 from zope.schema import List, Choice, Tuple
 
@@ -28,26 +10,28 @@ from z3c.form.datamanager import AttributeField
 import logging
 logger = logging.getLogger('collective.dms.basecontent._field')
 
+
 class ILocalRolesToPrincipals(IList):
-    """Field that list principals depending on a vocabulary and that assign given
-       local roles."""
+    """Field that list principals depending on a vocabulary (by default list every available groups)
+       and that assign local roles defined in the roles_to_assign attribute."""
 
     # this attribute will contains a tuple of principal to assign when the value is set
     roles_to_assign = Tuple(
           title=u"Roles to assign",
           description=u"""\
-          Define roles that will be automatically asigned as local roles.
+          Roles that will be automatically assigned as local roles to selected principals.
           """,
           required=True)
 
 
 @implementer(ILocalRolesToPrincipals)
 class LocalRolesToPrincipals(List):
-    """Field that list principals depending on a vocabulary and that assign given
-       local roles."""
+    """Field that list principals depending on a vocabulary (by default list every available groups)
+       and that assign local roles defined in the roles_to_assign attribute."""
 
     def __init__(self, roles_to_assign=(), value_type=Choice(vocabulary=u'plone.app.vocabularies.Groups',), **kw):
         self.roles_to_assign = roles_to_assign
+        # pass default value of value_type to super constructor
         kw['value_type'] = value_type
         super(LocalRolesToPrincipals, self).__init__(**kw) 
 
@@ -61,8 +45,8 @@ class LocalRolesToPrincipalsDataManager(AttributeField):
         # set local roles before setting the value so we still have access to the old value
         roles_to_assign = self.field.roles_to_assign
         # ---1 --- first find assigned roles to remove
-        # it is not that easy to remove local roles because no helper method exists
-        # for removing some specific local roles, only a method for removing every local roles...
+        # it is not that easy to remove local roles because no helper method exists for removing
+        # some specific local roles, only a method for removing every local roles for a list of principals...
         old_value = self.field.get(self.context)
         # now check between old_value and value (new value) what is missing
         removed_principals = set(old_value).difference(set(value))
