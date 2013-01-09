@@ -24,22 +24,20 @@
  <property name="klass">plone.dexterity.content.Container</property>
  <property name="behaviors">
   <element value="plone.app.content.interfaces.INameFromTitle"/>
-</property>
- <property name="schema">
+  <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
+ </property>
+ <property name="schema" />
+ <property name="model_source">
 &lt;model xmlns="http://namespaces.plone.org/supermodel/schema"&gt;
     &lt;schema&gt;
-        &lt;field name="title" type="zope.schema.TextLine"&gt;
-            &lt;title&gt;Title&lt;/title&gt;
-            &lt;required&gt;True&lt;/required&gt;
-        &lt;/field&gt;
-        &lt;field name="description" type="zope.schema.Text"&gt;
-            &lt;title&gt;Description&lt;/title&gt;
+        &lt;field name="testingField" type="collective.dms.basecontent.LocalRolesToPrincipals"&gt;
+            &lt;title&gt;testingField&lt;/title&gt;
             &lt;required&gt;False&lt;/required&gt;
+            &lt;roles_to_assign&gt;('Reader',)&lt;/roles_to_assign&gt;
         &lt;/field&gt;
     &lt;/schema&gt;
 &lt;/model&gt;
  </property>
- <property name="model_source" />
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="@@edit"/>
  <alias from="sharing" to="@@sharing"/>

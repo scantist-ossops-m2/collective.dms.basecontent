@@ -26,7 +26,6 @@ class ILocalRolesToPrincipals(IList):
           required=True)
 
 
-
 @implementer(ILocalRolesToPrincipals)
 class LocalRolesToPrincipals(List):
     """Field that list principals depending on a vocabulary (by default list every available groups)
