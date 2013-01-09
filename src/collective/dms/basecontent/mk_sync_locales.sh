@@ -34,7 +34,7 @@ for pot in $(find locales -mindepth 1 -maxdepth 1 -type f -name "*.pot" ! -name 
 
         if test -d locales/$langcode/LC_MESSAGES; then
     
-            PO=locales/$langcode/LC_MESSAGES/$CATALOGNAME.po
+            PO=locales/$langcode/LC_MESSAGES/$catalog.po
             # Create po file if not exists
             if ! test -f $PO; then
                 touch $PO
