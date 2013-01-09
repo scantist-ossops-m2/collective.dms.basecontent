@@ -3,7 +3,7 @@
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">DmsDocument</property>
  <property name="description" i18n:translate="">Dms base document</property>
- <property name="icon_expr">string:${portal_url}/++resource++dmsdoc_icon.png</property>
+ <property name="icon_expr">string:${portal_url}/++resource++dmsdocument_icon.png</property>
  <property name="factory">dmsdocument</property>
  <property name="add_view_expr">string:${folder_url}/++add++dmsdocument</property>
  <property name="link_target"></property>
