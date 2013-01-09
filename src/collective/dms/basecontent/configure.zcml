@@ -35,6 +35,11 @@
       name="schema_policy_dmsfile"
       />
 
+    <utility
+        component="._field.LocalRolesToPrincipalsHandler"
+        name="collective.dms.basecontent.LocalRolesToPrincipals"
+        />
+
   <adapter
       factory="._field.LocalRolesToPrincipalsDataManager"
       />

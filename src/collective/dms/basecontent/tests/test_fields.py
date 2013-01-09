@@ -2,7 +2,7 @@
 
 import unittest2 as unittest
 
-from zope.schema.interfaces import RequiredMissing, InvalidValue
+from zope.interface import Invalid
 
 from ecreall.helpers.testing.base import BaseTest
 
@@ -39,10 +39,11 @@ class TestFields(unittest.TestCase, BaseTest):
         field = self._makeOne()
         # the roles_to_assign attribute is required, if empty, validate fails
         self.assertEquals(field.roles_to_assign, ())
-        self.assertRaises(RequiredMissing, field.validate, [])
+        self.assertRaises(Invalid, field.validate, [])
         # if we want to assign role but one does not exist, validate fails too
         field = self._makeOne(roles_to_assign=('Editor', 'WrongRole',))
-        self.assertRaises(InvalidValue, field.validate, [])
+        self.assertRaises(Invalid, field.validate, [])
         # if we have valid values, it works like a charm ;-)
         field = self._makeOne(roles_to_assign=('Editor', 'Reader',))
         field.validate([])
+

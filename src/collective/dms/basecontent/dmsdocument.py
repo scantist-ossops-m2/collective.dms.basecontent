@@ -23,7 +23,7 @@ class IDmsDocument(model.Schema):
     treating_groups = LocalRolesToPrincipals(
         title=_(u"Treating groups"),
         required=False,
-        roles_to_assign=('Editor',)
+        roles_to_assign=('Editor',),
         )
 
     recipient_groups = LocalRolesToPrincipals(

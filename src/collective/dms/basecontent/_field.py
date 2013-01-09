@@ -5,7 +5,7 @@ from zope.interface import Interface
 
 from zope.schema.interfaces import IList
 from zope.schema import List, Choice, Tuple
-from zope.schema.interfaces import RequiredMissing, InvalidValue
+from zope.interface import Invalid
 
 from z3c.form.datamanager import AttributeField
 
@@ -26,6 +26,7 @@ class ILocalRolesToPrincipals(IList):
           required=True)
 
 
+
 @implementer(ILocalRolesToPrincipals)
 class LocalRolesToPrincipals(List):
     """Field that list principals depending on a vocabulary (by default list every available groups)
@@ -41,15 +42,16 @@ class LocalRolesToPrincipals(List):
         """Check that we have roles to assign, this is mendatory and
            that roles we want to assign actually exist."""
         super(LocalRolesToPrincipals, self)._validate(value)
-        # the roles_to_assign is mandatory
+
+        # the field must specify some roles to assign as this is a required value
         if not self.roles_to_assign:
-            raise RequiredMissing
+            raise Invalid(u'The field is not configured correctly, roles_to_assign is required.  Contact system administrator!')
 
         # check that roles we want to assign actually exist
         existingRoles = [role for role in self.context.acl_users.portal_role_manager.listRoleIds()]
         for role_to_assign in self.roles_to_assign:
             if not role_to_assign in existingRoles:
-                raise InvalidValue
+                raise Invalid(u'The field is not configured correctly, the defined role \'%s\' does not exist.  Contact system administrator!' % role_to_assign)
 
 
 class LocalRolesToPrincipalsDataManager(AttributeField):
@@ -91,4 +93,9 @@ class LocalRolesToPrincipalsDataManager(AttributeField):
             self.context.manage_addLocalRoles(added_principal, roles_to_assign)
         # finally set the value
         super(LocalRolesToPrincipalsDataManager, self).set(value)
+
+import plone.supermodel.exportimport
+
+LocalRolesToPrincipalsHandler = plone.supermodel.exportimport.BaseHandler(LocalRolesToPrincipals)
+
 
