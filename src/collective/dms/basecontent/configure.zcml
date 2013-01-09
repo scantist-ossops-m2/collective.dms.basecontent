@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.dms.basecontent">
 
@@ -16,6 +17,11 @@
   <include package="plone.supermodel" />
 
   <adapter factory=".relateddocs.RelatedDocsFieldWidget" />
+
+  <browser:resource
+      name="dmsdoc_icon.png"
+      image="file_icon.png"
+      />
 
   <genericsetup:registerProfile
       name="default"

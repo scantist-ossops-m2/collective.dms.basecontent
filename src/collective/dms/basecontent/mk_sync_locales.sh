@@ -8,7 +8,7 @@
 
 CATALOGNAME="collective.dms.basecontent"
 
-# List of managed languages (separated by space)
+# List of languages used for po initialization (no mandatory update for syncing)
 # Ex LANGUAGES="fr|French|fr-fr;fr-be;fr-ca nl|Dutch|nl-be;nl-nl"
 LANGUAGES="en|English|en-au;en-ca;en-gb;en-us fr|French|fr-fr;fr-be;fr-ca nl|Dutch|nl-be;nl-nl"
 

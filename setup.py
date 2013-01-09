@@ -40,6 +40,7 @@ setup(name='collective.dms.basecontent',
           'plone.app.dexterity',
           'plone.namedfile',
           'z3c.blobfile',
+          'z3c.relationfield',
       ],
       extras_require={
           'test': ['plone.app.testing',
