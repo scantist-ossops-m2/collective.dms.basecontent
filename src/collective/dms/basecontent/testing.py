@@ -8,14 +8,14 @@ import collective.dms.basecontent
 DMS = PloneWithPackageLayer(
     zcml_filename="testing.zcml",
     zcml_package=collective.dms.basecontent,
-    gs_profile_id='collective.dms.basecontent:default',
+    gs_profile_id='collective.dms.basecontent:testing',
     name="DMS")
 
 DMS_TESTS_PROFILE = PloneWithPackageLayer(
     bases=(DMS, ),
     zcml_filename="testing.zcml",
     zcml_package=collective.dms.basecontent,
-    gs_profile_id='collective.dms.basecontent:default',
+    gs_profile_id='collective.dms.basecontent:testing',
     name="DMS_TESTS_PROFILE")
 
 DMS_TESTS_PROFILE_FUNCTIONAL = FunctionalTesting(
