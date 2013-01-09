@@ -18,4 +18,12 @@
       image="dmsdocument_icon.png"
       />
 
+    <browser:page
+        for="collective.dms.basecontent.dmsdocument.IDmsDocument"
+        name="dmsdocument.view"
+        class="plone.dexterity.browser.view.DefaultView"
+        template="dmsdocument_view.pt"
+        permission="zope2.View"
+        />
+
 </configure>
