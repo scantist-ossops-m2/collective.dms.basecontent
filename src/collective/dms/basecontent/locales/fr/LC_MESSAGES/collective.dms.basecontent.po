@@ -25,7 +25,7 @@ msgstr "Notes"
 
 #: ./dmsdocument.py:30
 msgid "Recipient groups"
-msgstr "Destinataires"
+msgstr "Services concernés"
 
 #: ./dmsdocument.py:36
 msgid "Related documents"
