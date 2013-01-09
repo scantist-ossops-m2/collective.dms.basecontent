@@ -21,7 +21,7 @@
   <element value="plone.app.content.interfaces.INameFromTitle"/>
   <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
  </property>
- <property name="schema" />
+ <property name="schema">collective.dms.basecontent.dmsfile.IDmsFile</property>
  <!-- DO NOT use a model_source or it removes manually added fields while reapplying the profile -->
  <!--property name="model_source" /-->
  <property name="schema_policy">schema_policy_dmsfile</property>
