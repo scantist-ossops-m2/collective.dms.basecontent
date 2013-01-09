@@ -16,7 +16,8 @@ LANGUAGES="en|English|en-au;en-ca;en-gb;en-us fr|French|fr-fr;fr-be;fr-ca nl|Dut
 install -d locales
 
 # Rebuild .pot
-if ! test -f locales/$CATALOGNAME.pot; then
+if ! test -f locales/$CATALOGNAME.pot || [ "$1" == "rebuild" ]; then
+    echo "Rebuilding locales/$CATALOGNAME.pot"
     i18ndude rebuild-pot --pot locales/$CATALOGNAME.pot --create $CATALOGNAME .
 fi
 
@@ -26,21 +27,21 @@ for pot in $(find locales -mindepth 1 -maxdepth 1 -type f -name "*.pot" ! -name 
     catalog=`basename $pot .pot`
     echo "=> Found pot $pot"
     # Compile po files
-    for infos in $LANGUAGES; do
-        arr=(`echo $infos | cut -d "|"  --output-delimiter=" " -f 1-`)
-        lang=${arr[0]}
-        install -d locales/$lang/LC_MESSAGES
+    for language in $LANGUAGES; do
+        arr=(`echo $language | cut -d "|"  --output-delimiter=" " -f 1-`)
+        langcode=${arr[0]}
+        install -d locales/$langcode/LC_MESSAGES
 
-        if test -d locales/$lang/LC_MESSAGES; then
+        if test -d locales/$langcode/LC_MESSAGES; then
     
-            PO=locales/$lang/LC_MESSAGES/$CATALOGNAME.po
+            PO=locales/$langcode/LC_MESSAGES/$CATALOGNAME.po
             # Create po file if not exists
             if ! test -f $PO; then
                 touch $PO
                 echo " -> Syncing $PO"
                 i18ndude sync --pot $pot $PO
                 sed -i -e "/^\\\"Domain: DOMAIN/ s/DOMAIN/$catalog/" $PO
-                sed -i -e "/^\\\"Language-Code: en/ s/en/$lang/" $PO
+                sed -i -e "/^\\\"Language-Code: en/ s/en/$langcode/" $PO
                 langname=${arr[1]}
                 if [ -n "$langname" ]; then
                     sed -i -e "/^\\\"Language-Name: English/ s/English/$langname/" $PO
@@ -56,8 +57,8 @@ for pot in $(find locales -mindepth 1 -maxdepth 1 -type f -name "*.pot" ! -name 
             fi
     
             # Compile .po to .mo (msgfmt is in package gettext)
-            MO=locales/$lang/LC_MESSAGES/$catalog.mo
-            echo " -> Compiling $MO"
+            MO=locales/$langcode/LC_MESSAGES/$catalog.mo
+            #echo " -> Compiling $MO"
             #msgfmt -o $MO locales/$lang/LC_MESSAGES/$catalog.po
         fi
     done
