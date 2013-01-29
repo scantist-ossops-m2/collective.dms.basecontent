@@ -7,6 +7,7 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 from plone.supermodel import model
 
 from collective.dms.basecontent.relateddocs import RelatedDocs
+from collective.dms.thesaurus.field import ThesaurusKeywords
 
 from . import _
 from ._field import LocalRolesToPrincipals
@@ -36,6 +37,10 @@ class IDmsDocument(model.Schema):
         title=_(u"Related documents"),
         required=False,
         display_backrefs=True)
+
+    administrative_keywords = ThesaurusKeywords(
+        title=_(u"Administrative Keywords"),
+        required=False)
 
 
 class DmsDocument(Container):
