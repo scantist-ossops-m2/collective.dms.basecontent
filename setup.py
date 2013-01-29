@@ -42,6 +42,7 @@ setup(name='collective.dms.basecontent',
           'z3c.blobfile',
           'plone.app.relationfield',
           'plone.formwidget.contenttree',
+          'collective.dms.thesaurus',
       ],
       extras_require={
           'test': ['plone.app.testing',
