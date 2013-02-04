@@ -4,7 +4,7 @@ from zope.interface import implementer
 from zope.interface import Interface
 
 from zope.schema.interfaces import IList
-from zope.schema import List, Choice, Tuple
+from zope.schema import List, Tuple
 from zope.interface import Invalid
 
 from z3c.form.datamanager import AttributeField
@@ -31,10 +31,8 @@ class LocalRolesToPrincipals(List):
     """Field that list principals depending on a vocabulary (by default list every available groups)
        and that assign local roles defined in the roles_to_assign attribute."""
 
-    def __init__(self, roles_to_assign=(), value_type=Choice(vocabulary=u'plone.app.vocabularies.Groups',), **kw):
+    def __init__(self, roles_to_assign=(), **kw):
         self.roles_to_assign = roles_to_assign
-        # pass default value of value_type to super constructor
-        kw['value_type'] = value_type
         super(LocalRolesToPrincipals, self).__init__(**kw) 
 
     def validate(self, value):
