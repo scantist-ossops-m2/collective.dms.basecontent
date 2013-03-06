@@ -14,6 +14,7 @@ from ._field import LocalRolesToPrincipals
 
 from zope.schema.interfaces import IVocabularyFactory
 
+
 class IDmsDocument(model.Schema):
     """ """
 
@@ -45,6 +46,7 @@ class IDmsDocument(model.Schema):
         title=_(u"Administrative Keywords"),
         required=False)
 
+
 class DmsDocument(Container):
     """ """
 
@@ -57,6 +59,7 @@ class DmsDocumentSchemaPolicy(DexteritySchemaPolicy):
     def bases(self, schemaName, tree):
         return (IDmsDocument, )
 
+
 class TreatingGroupsVocabulary(object):
     grok.implements(IVocabularyFactory)
 
@@ -66,6 +69,7 @@ class TreatingGroupsVocabulary(object):
 
 grok.global_utility(TreatingGroupsVocabulary, name=u"collective.dms.basecontent.treating_groups")
 
+
 class RecipientGroupsVocabulary(object):
     grok.implements(IVocabularyFactory)
 
@@ -74,4 +78,3 @@ class RecipientGroupsVocabulary(object):
         return standard_groups.__call__(context)
 
 grok.global_utility(RecipientGroupsVocabulary, name=u"collective.dms.basecontent.recipient_groups")
-
