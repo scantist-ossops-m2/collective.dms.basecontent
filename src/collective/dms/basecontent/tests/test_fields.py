@@ -30,14 +30,6 @@ class TestFields(unittest.TestCase, BaseTest):
         # this is needed to initialize the vocabulary
         return field.bind(self.portal)
 
-    def test_value_type_default_value(self):
-        """By default, the field's value_type attribute contains a vocabulary
-           listing every available groups of the Plone site."""
-        field = self._makeOne()
-        value_type_terms = [term.value for term in field.value_type.vocabulary._terms]
-        # by default, the proposed vocabulary is the list of existing groups
-        self.assertEquals(set(value_type_terms), set(self.portal.portal_groups.listGroupNames()))
-
     def test_roles_to_assign_attribute(self):
         """If the field is not correctly configured, it fails upon validation."""
         field = self._makeOne()
@@ -89,4 +81,3 @@ class TestFields(unittest.TestCase, BaseTest):
         datamanager.set(())
         # not managed local_roles are kepts
         self.assertEquals(tuple(testingobj.__ac_local_roles__['Reviewers']), ('Reader',))
-
