@@ -1,10 +1,10 @@
 Changelog
 =========
 
-0.2 (unreleased)
-----------------
+0.1.1 (2013-03-08)
+------------------
 
-- Nothing changed yet.
+- Corrected MANIFEST.in
 
 
 0.1 (2013-03-06)
@@ -12,3 +12,9 @@ Changelog
 
 - Package created using templer
   [cedricmessiant]
+- Added portal types
+  [sgeulette]
+- Related field
+  [davidconvent]
+- LocalRolesToPrincipals field
+  [gauthierbastien]
