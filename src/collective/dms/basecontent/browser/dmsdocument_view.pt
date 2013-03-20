@@ -52,6 +52,7 @@
                                    item_wf_state_class python:'state-' + normalizeString(item_wf_state)">
                 <metal:block define-slot="entry">
                 <li metal:define-macro="listitem"
+                    tal:condition="python: item_type in ('dmsmainfile', 'dmsappendixfile')"
                     tal:attributes="class python:item_type == 'Event' and 'vevent' or ''">
 
                     <span class="summary">
