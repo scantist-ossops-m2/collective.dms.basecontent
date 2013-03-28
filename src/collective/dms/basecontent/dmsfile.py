@@ -1,8 +1,4 @@
-from zope import schema
-from zope.component import adapts
-from zope.interface import implements, alsoProvides
-
-from plone.app.content.interfaces import INameFromTitle
+from zope.interface import implements
 
 from plone.dexterity.content import Item
 from plone.dexterity.schema import DexteritySchemaPolicy
