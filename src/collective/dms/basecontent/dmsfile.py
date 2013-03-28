@@ -10,7 +10,7 @@ from . import _
 
 
 class IDmsFile(model.Schema):
-    """ """
+    """Schema for DmsFile"""
     model.primary('file')
     file = NamedBlobFile(
         title=_("File"),
@@ -22,7 +22,7 @@ class DmsFile(Item):
     implements(IDmsFile)
 
 class DmsFileSchemaPolicy(DexteritySchemaPolicy):
-    """ """
+    """Schema Policy for DmsFile"""
 
     def bases(self, schemaName, tree):
         return (IDmsFile, )
