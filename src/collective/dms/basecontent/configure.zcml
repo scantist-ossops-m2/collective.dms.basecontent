@@ -13,6 +13,7 @@
 
   <include package="plone.app.dexterity" />
   <include package="plone.app.relationfield" />
+  <include package="plone.principalsource" />
   <include package="plone.supermodel" />
   <include package=".browser" />
 

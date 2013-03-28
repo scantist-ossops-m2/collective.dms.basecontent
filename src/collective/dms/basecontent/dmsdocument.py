@@ -26,14 +26,14 @@ class IDmsDocument(model.Schema):
         title=_(u"Treating groups"),
         required=False,
         roles_to_assign=('Editor',),
-        value_type=schema.Choice(vocabulary=u'collective.dms.basecontent.treating_groups',)
+        value_type=schema.Choice(vocabulary="plone.principalsource.Principals")
     )
 
     recipient_groups = LocalRolesToPrincipals(
         title=_(u"Recipient groups"),
         required=False,
         roles_to_assign=('Reader',),
-        value_type=schema.Choice(vocabulary=u'collective.dms.basecontent.recipient_groups',)
+        value_type=schema.Choice(vocabulary="plone.principalsource.Principals")
     )
 
     related_docs = RelatedDocs(
