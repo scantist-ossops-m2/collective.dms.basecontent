@@ -15,7 +15,7 @@ from zope.schema.interfaces import IVocabularyFactory
 
 
 class IDmsDocument(model.Schema):
-    """ """
+    """Schema for DmsDocument"""
 
     notes = schema.Text(
         title=_(u"Notes"),
@@ -44,33 +44,32 @@ class IDmsDocument(model.Schema):
 
 
 class DmsDocument(Container):
-    """ """
-
+    """DmsDocument"""
     implements(IDmsDocument)
 
 
 class DmsDocumentSchemaPolicy(DexteritySchemaPolicy):
-    """ """
+    """DmsDocument schema policy"""
 
     def bases(self, schemaName, tree):
         return (IDmsDocument, )
 
 
-class TreatingGroupsVocabulary(object):
+class TreatingGroupsVocabulary(grok.GlobalUtility):
+    """Vocabulary for treating groups"""
+    grok.name('collective.dms.basecontent.treating_groups')
     grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
         standard_groups = queryUtility(IVocabularyFactory, name=u'plone.app.vocabularies.Groups')
         return standard_groups.__call__(context)
 
-grok.global_utility(TreatingGroupsVocabulary, name=u"collective.dms.basecontent.treating_groups")
 
-
-class RecipientGroupsVocabulary(object):
+class RecipientGroupsVocabulary(grok.GlobalUtility):
+    """Vocabulary for recipient groups"""
+    grok.name('collective.dms.basecontent.recipient_groups')
     grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
         standard_groups = queryUtility(IVocabularyFactory, name=u'plone.app.vocabularies.Groups')
         return standard_groups.__call__(context)
-
-grok.global_utility(RecipientGroupsVocabulary, name=u"collective.dms.basecontent.recipient_groups")
