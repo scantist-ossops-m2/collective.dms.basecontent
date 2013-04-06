@@ -2,7 +2,7 @@ from five import grok
 
 from collective.dms.basecontent.dmsdocument import IDmsDocument
 from collective.dms.basecontent import _
-from collective.dms.basecontent.browser.listing import Table
+from collective.dms.basecontent.browser.listing import FilesTable, TasksTable
 
 grok.templatedir('templates')
 grok.context(IDmsDocument)
@@ -16,9 +16,10 @@ class BaseViewlet(grok.Viewlet):
     grok.baseclass()
     grok.template('filesviewlet')
     grok.viewletmanager(DmsBelowContentViewletManager)
+    __table__ = FilesTable
 
     def update(self):
-        self.table = Table(self.context, self.request)
+        self.table = self.__table__(self.context, self.request)
         self.table.viewlet = self
         self.table.update()
 
@@ -31,7 +32,7 @@ class FilesViewlet(BaseViewlet):
     grok.order(10)
     portal_type = 'dmsmainfile'
     label = _(u"Version notes")
-    noresult_message = _(u"There is no version notes for this document.")
+    noresult_message = _(u"There is no version note for this document.")
 
 
 class AppendixViewlet(BaseViewlet):
@@ -40,3 +41,12 @@ class AppendixViewlet(BaseViewlet):
     portal_type = 'dmsappendixfile'
     label = _(u"Appendix")
     noresult_message = _(u"There is no appendix for this document.")
+
+
+class TasksViewlet(BaseViewlet):
+    grok.name('dms.tasks')
+    grok.order(30)
+    portal_type = 'task'
+    label = _(u"Tasks")
+    noresult_message = _(u"There is no task for this document.")
+    __table__ = TasksTable

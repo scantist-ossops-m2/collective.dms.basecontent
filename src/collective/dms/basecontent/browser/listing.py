@@ -5,6 +5,7 @@ from z3c.table import interfaces
 from Products.CMFCore.utils import getToolByName
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
+from zope.i18n import translate
 
 from collective.dms.basecontent import _
 from collective.dms.basecontent.dmsdocument import IDmsDocument
@@ -35,6 +36,14 @@ class Table(z3c.table.table.Table):
         return results
 
 
+class FilesTable(Table):
+    pass
+
+
+class TasksTable(Table):
+    pass
+
+
 class Column(z3c.table.column.Column, grok.MultiAdapter):
     grok.provides(interfaces.IColumn)
     grok.adapts(Interface, Interface, Table)
@@ -42,8 +51,49 @@ class Column(z3c.table.column.Column, grok.MultiAdapter):
 
 
 class TitleColumn(Column):
+    grok.name('dms.title')
     header = PMF("Title")
+    weight = 10
 
     def renderCell(self, value):
         return u"""<a href="%s">%s</a>""" % (value.getURL(), value.Title)
 
+
+class DirectDownloadColumn(Column):
+    grok.name('dms.download')
+    grok.adapts(Interface, Interface, FilesTable)
+    header = u""
+    weight = 60
+
+    def renderCell(self, value):
+        obj = value.getObject()
+        download_file_msg = _(u"Download file")
+        download_url = '%s/@@download' % obj.absolute_url()
+        return u"""<a href="%s"><img title="%s" src="download_icon.png" /></a>""" % (
+                download_url,
+                translate(download_file_msg, context=self.request),
+                )
+
+
+class ResponsibleColumn(Column):
+    grok.name('dms.responsible')
+    grok.adapts(Interface, Interface, TasksTable)
+    header = _(u"Responsible")
+    weight = 20
+
+    def renderCell(self, value):
+        obj = value.getObject()
+        # TODO get fullname
+        return u', '.join(obj.responsible)
+
+
+class DeadlineColumn(Column):
+    grok.name('dms.deadline')
+    grok.adapts(Interface, Interface, TasksTable)
+    header = _(u"Deadline")
+    weight = 20
+
+    def renderCell(self, value):
+        obj = value.getObject()
+        # TODO translate deadline
+        return obj.deadline and str(obj.deadline) or u""
