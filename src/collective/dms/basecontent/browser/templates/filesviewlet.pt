@@ -1,0 +1,8 @@
+    <fieldset>
+      <legend i18n:translate=""
+        tal:content="viewlet/label">Version notes</legend>
+        <tal:listing define="results viewlet/table/values">
+          <tal:b condition="results" replace="structure viewlet/table/render" />
+          <tal:b condition="not:results" replace="viewlet/noresult_message" />
+        </tal:listing>
+    </fieldset>

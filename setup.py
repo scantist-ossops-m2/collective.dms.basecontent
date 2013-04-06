@@ -50,6 +50,7 @@ setup(name='collective.dms.basecontent',
           'plone.formwidget.contenttree',
           'plone.principalsource',
           'collective.z3cform.rolefield',
+          'z3c.table',
       ],
       extras_require={
           'test': ['plone.app.testing',
