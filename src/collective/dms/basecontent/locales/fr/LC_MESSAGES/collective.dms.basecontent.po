@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-09 07:42+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: collective.dms.basecontent\n"
+"POT-Creation-Date: 2013-04-06 17:00+0000\n"
+"PO-Revision-Date: 2013-04-06 19:01+0100\n"
+"Last-Translator: Cédric Messiant <cedricmessiant@ecreall.com>\n"
+"Language-Team: Ecréall\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,23 +15,23 @@ msgstr ""
 "Domain: collective.dms.basecontent\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
-#: ./dmsfile.py:20
+#: ../dmsfile.py:16
 msgid "File"
 msgstr "Fichier"
 
-#: ./dmsdocument.py:19
+#: ../dmsdocument.py:21
 msgid "Notes"
 msgstr "Notes"
 
-#: ./dmsdocument.py:30
+#: ../dmsdocument.py:33
 msgid "Recipient groups"
-msgstr "Services concernés"
+msgstr "Services à informer"
 
-#: ./dmsdocument.py:36
+#: ../dmsdocument.py:40
 msgid "Related documents"
 msgstr "Documents en rapport"
 
-#: ./dmsdocument.py:24
+#: ../dmsdocument.py:26
 msgid "Treating groups"
-msgstr "Services traitants"
+msgstr "Services en charge du traitement"
 

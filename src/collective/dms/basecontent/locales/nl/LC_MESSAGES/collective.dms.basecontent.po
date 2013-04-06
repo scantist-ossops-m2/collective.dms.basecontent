@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-09 07:42+0000\n"
+"POT-Creation-Date: 2013-04-06 17:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,23 +15,23 @@ msgstr ""
 "Domain: collective.dms.basecontent\n"
 "X-is-fallback-for: nl-be nl-nl\n"
 
-#: ./dmsfile.py:20
+#: ../dmsfile.py:16
 msgid "File"
 msgstr ""
 
-#: ./dmsdocument.py:19
+#: ../dmsdocument.py:21
 msgid "Notes"
 msgstr ""
 
-#: ./dmsdocument.py:30
+#: ../dmsdocument.py:33
 msgid "Recipient groups"
 msgstr ""
 
-#: ./dmsdocument.py:36
+#: ../dmsdocument.py:40
 msgid "Related documents"
 msgstr ""
 
-#: ./dmsdocument.py:24
+#: ../dmsdocument.py:26
 msgid "Treating groups"
 msgstr ""
 
