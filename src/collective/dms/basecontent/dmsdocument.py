@@ -46,6 +46,8 @@ class IDmsDocument(model.Schema):
 class DmsDocument(Container):
     """DmsDocument"""
     implements(IDmsDocument)
+    # disable local roles inheritance
+    __ac_local_roles_block__ = True
 
 
 class DmsDocumentSchemaPolicy(DexteritySchemaPolicy):
