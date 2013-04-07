@@ -1,27 +1,22 @@
 from five import grok
-from zope.cachedescriptors.property import CachedProperty
-import z3c.table.table
-from z3c.table import interfaces
-from Products.CMFCore.utils import getToolByName
 from zope.interface import Interface
+from zope.cachedescriptors.property import CachedProperty
 from zope.i18nmessageid import MessageFactory
 from zope.i18n import translate
+from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.WorkflowCore import WorkflowException
 
 from collective.dms.basecontent import _
 from collective.dms.basecontent.dmsdocument import IDmsDocument
+from collective.dms.basecontent.browser import table
+from collective.dms.basecontent.browser.table import Column, DateColumn, Table
 
 grok.templatedir('templates')
-#grok.context(IDmsDocument)
 
 PMF = MessageFactory('plone')
 
-class Table(z3c.table.table.Table):
-    cssClassEven = u'even'
-    cssClassOdd = u'odd'
-    cssClasses = {'table': 'listing'}
-    sortOn = None
-    batchSize = 10000
-    startBatchingAt = 10000
+
+class BaseTable(Table):
 
     @CachedProperty
     def values(self):
@@ -36,22 +31,17 @@ class Table(z3c.table.table.Table):
         return results
 
 
-class FilesTable(Table):
+class FilesTable(BaseTable):
     pass
 
 
-class TasksTable(Table):
+class TasksTable(BaseTable):
     pass
-
-
-class Column(z3c.table.column.Column, grok.MultiAdapter):
-    grok.provides(interfaces.IColumn)
-    grok.adapts(Interface, Interface, Table)
-    grok.baseclass()
 
 
 class TitleColumn(Column):
     grok.name('dms.title')
+    grok.adapts(IDmsDocument, Interface, BaseTable)
     header = PMF("Title")
     weight = 10
 
@@ -61,9 +51,9 @@ class TitleColumn(Column):
 
 class DirectDownloadColumn(Column):
     grok.name('dms.download')
-    grok.adapts(Interface, Interface, FilesTable)
+    grok.adapts(IDmsDocument, Interface, FilesTable)
     header = u""
-    weight = 60
+    weight = 100
 
     def renderCell(self, value):
         obj = value.getObject()
@@ -75,9 +65,32 @@ class DirectDownloadColumn(Column):
                 )
 
 
+class UpdateColumn(DateColumn):
+    grok.name('dms.update')
+    grok.adapts(IDmsDocument, Interface, FilesTable)
+    header = PMF(u"Modified")
+    attribute = 'modification_date'
+    weight = 40
+
+
+class StateColumn(Column):
+    grok.name('dms.state')
+    grok.adapts(IDmsDocument, Interface, BaseTable)
+    header = PMF(u"State")
+    weight = 50
+
+    def renderCell(self, value):
+        obj = value.getObject()
+        try:
+            # TODO get state title
+            return self.table.wtool.getInfoFor(obj, 'review_state')
+        except WorkflowException:
+            return u""
+
+
 class ResponsibleColumn(Column):
     grok.name('dms.responsible')
-    grok.adapts(Interface, Interface, TasksTable)
+    grok.adapts(IDmsDocument, Interface, TasksTable)
     header = _(u"Responsible")
     weight = 20
 
@@ -87,13 +100,9 @@ class ResponsibleColumn(Column):
         return u', '.join(obj.responsible)
 
 
-class DeadlineColumn(Column):
+class DeadlineColumn(table.DateColumn):
     grok.name('dms.deadline')
-    grok.adapts(Interface, Interface, TasksTable)
+    grok.adapts(IDmsDocument, Interface, TasksTable)
     header = _(u"Deadline")
-    weight = 20
-
-    def renderCell(self, value):
-        obj = value.getObject()
-        # TODO translate deadline
-        return obj.deadline and str(obj.deadline) or u""
+    attribute = 'deadline'
+    weight = 30

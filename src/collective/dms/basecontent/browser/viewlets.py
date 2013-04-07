@@ -4,6 +4,8 @@ from collective.dms.basecontent.dmsdocument import IDmsDocument
 from collective.dms.basecontent import _
 from collective.dms.basecontent.browser.listing import FilesTable, TasksTable
 
+from collective.dms.basecontent.browser.table import TableViewlet
+
 grok.templatedir('templates')
 grok.context(IDmsDocument)
 
@@ -12,16 +14,10 @@ class DmsBelowContentViewletManager(grok.ViewletManager):
     grok.name('dms.belowcontent')
 
 
-class BaseViewlet(grok.Viewlet):
+class BaseViewlet(TableViewlet):
     grok.baseclass()
-    grok.template('filesviewlet')
     grok.viewletmanager(DmsBelowContentViewletManager)
     __table__ = FilesTable
-
-    def update(self):
-        self.table = self.__table__(self.context, self.request)
-        self.table.viewlet = self
-        self.table.update()
 
     def contentFilter(self):
         return {'portal_type': self.portal_type}
