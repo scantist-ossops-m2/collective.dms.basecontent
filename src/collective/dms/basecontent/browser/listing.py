@@ -46,7 +46,8 @@ class TitleColumn(Column):
     weight = 10
 
     def renderCell(self, value):
-        return u"""<a href="%s">%s</a>""" % (value.getURL(), value.Title)
+        return u"""<a href="%s">%s</a>""" % (value.getURL(),
+                                             value.Title.decode('utf8'))
 
 
 class DirectDownloadColumn(Column):
