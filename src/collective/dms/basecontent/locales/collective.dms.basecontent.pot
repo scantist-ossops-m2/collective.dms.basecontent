@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-04-06 17:00+0000\n"
+"POT-Creation-Date: 2013-04-12 12:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,18 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.dms.basecontent\n"
+
+#: ../browser/viewlets.py:38
+msgid "Appendix"
+msgstr ""
+
+#: ../browser/listing.py:107
+msgid "Deadline"
+msgstr ""
+
+#: ../browser/listing.py:61
+msgid "Download file"
+msgstr ""
 
 #: ../dmsfile.py:16
 msgid "File"
@@ -33,7 +45,31 @@ msgstr ""
 msgid "Related documents"
 msgstr ""
 
+#: ../browser/listing.py:95
+msgid "Responsible"
+msgstr ""
+
+#: ../browser/viewlets.py:46
+msgid "Tasks"
+msgstr ""
+
+#: ../browser/viewlets.py:39
+msgid "There is no appendix for this document."
+msgstr ""
+
+#: ../browser/viewlets.py:47
+msgid "There is no task for this document."
+msgstr ""
+
+#: ../browser/viewlets.py:31
+msgid "There is no version note for this document."
+msgstr ""
+
 #: ../dmsdocument.py:26
 msgid "Treating groups"
+msgstr ""
+
+#: ../browser/viewlets.py:30
+msgid "Version notes"
 msgstr ""
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.dms.basecontent\n"
-"POT-Creation-Date: 2013-04-06 17:00+0000\n"
+"POT-Creation-Date: 2013-04-12 12:18+0000\n"
 "PO-Revision-Date: 2013-04-06 19:01+0100\n"
 "Last-Translator: Cédric Messiant <cedricmessiant@ecreall.com>\n"
 "Language-Team: Ecréall\n"
@@ -14,6 +14,18 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.dms.basecontent\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
+
+#: ../browser/viewlets.py:38
+msgid "Appendix"
+msgstr "Annexes"
+
+#: ../browser/listing.py:107
+msgid "Deadline"
+msgstr "Echéance"
+
+#: ../browser/listing.py:61
+msgid "Download file"
+msgstr "Télécharger"
 
 #: ../dmsfile.py:16
 msgid "File"
@@ -31,7 +43,31 @@ msgstr "Services à informer"
 msgid "Related documents"
 msgstr "Documents en rapport"
 
+#: ../browser/listing.py:95
+msgid "Responsible"
+msgstr "Responsable"
+
+#: ../browser/viewlets.py:46
+msgid "Tasks"
+msgstr "Tâches"
+
+#: ../browser/viewlets.py:39
+msgid "There is no appendix for this document."
+msgstr "Il n'y a aucune annexe."
+
+#: ../browser/viewlets.py:47
+msgid "There is no task for this document."
+msgstr "Il n'y a aucune tâche."
+
+#: ../browser/viewlets.py:31
+msgid "There is no version note for this document."
+msgstr "Il n'y a aucun fichier ged."
+
 #: ../dmsdocument.py:26
 msgid "Treating groups"
 msgstr "Services en charge du traitement"
+
+#: ../browser/viewlets.py:30
+msgid "Version notes"
+msgstr "Fichiers ged"
 

@@ -69,7 +69,7 @@ class DirectDownloadColumn(Column):
 class UpdateColumn(DateColumn):
     grok.name('dms.update')
     grok.adapts(IDmsDocument, Interface, FilesTable)
-    header = PMF(u"Modified")
+    header = PMF(u"listingheader_modified")
     attribute = 'modification_date'
     weight = 40
 
