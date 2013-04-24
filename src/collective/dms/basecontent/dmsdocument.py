@@ -26,14 +26,14 @@ class IDmsDocument(model.Schema):
         title=_(u"Treating groups"),
         required=False,
         roles_to_assign=('Editor',),
-        value_type=schema.Choice(vocabulary="plone.principalsource.Principals")
+        value_type=schema.Choice(vocabulary=u'collective.dms.basecontent.treating_groups',)
     )
 
     recipient_groups = LocalRolesToPrincipals(
         title=_(u"Recipient groups"),
         required=False,
         roles_to_assign=('Reader',),
-        value_type=schema.Choice(vocabulary="plone.principalsource.Principals")
+        value_type=schema.Choice(vocabulary=u'collective.dms.basecontent.recipient_groups')
     )
 
     related_docs = RelatedDocs(
@@ -63,8 +63,8 @@ class TreatingGroupsVocabulary(grok.GlobalUtility):
     grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
-        standard_groups = queryUtility(IVocabularyFactory, name=u'plone.app.vocabularies.Groups')
-        return standard_groups.__call__(context)
+        principals = queryUtility(IVocabularyFactory, name=u'plone.principalsource.Principals')
+        return principals(context)
 
 
 class RecipientGroupsVocabulary(grok.GlobalUtility):
@@ -73,5 +73,5 @@ class RecipientGroupsVocabulary(grok.GlobalUtility):
     grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
-        standard_groups = queryUtility(IVocabularyFactory, name=u'plone.app.vocabularies.Groups')
-        return standard_groups.__call__(context)
+        principals = queryUtility(IVocabularyFactory, name=u'plone.principalsource.Principals')
+        return principals(context)

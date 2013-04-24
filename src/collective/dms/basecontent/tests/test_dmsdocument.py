@@ -19,10 +19,12 @@ class TestDmsdocument(unittest.TestCase, BaseTest):
 
     def test_RecipientGroupsVocabulary(self):
         voc_inst = RecipientGroupsVocabulary()
-        voc_dic = voc_inst(self.portal).by_token
-        self.assertEquals(set(voc_dic), set(self.portal.portal_groups.listGroupNames()))
+        voc_ids = [i.token for i in voc_inst(self.portal).__iter__()]
+        self.assertEquals(set(voc_ids), set(['test_user_1_', 'Administrators', 'AuthenticatedUsers',
+                                             'Reviewers', 'Site Administrators']))
 
     def test_TreatingGroupsVocabulary(self):
         voc_inst = TreatingGroupsVocabulary()
-        voc_dic = voc_inst(self.portal).by_token
-        self.assertEquals(set(voc_dic), set(self.portal.portal_groups.listGroupNames()))
+        voc_ids = [i.token for i in voc_inst(self.portal).__iter__()]
+        self.assertEquals(set(voc_ids), set(['test_user_1_', 'Administrators', 'AuthenticatedUsers',
+                                             'Reviewers', 'Site Administrators']))
