@@ -83,8 +83,11 @@ class StateColumn(Column):
     def renderCell(self, value):
         obj = value.getObject()
         try:
-            # TODO get state title
-            return self.table.wtool.getInfoFor(obj, 'review_state')
+            wtool = self.table.wtool
+            review_state = wtool.getInfoFor(obj, 'review_state')
+            state_title = wtool.getTitleForStateOnType(review_state,
+                                                       obj.portal_type)
+            return translate(PMF(state_title), context=self.request)
         except WorkflowException:
             return u""
 
