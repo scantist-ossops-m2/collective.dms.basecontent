@@ -97,8 +97,19 @@ class ResponsibleColumn(Column):
 
     def renderCell(self, value):
         obj = value.getObject()
-        # TODO get fullname
-        return u', '.join(obj.responsible)
+        pas = getToolByName(self.context, 'acl_users')
+        gtool = getToolByName(self.context, 'portal_groups')
+        principals = []
+        for principal_id in obj.responsible:
+            user = pas.getUserById(principal_id)
+            if user is not None:
+                principals.append(user.getProperty('fullname', None) or user.getId())
+            else:
+                group = gtool.getGroupById(principal_id)
+                if group is not None:
+                    principals.append(group.getProperty('title', None) or group.getId())
+
+        return u', '.join(principals)
 
 
 class DeadlineColumn(table.DateColumn):
