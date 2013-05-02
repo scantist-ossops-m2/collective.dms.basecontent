@@ -112,7 +112,7 @@ class ResponsibleColumn(Column):
                 if group is not None:
                     principals.append(group.getProperty('title', None) or group.getId())
 
-        return u', '.join(principals)
+        return ', '.join(principals)
 
 
 class DeadlineColumn(table.DateColumn):
