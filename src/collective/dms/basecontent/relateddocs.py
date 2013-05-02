@@ -1,6 +1,6 @@
 from zope.interface import implements, implementer
 from zope.component import adapter, getUtility
-from zope.app.intid.interfaces import IIntIds
+from zope.intid.interfaces import IIntIds
 
 from zc.relation.interfaces import ICatalog
 
