@@ -7,6 +7,8 @@ from .dmsdocument import IDmsDocument
 
 @indexer(IDmsDocument)
 def document_dynamic_searchable_text_indexer(obj):
+    # XXX: this hardcodes the version created by the batchimport process; it
+    # should instead look into the content and take the latest version.
     try:
         data = obj['main'].file
     except KeyError:
