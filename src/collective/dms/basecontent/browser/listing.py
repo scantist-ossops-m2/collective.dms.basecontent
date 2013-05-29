@@ -7,7 +7,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 
 from collective.dms.basecontent import _
-from collective.dms.basecontent.dmsdocument import IDmsDocument
 from collective.dms.basecontent.browser import table
 from collective.dms.basecontent.browser.table import Column, DateColumn, Table
 
@@ -41,7 +40,7 @@ class TasksTable(BaseTable):
 
 class TitleColumn(Column):
     grok.name('dms.title')
-    grok.adapts(IDmsDocument, Interface, BaseTable)
+    grok.adapts(Interface, Interface, BaseTable)
     header = PMF("Title")
     weight = 10
 
@@ -52,7 +51,7 @@ class TitleColumn(Column):
 
 class DirectDownloadColumn(Column):
     grok.name('dms.download')
-    grok.adapts(IDmsDocument, Interface, FilesTable)
+    grok.adapts(Interface, Interface, FilesTable)
     header = u""
     weight = 100
 
@@ -68,7 +67,7 @@ class DirectDownloadColumn(Column):
 
 class UpdateColumn(DateColumn):
     grok.name('dms.update')
-    grok.adapts(IDmsDocument, Interface, FilesTable)
+    grok.adapts(Interface, Interface, FilesTable)
     header = PMF(u"listingheader_modified")
     attribute = 'modification_date'
     weight = 40
@@ -76,7 +75,7 @@ class UpdateColumn(DateColumn):
 
 class StateColumn(Column):
     grok.name('dms.state')
-    grok.adapts(IDmsDocument, Interface, BaseTable)
+    grok.adapts(Interface, Interface, BaseTable)
     header = PMF(u"State")
     weight = 50
 
@@ -94,7 +93,7 @@ class StateColumn(Column):
 
 class ResponsibleColumn(Column):
     grok.name('dms.responsible')
-    grok.adapts(IDmsDocument, Interface, TasksTable)
+    grok.adapts(Interface, Interface, TasksTable)
     header = _(u"Responsible")
     weight = 20
 
@@ -117,7 +116,7 @@ class ResponsibleColumn(Column):
 
 class DeadlineColumn(table.DateColumn):
     grok.name('dms.deadline')
-    grok.adapts(IDmsDocument, Interface, TasksTable)
+    grok.adapts(Interface, Interface, TasksTable)
     header = _(u"Deadline")
     attribute = 'deadline'
     weight = 30
