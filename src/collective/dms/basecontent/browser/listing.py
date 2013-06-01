@@ -7,8 +7,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 
 from collective.dms.basecontent import _
-from collective.dms.basecontent.browser import table
-from collective.dms.basecontent.browser.table import Column, DateColumn, Table
+from collective.dms.basecontent.browser.table import (
+    Column, DateColumn, PrincipalColumn, Table)
 
 grok.templatedir('templates')
 
@@ -91,30 +91,15 @@ class StateColumn(Column):
             return u""
 
 
-class ResponsibleColumn(Column):
+class ResponsibleColumn(PrincipalColumn):
     grok.name('dms.responsible')
     grok.adapts(Interface, Interface, TasksTable)
     header = _(u"Responsible")
     weight = 20
-
-    def renderCell(self, value):
-        obj = value.getObject()
-        pas = getToolByName(self.context, 'acl_users')
-        gtool = getToolByName(self.context, 'portal_groups')
-        principals = []
-        for principal_id in obj.responsible:
-            user = pas.getUserById(principal_id)
-            if user is not None:
-                principals.append(user.getProperty('fullname', None) or user.getId())
-            else:
-                group = gtool.getGroupById(principal_id)
-                if group is not None:
-                    principals.append(group.getProperty('title', None) or group.getId())
-
-        return ', '.join(principals).decode('utf-8')
+    attribute = 'responsible'
 
 
-class DeadlineColumn(table.DateColumn):
+class DeadlineColumn(DateColumn):
     grok.name('dms.deadline')
     grok.adapts(Interface, Interface, TasksTable)
     header = _(u"Deadline")

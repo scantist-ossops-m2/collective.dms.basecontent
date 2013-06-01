@@ -59,9 +59,8 @@ class Table(z3c.table.table.Table):
 
 
 class Column(z3c.table.column.Column, grok.MultiAdapter):
-    grok.provides(interfaces.IColumn)
-    grok.adapts(Interface, Interface, Table)
     grok.baseclass()
+    grok.provides(interfaces.IColumn)
 
 
 class DateColumn(Column):
@@ -70,5 +69,26 @@ class DateColumn(Column):
 
     def renderCell(self, value):
         obj = value.getObject()
-        date = getattr(obj, self.attribute)
+        date = getattr(obj, self.attribute, None)
         return self.table.format_date(date)
+
+
+class PrincipalColumn(Column):
+    grok.baseclass()
+    attribute = NotImplemented
+
+    def renderCell(self, value):
+        obj = value.getObject()
+        pas = getToolByName(self.context, 'acl_users')
+        gtool = getToolByName(self.context, 'portal_groups')
+        principals = []
+        for principal_id in getattr(obj, self.attribute, ()):
+            user = pas.getUserById(principal_id)
+            if user is not None:
+                principals.append(user.getProperty('fullname', None) or user.getId())
+            else:
+                group = gtool.getGroupById(principal_id)
+                if group is not None:
+                    principals.append(group.getProperty('title', None) or group.getId())
+
+        return ', '.join(principals).decode('utf-8')
