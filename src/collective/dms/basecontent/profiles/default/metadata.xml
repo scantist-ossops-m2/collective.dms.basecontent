@@ -2,6 +2,7 @@
 <metadata>
   <version>0001</version>
   <dependencies>
+    <dependency>profile-collective.task:default</dependency>
     <dependency>profile-plone.app.dexterity:default</dependency>
     <dependency>profile-plone.app.relationfield:default</dependency>
   </dependencies>
