@@ -19,7 +19,7 @@ class IRelatedDocs(IRelationList):
 
 class RelatedDocsWidget(MultiContentTreeWidget):
     display_template = ViewPageTemplateFile('related-docs-display.pt')
-    
+
     def __init__(self, display_backrefs, request):
         self.display_backrefs = display_backrefs
         super(RelatedDocsWidget, self).__init__(request)
