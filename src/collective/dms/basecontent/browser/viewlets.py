@@ -46,3 +46,27 @@ class TasksViewlet(BaseViewlet):
     label = _(u"Tasks")
     noresult_message = _(u"There is no task for this document.")
     __table__ = TasksTable
+
+class OpinionsViewlet(BaseViewlet):
+    grok.name('dms.opinions')
+    grok.order(40)
+    portal_type = 'opinion'
+    label = _(u"Opinion applications")
+    noresult_message = _(u"There is no opinion applications for this document.")
+    __table__ = TasksTable
+
+class ValidationsViewlet(BaseViewlet):
+    grok.name('dms.validations')
+    grok.order(50)
+    portal_type = 'validation'
+    label = _(u"Validation applications")
+    noresult_message = _(u"There is no validation applications for this document.")
+    __table__ = TasksTable
+
+class InformationsViewlet(BaseViewlet):
+    grok.name('dms.informations')
+    grok.order(60)
+    portal_type = 'information'
+    label = _(u"Informations")
+    noresult_message = _(u"There is no informations for this document.")
+    __table__ = TasksTable
