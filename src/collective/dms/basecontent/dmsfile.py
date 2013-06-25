@@ -18,8 +18,9 @@ class IDmsFile(model.Schema):
     )
 
 class DmsFile(Item):
-    """ """
+    """DmsFile"""
     implements(IDmsFile)
+    __ac_local_roles_block__ = True
 
 class DmsFileSchemaPolicy(DexteritySchemaPolicy):
     """Schema Policy for DmsFile"""
