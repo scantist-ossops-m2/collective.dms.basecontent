@@ -107,7 +107,7 @@ class ResponsibleColumn(PrincipalColumn):
     grok.name('dms.responsible')
     grok.adapts(Interface, Interface, TasksTable)
     header = _(u"Responsible")
-    weight = 20
+    weight = 30
     attribute = 'responsible'
 
 
@@ -116,4 +116,4 @@ class DeadlineColumn(DateColumn):
     grok.adapts(Interface, Interface, TasksTable)
     header = _(u"Deadline")
     attribute = 'deadline'
-    weight = 30
+    weight = 60
