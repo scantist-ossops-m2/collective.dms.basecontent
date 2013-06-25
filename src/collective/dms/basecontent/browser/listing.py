@@ -1,14 +1,19 @@
 from five import grok
+
 from zope.interface import Interface
 from zope.cachedescriptors.property import CachedProperty
 from zope.i18nmessageid import MessageFactory
 from zope.i18n import translate
+
+from plone import api
+
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 
 from collective.dms.basecontent import _
 from collective.dms.basecontent.browser.table import (
     Column, DateColumn, PrincipalColumn, Table)
+
 
 grok.templatedir('templates')
 
@@ -89,6 +94,13 @@ class StateColumn(Column):
             return translate(PMF(state_title), context=self.request)
         except WorkflowException:
             return u""
+
+class EnquirerColumn(PrincipalColumn):
+    grok.name('dms.enquirer')
+    grok.adapts(Interface, Interface, TasksTable)
+    header = _(u"Enquirer")
+    weight = 20
+    attribute = 'enquirer'
 
 
 class ResponsibleColumn(PrincipalColumn):
