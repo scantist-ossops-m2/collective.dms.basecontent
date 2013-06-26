@@ -50,6 +50,7 @@ setup(name='collective.dms.basecontent',
           'plone.formwidget.contenttree',
           'plone.principalsource',
           'collective.task',
+          'collective.z3cform.chosen',
           'collective.z3cform.rolefield',
           'z3c.table',
           # plone.principalsource requires zope.app.component

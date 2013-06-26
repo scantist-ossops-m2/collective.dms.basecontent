@@ -16,6 +16,7 @@
   <include package="plone.principalsource" />
   <include package="plone.supermodel" />
   <include package="collective.task" />
+  <include package="collective.z3cform.chosen" />
 
   <include package=".browser" />
 
