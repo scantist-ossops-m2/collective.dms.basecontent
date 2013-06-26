@@ -11,6 +11,7 @@
 
   <i18n:registerTranslations directory="locales" />
 
+  <include package="plone.api" />
   <include package="plone.app.dexterity" />
   <include package="plone.app.relationfield" />
   <include package="plone.principalsource" />

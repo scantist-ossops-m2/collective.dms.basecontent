@@ -43,6 +43,7 @@ setup(name='collective.dms.basecontent',
       install_requires=[
           'setuptools',
           'five.grok',
+          'plone.api',
           'plone.app.dexterity',
           'plone.namedfile',
           'z3c.blobfile',
