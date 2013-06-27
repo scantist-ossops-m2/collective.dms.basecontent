@@ -25,7 +25,7 @@
  <!-- DO NOT use a model_source or it removes manually added fields while reapplying the profile -->
  <!--property name="model_source" /-->
  <property name="schema_policy">schema_policy_dmsfile</property>
- <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="(Default)" to="@@display-file"/>
  <alias from="edit" to="@@edit"/>
  <alias from="sharing" to="@@sharing"/>
  <alias from="view" to="(selected layout)"/>
