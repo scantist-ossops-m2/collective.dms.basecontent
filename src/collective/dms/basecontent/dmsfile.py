@@ -5,11 +5,12 @@ from plone.dexterity.schema import DexteritySchemaPolicy
 
 from plone.namedfile.field import NamedBlobFile
 from plone.supermodel import model
+from plone.app.contenttypes.interfaces import IFile
 
 from . import _
 
 
-class IDmsFile(model.Schema):
+class IDmsFile(model.Schema, IFile):
     """Schema for DmsFile"""
     model.primary('file')
     file = NamedBlobFile(
@@ -21,6 +22,7 @@ class DmsFile(Item):
     """DmsFile"""
     implements(IDmsFile)
     __ac_local_roles_block__ = True
+
 
 class DmsFileSchemaPolicy(DexteritySchemaPolicy):
     """Schema Policy for DmsFile"""
