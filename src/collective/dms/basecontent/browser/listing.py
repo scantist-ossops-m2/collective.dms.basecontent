@@ -63,10 +63,10 @@ class TaskTitleColumn(Column):
     def renderCell(self, value):
         cell = u"""<a class="task_title" href="%s">%s</a>""" % (value.getURL(),
                                                       value.Title.decode('utf8'))
-        note = value.getObject().note
-        if note is not None:
-            tooltip_div = """<div class="tooltip pb-ajax" style="display:none">%s</div>""" % note.decode('utf8')
-            cell += '\n' + tooltip_div
+        #note = value.getObject().note
+        #if note is not None:
+        #    tooltip_div = """<div class="tooltip pb-ajax" style="display:none">%s</div>""" % note.decode('utf8')
+        #    cell += '\n' + tooltip_div
         return cell
 
 
