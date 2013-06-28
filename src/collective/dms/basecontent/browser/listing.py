@@ -5,8 +5,6 @@ from zope.cachedescriptors.property import CachedProperty
 from zope.i18nmessageid import MessageFactory
 from zope.i18n import translate
 
-from plone import api
-
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 
