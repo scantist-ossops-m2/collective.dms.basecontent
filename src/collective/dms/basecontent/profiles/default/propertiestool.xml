@@ -6,6 +6,10 @@
    <element value="dmsmainfile"/>
    <element value="dmsappendixfile"/>
   </property>
+  <property name="typesUseViewActionInListings" type="lines" purge="False">
+   <element value="dmsmainfile"/>
+   <element value="dmsappendixfile"/>
+  </property>
  </object>
  <object name="navtree_properties" meta_type="Plone Property Sheet">
   <property name="metaTypesNotToList" type="lines" purge="False">
