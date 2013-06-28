@@ -4,11 +4,6 @@
     i18n_domain="plone">
 
   <browser:resource
-      name="dmstooltips.js"
-      image="static/js/tooltips.js"
-      />
-
-  <browser:resource
       name="dmsappendixfile_icon.png"
       image="static/img/dmsappendixfile_icon.png"
       />
