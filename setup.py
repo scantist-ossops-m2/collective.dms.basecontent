@@ -54,8 +54,6 @@ setup(name='collective.dms.basecontent',
           'collective.z3cform.chosen',
           'collective.z3cform.rolefield',
           'z3c.table',
-          # plone.principalsource requires zope.app.component
-          'zope.app.component',
       ],
       extras_require={
           'test': ['plone.app.testing',
