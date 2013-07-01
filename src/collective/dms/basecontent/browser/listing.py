@@ -54,7 +54,7 @@ class VersionsTitleColumn(BaseTitleColumn):
 
 class TaskTitleColumn(BaseTitleColumn):
     grok.adapts(Interface, Interface, TasksTable)
-    contentClasses = 'pfwb-overlay-form-close'
+    contentClasses = 'overlay-form-close'
 
 
 class DirectDownloadColumn(Column):
