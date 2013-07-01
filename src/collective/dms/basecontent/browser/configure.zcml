@@ -18,12 +18,27 @@
       image="static/img/dmsdocument_icon.png"
       />
 
-    <browser:page
-        for="collective.dms.basecontent.dmsdocument.IDmsDocument"
-        name="view"
-        class="plone.dexterity.browser.view.DefaultView"
-        template="templates/dmsdocument_view.pt"
-        permission="zope2.View"
-        />
+  <browser:page
+      for="collective.dms.basecontent.dmsdocument.IDmsDocument"
+      name="view"
+      class=".views.DmsDocumentView"
+      template="templates/dmsdocument_view.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+    name="versionviewer"
+    for="plone.app.contenttypes.interfaces.IFile"
+    class=".views.VersionViewerView"
+    template="templates/versionviewer.pt"
+    permission="zope2.View"
+    layer="collective.documentviewer.interfaces.ILayer" />
+
+  <browser:page
+    name="dvdata"
+    for="plone.app.contenttypes.interfaces.IFile"
+    class=".views.JSONVersionViewerView"
+    permission="zope2.View"
+    layer="collective.documentviewer.interfaces.ILayer" />
 
 </configure>

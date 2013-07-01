@@ -10,7 +10,8 @@ from Products.CMFCore.WorkflowCore import WorkflowException
 
 from collective.dms.basecontent import _
 from collective.dms.basecontent.browser.table import (
-    Column, DateColumn, PrincipalColumn, Table)
+    Column, DateColumn, PrincipalColumn, TitleColumn,
+    Table)
 
 
 grok.templatedir('templates')
@@ -33,7 +34,7 @@ class BaseTable(Table):
         return results
 
 
-class FilesTable(BaseTable):
+class VersionsTable(BaseTable):
     pass
 
 
@@ -41,38 +42,21 @@ class TasksTable(BaseTable):
     pass
 
 
-class TitleColumn(Column):
+class BaseTitleColumn(TitleColumn):
     grok.name('dms.title')
     grok.adapts(Interface, Interface, BaseTable)
-    header = PMF("Title")
-    weight = 10
-
-    def renderCell(self, value):
-        return u"""<a href="%s">%s</a>""" % (value.getURL(),
-                                             value.Title.decode('utf8'))
 
 
-class TaskTitleColumn(Column):
-    grok.name('dms.title')
-    grok.adapts(Interface, Interface, TasksTable)
-    header = PMF("Title")
-    weight = 10
-
-    def renderCell(self, value):
-        cell = u"""<a class="task_title" href="%s">%s</a>""" % (value.getURL(),
-                                                      value.Title.decode('utf8'))
-        #note = value.getObject().note
-        #if note is not None:
-        #    tooltip_div = """<div class="tooltip pb-ajax" style="display:none">%s</div>""" % note.decode('utf8')
-        #    cell += '\n' + tooltip_div
-        return cell
+class VersionsTitleColumn(BaseTitleColumn):
+    grok.adapts(Interface, Interface, VersionsTable)
+    contentClasses = 'version-link'
 
 
 class DirectDownloadColumn(Column):
     grok.name('dms.download')
-    grok.adapts(Interface, Interface, FilesTable)
+    grok.adapts(Interface, Interface, VersionsTable)
     header = u""
-    weight = 100
+    weight = 1
 
     def renderCell(self, value):
         obj = value.getObject()
@@ -86,7 +70,7 @@ class DirectDownloadColumn(Column):
 
 class UpdateColumn(DateColumn):
     grok.name('dms.update')
-    grok.adapts(Interface, Interface, FilesTable)
+    grok.adapts(Interface, Interface, VersionsTable)
     header = PMF(u"listingheader_modified")
     attribute = 'modification_date'
     weight = 40

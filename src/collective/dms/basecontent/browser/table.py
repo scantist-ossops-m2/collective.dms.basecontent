@@ -4,8 +4,10 @@ from Products.CMFCore.utils import getToolByName
 from five import grok
 from z3c.table import interfaces
 from zope.cachedescriptors.property import CachedProperty
-from zope.interface import Interface
+from zope.i18nmessageid import MessageFactory
 import z3c.table.table
+
+PMF = MessageFactory('plone')
 
 grok.templatedir('templates')
 
@@ -92,3 +94,16 @@ class PrincipalColumn(Column):
                     principals.append(group.getProperty('title', None) or group.getId())
 
         return ', '.join(principals).decode('utf-8')
+
+
+class TitleColumn(Column):
+    grok.baseclass()
+    header = PMF("Title")
+    weight = 10
+    contentClasses = ''
+
+    def renderCell(self, value):
+        return u"""<a%s href="%s">%s</a>""" % (
+            self.contentClasses and ' class="%s"' % self.contentClasses or '',
+            value.getURL(),
+            value.Title.decode('utf8'))

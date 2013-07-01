@@ -2,13 +2,16 @@ from five import grok
 
 from collective.dms.basecontent.dmsdocument import IDmsDocument
 from collective.dms.basecontent import _
-from collective.dms.basecontent.browser.listing import FilesTable, TasksTable
+from collective.dms.basecontent.browser.listing import VersionsTable, TasksTable
 
 from collective.dms.basecontent.browser.table import TableViewlet
 
 grok.templatedir('templates')
 grok.context(IDmsDocument)
 
+
+class DmsAboveContentViewletManager(grok.ViewletManager):
+    grok.name('dms.abovecontent')
 
 class DmsBelowContentViewletManager(grok.ViewletManager):
     grok.name('dms.belowcontent')
@@ -17,17 +20,19 @@ class DmsBelowContentViewletManager(grok.ViewletManager):
 class BaseViewlet(TableViewlet):
     grok.baseclass()
     grok.viewletmanager(DmsBelowContentViewletManager)
-    __table__ = FilesTable
+    __table__ = VersionsTable
 
     def contentFilter(self):
         return {'portal_type': self.portal_type}
 
 
-class FilesViewlet(BaseViewlet):
+class VersionsViewlet(BaseViewlet):
     grok.name('dms.files')
+    grok.template('versionsviewlet')
+    grok.viewletmanager(DmsAboveContentViewletManager)
     grok.order(10)
     portal_type = 'dmsmainfile'
-    label = _(u"Version notes")
+    label = _(u"Versions")
     noresult_message = _(u"There is no version note for this document.")
 
 

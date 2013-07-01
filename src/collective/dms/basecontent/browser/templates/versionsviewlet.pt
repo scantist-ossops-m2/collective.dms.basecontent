@@ -1,0 +1,30 @@
+<div id="fieldset-versions" style="float:right; width: 50%;">
+<fieldset>
+  <legend i18n:translate=""
+    tal:content="viewlet/label">label</legend>
+    <tal:listing define="results viewlet/table/values">
+      <tal:b condition="results">
+        <table tal:replace="structure viewlet/table/render" />
+        <div tal:define="version python:results[0].getObject()"
+             tal:replace="structure version/@@versionviewer" />
+      </tal:b>
+      <tal:b condition="not:results" replace="viewlet/noresult_message" />
+    </tal:listing>
+</fieldset>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".version-link:first").closest('tr').addClass('selected');
+    $(".version-link").click(function(){
+      var trigger = $(this);
+      var url = trigger.attr('href') + '/@@dvdata';
+      $.getJSON(url, function(data) {
+          window.documentData = data;
+          window.initializeDV();
+          trigger.closest('table').find('tr').removeClass('selected');
+          trigger.closest('tr').addClass('selected');
+        });
+      return false;
+  });
+});
+</script>
+</div>
