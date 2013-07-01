@@ -31,6 +31,15 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <!-- import steps -->
+  <genericsetup:importStep
+      name="collective.dms.basecontent-final"
+      title="collective.dms.basecontent final step"
+      description="collective.dms.basecontent final step"
+      handler="collective.dms.basecontent.setuphandlers.importFinalSteps">
+    <depends name="plone-final"/>
+  </genericsetup:importStep>
+
   <utility
       factory=".dmsdocument.DmsDocumentSchemaPolicy"
       name="schema_policy_dmsdocument"
