@@ -16,7 +16,7 @@
   <element value="documentviewer"/>
  </property>
  <property name="default_view_fallback">False</property>
- <property name="add_permission">cmf.AddPortalContent</property>
+ <property name="add_permission">collective.dms.basecontent.dmsfile.add</property>
  <property name="klass">collective.dms.basecontent.dmsfile.DmsFile</property>
  <property name="behaviors">
   <element value="plone.app.content.interfaces.INameFromTitle"/>

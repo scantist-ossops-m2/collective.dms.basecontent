@@ -19,6 +19,7 @@
   <include package="collective.z3cform.chosen" />
 
   <include package=".browser" />
+  <include file="permissions.zcml" />
 
   <adapter factory=".relateddocs.RelatedDocsFieldWidget" />
 
