@@ -32,7 +32,7 @@ class TableViewlet(grok.Viewlet):
 class Table(z3c.table.table.Table):
     cssClassEven = u'even'
     cssClassOdd = u'odd'
-    cssClasses = {'table': 'listing'}
+    cssClasses = {'table': 'listing nosort'}
     sortOn = None
     batchSize = 10000
     startBatchingAt = 10000
