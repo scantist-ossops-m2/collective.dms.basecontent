@@ -2,14 +2,11 @@ import datetime
 
 from Products.CMFCore.utils import getToolByName
 from five import grok
-from z3c.table import interfaces
 from zope.cachedescriptors.property import CachedProperty
 from zope.i18nmessageid import MessageFactory
-from zope.i18n import translate
 import z3c.table.table
 import z3c.table.column
 
-from collective.dms.basecontent import _
 
 PMF = MessageFactory('plone')
 

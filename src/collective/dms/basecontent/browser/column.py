@@ -33,13 +33,24 @@ class PrincipalColumn(Column):
     grok.baseclass()
     attribute = NotImplemented
 
-    def renderCell(self, value):
-        obj = value.getObject()
-        pas = getToolByName(self.context, 'acl_users')
+    def renderCell(self, item):
+        try:
+            value = getattr(item, self.attribute)
+        except AttributeError:
+            obj = item.getObject()
+            value = getattr(obj, self.attribute, ())
+
+        if callable(value):
+            value = value()
+
+        if not isinstance(value, (list, tuple)):
+            value = (value,)
+
         gtool = getToolByName(self.context, 'portal_groups')
+        mtool = getToolByName(self.context, 'portal_membership')
         principals = []
-        for principal_id in getattr(obj, self.attribute, ()):
-            user = pas.getUserById(principal_id)
+        for principal_id in value:
+            user = mtool.getMemberById(principal_id)
             if user is not None:
                 principals.append(user.getProperty('fullname', None) or user.getId())
             else:
@@ -101,13 +112,11 @@ class StateColumn(Column):
     header = PMF(u"State")
     weight = 50
 
-    def renderCell(self, value):
-        obj = value.getObject()
+    def renderCell(self, item):
         try:
             wtool = self.table.wtool
-            review_state = wtool.getInfoFor(obj, 'review_state')
-            state_title = wtool.getTitleForStateOnType(review_state,
-                                                       obj.portal_type)
+            state_title = wtool.getTitleForStateOnType(item.review_state,
+                                                       item.portal_type)
             return translate(PMF(state_title), context=self.request)
         except WorkflowException:
             return u""

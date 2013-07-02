@@ -66,6 +66,14 @@ class DeleteColumn(column.DeleteColumn):
     grok.adapts(Interface, Interface, VersionsTable)
 
 
+class AuthorColumn(column.PrincipalColumn):
+    grok.name('dms.author')
+    grok.adapts(Interface, Interface, VersionsTable)
+    header = _(u"Author")
+    weight = 30
+    attribute = 'Creator'
+
+
 class UpdateColumn(column.DateColumn):
     grok.name('dms.update')
     grok.adapts(Interface, Interface, VersionsTable)
