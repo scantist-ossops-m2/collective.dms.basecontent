@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-04-12 12:18+0000\n"
+"POT-Creation-Date: 2013-07-02 14:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,59 +17,91 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.dms.basecontent\n"
 
-#: ../browser/viewlets.py:38
+#: ../browser/viewlets.py:44
 msgid "Appendix"
 msgstr ""
 
-#: ../browser/listing.py:107
+#: ../browser/listing.py:72
+msgid "Author"
+msgstr ""
+
+#: ../browser/listing.py:110
 msgid "Deadline"
 msgstr ""
 
-#: ../browser/listing.py:61
+#: ../browser/column.py:107
 msgid "Download file"
 msgstr ""
 
-#: ../dmsfile.py:16
+#: ../browser/listing.py:94
+msgid "Enquirer"
+msgstr ""
+
+#: ../dmsfile.py:17
 msgid "File"
 msgstr ""
 
-#: ../dmsdocument.py:21
+#: ../browser/viewlets.py:79
+msgid "Informations"
+msgstr ""
+
+#: ../dmsdocument.py:25
 msgid "Notes"
 msgstr ""
 
-#: ../dmsdocument.py:33
+#: ../browser/viewlets.py:61
+msgid "Opinion applications"
+msgstr ""
+
+#: ../dmsdocument.py:38
 msgid "Recipient groups"
 msgstr ""
 
-#: ../dmsdocument.py:40
+#: ../dmsdocument.py:46
 msgid "Related documents"
 msgstr ""
 
-#: ../browser/listing.py:95
+#: ../browser/listing.py:102
 msgid "Responsible"
 msgstr ""
 
-#: ../browser/viewlets.py:46
+#: ../browser/viewlets.py:52
 msgid "Tasks"
 msgstr ""
 
-#: ../browser/viewlets.py:39
+#: ../browser/viewlets.py:45
 msgid "There is no appendix for this document."
 msgstr ""
 
-#: ../browser/viewlets.py:47
+#: ../browser/viewlets.py:80
+msgid "There is no informations for this document."
+msgstr ""
+
+#: ../browser/viewlets.py:62
+msgid "There is no opinion applications for this document."
+msgstr ""
+
+#: ../browser/viewlets.py:53
 msgid "There is no task for this document."
 msgstr ""
 
-#: ../browser/viewlets.py:31
+#: ../browser/viewlets.py:71
+msgid "There is no validation applications for this document."
+msgstr ""
+
+#: ../browser/viewlets.py:37
 msgid "There is no version note for this document."
 msgstr ""
 
-#: ../dmsdocument.py:26
+#: ../dmsdocument.py:30
 msgid "Treating groups"
 msgstr ""
 
-#: ../browser/viewlets.py:30
-msgid "Version notes"
+#: ../browser/viewlets.py:70
+msgid "Validation applications"
+msgstr ""
+
+#: ../browser/viewlets.py:36
+msgid "Versions"
 msgstr ""
 
