@@ -9,9 +9,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 
 from collective.dms.basecontent import _
-from collective.dms.basecontent.browser.table import (
-    Column, DateColumn, PrincipalColumn, TitleColumn,
-    Table)
+from collective.dms.basecontent.browser import column
+from collective.dms.basecontent.browser.table import Table
 
 
 grok.templatedir('templates')
@@ -42,38 +41,32 @@ class TasksTable(BaseTable):
     pass
 
 
-class BaseTitleColumn(TitleColumn):
+class BaseTitleColumn(column.TitleColumn):
     grok.name('dms.title')
     grok.adapts(Interface, Interface, BaseTable)
 
 
 class VersionsTitleColumn(BaseTitleColumn):
     grok.adapts(Interface, Interface, VersionsTable)
-    contentClasses = 'version-link'
+    linkCSS = 'version-link'
 
 
 class TaskTitleColumn(BaseTitleColumn):
     grok.adapts(Interface, Interface, TasksTable)
-    contentClasses = 'overlay-comment-form'
+    linkCSS = 'overlay-comment-form'
 
 
-class DirectDownloadColumn(Column):
+class DownloadColumn(column.DownloadColumn):
     grok.name('dms.download')
     grok.adapts(Interface, Interface, VersionsTable)
-    header = u""
-    weight = 1
-
-    def renderCell(self, value):
-        obj = value.getObject()
-        download_file_msg = _(u"Download file")
-        download_url = '%s/@@download' % obj.absolute_url()
-        return u"""<a href="%s"><img title="%s" src="download_icon.png" /></a>""" % (
-                download_url,
-                translate(download_file_msg, context=self.request),
-                )
 
 
-class UpdateColumn(DateColumn):
+class DeleteColumn(column.DeleteColumn):
+    grok.name('dms.delete')
+    grok.adapts(Interface, Interface, VersionsTable)
+
+
+class UpdateColumn(column.DateColumn):
     grok.name('dms.update')
     grok.adapts(Interface, Interface, VersionsTable)
     header = PMF(u"listingheader_modified")
@@ -81,24 +74,13 @@ class UpdateColumn(DateColumn):
     weight = 40
 
 
-class StateColumn(Column):
+class StateColumn(column.StateColumn):
     grok.name('dms.state')
     grok.adapts(Interface, Interface, BaseTable)
-    header = PMF(u"State")
     weight = 50
 
-    def renderCell(self, value):
-        obj = value.getObject()
-        try:
-            wtool = self.table.wtool
-            review_state = wtool.getInfoFor(obj, 'review_state')
-            state_title = wtool.getTitleForStateOnType(review_state,
-                                                       obj.portal_type)
-            return translate(PMF(state_title), context=self.request)
-        except WorkflowException:
-            return u""
 
-class EnquirerColumn(PrincipalColumn):
+class EnquirerColumn(column.PrincipalColumn):
     grok.name('dms.enquirer')
     grok.adapts(Interface, Interface, TasksTable)
     header = _(u"Enquirer")
@@ -106,7 +88,7 @@ class EnquirerColumn(PrincipalColumn):
     attribute = 'enquirer'
 
 
-class ResponsibleColumn(PrincipalColumn):
+class ResponsibleColumn(column.PrincipalColumn):
     grok.name('dms.responsible')
     grok.adapts(Interface, Interface, TasksTable)
     header = _(u"Responsible")
@@ -114,7 +96,7 @@ class ResponsibleColumn(PrincipalColumn):
     attribute = 'responsible'
 
 
-class DeadlineColumn(DateColumn):
+class DeadlineColumn(column.DateColumn):
     grok.name('dms.deadline')
     grok.adapts(Interface, Interface, TasksTable)
     header = _(u"Deadline")

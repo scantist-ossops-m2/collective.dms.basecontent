@@ -5,7 +5,11 @@ from five import grok
 from z3c.table import interfaces
 from zope.cachedescriptors.property import CachedProperty
 from zope.i18nmessageid import MessageFactory
+from zope.i18n import translate
 import z3c.table.table
+import z3c.table.column
+
+from collective.dms.basecontent import _
 
 PMF = MessageFactory('plone')
 
@@ -41,6 +45,10 @@ class Table(z3c.table.table.Table):
     def wtool(self):
         return getToolByName(self.context, 'portal_workflow')
 
+    @CachedProperty
+    def portal_url(self):
+        return getToolByName(self.context, 'portal_url')()
+
     def update(self):
         super(Table, self).update()
 
@@ -58,52 +66,3 @@ class Table(z3c.table.table.Table):
             context=self.context,
             domain='plonelocales',
             request=self.request)
-
-
-class Column(z3c.table.column.Column, grok.MultiAdapter):
-    grok.baseclass()
-    grok.provides(interfaces.IColumn)
-
-
-class DateColumn(Column):
-    grok.baseclass()
-    attribute = NotImplemented
-
-    def renderCell(self, value):
-        obj = value.getObject()
-        date = getattr(obj, self.attribute, None)
-        return self.table.format_date(date)
-
-
-class PrincipalColumn(Column):
-    grok.baseclass()
-    attribute = NotImplemented
-
-    def renderCell(self, value):
-        obj = value.getObject()
-        pas = getToolByName(self.context, 'acl_users')
-        gtool = getToolByName(self.context, 'portal_groups')
-        principals = []
-        for principal_id in getattr(obj, self.attribute, ()):
-            user = pas.getUserById(principal_id)
-            if user is not None:
-                principals.append(user.getProperty('fullname', None) or user.getId())
-            else:
-                group = gtool.getGroupById(principal_id)
-                if group is not None:
-                    principals.append(group.getProperty('title', None) or group.getId())
-
-        return ', '.join(principals).decode('utf-8')
-
-
-class TitleColumn(Column):
-    grok.baseclass()
-    header = PMF("Title")
-    weight = 10
-    contentClasses = ''
-
-    def renderCell(self, value):
-        return u"""<a%s href="%s">%s</a>""" % (
-            self.contentClasses and ' class="%s"' % self.contentClasses or '',
-            value.getURL(),
-            value.Title.decode('utf8'))
