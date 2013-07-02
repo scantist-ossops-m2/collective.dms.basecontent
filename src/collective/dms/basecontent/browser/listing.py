@@ -54,7 +54,7 @@ class VersionsTitleColumn(BaseTitleColumn):
 
 class TaskTitleColumn(BaseTitleColumn):
     grok.adapts(Interface, Interface, TasksTable)
-    contentClasses = 'overlay-form-close'
+    contentClasses = 'overlay-comment-form'
 
 
 class DirectDownloadColumn(Column):

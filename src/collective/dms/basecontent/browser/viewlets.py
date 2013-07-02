@@ -13,6 +13,7 @@ grok.context(IDmsDocument)
 class DmsAboveContentViewletManager(grok.ViewletManager):
     grok.name('dms.abovecontent')
 
+
 class DmsBelowContentViewletManager(grok.ViewletManager):
     grok.name('dms.belowcontent')
 
@@ -52,6 +53,7 @@ class TasksViewlet(BaseViewlet):
     noresult_message = _(u"There is no task for this document.")
     __table__ = TasksTable
 
+
 class OpinionsViewlet(BaseViewlet):
     grok.name('dms.opinions')
     grok.order(40)
@@ -60,6 +62,7 @@ class OpinionsViewlet(BaseViewlet):
     noresult_message = _(u"There is no opinion applications for this document.")
     __table__ = TasksTable
 
+
 class ValidationsViewlet(BaseViewlet):
     grok.name('dms.validations')
     grok.order(50)
@@ -67,6 +70,7 @@ class ValidationsViewlet(BaseViewlet):
     label = _(u"Validation applications")
     noresult_message = _(u"There is no validation applications for this document.")
     __table__ = TasksTable
+
 
 class InformationsViewlet(BaseViewlet):
     grok.name('dms.informations')
