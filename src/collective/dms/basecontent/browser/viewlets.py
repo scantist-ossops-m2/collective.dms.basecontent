@@ -35,6 +35,10 @@ class VersionsViewlet(BaseViewlet):
     portal_type = 'dmsmainfile'
     label = _(u"Versions")
     noresult_message = _(u"There is no version note for this document.")
+    def contentFilter(self):
+        return {'portal_type': self.portal_type,
+                'sort_on': 'getObjPositionInParent',
+                'sort_order': 'descending'}
 
 
 class AppendixViewlet(BaseViewlet):

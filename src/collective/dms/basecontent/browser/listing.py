@@ -3,10 +3,8 @@ from five import grok
 from zope.interface import Interface
 from zope.cachedescriptors.property import CachedProperty
 from zope.i18nmessageid import MessageFactory
-from zope.i18n import translate
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.WorkflowCore import WorkflowException
 
 from collective.dms.basecontent import _
 from collective.dms.basecontent.browser import column
@@ -22,13 +20,12 @@ class BaseTable(Table):
 
     @CachedProperty
     def values(self):
-        portal_type = self.viewlet.portal_type
         portal_catalog = getToolByName(self, 'portal_catalog')
         folder_path = '/'.join(self.context.getPhysicalPath())
-        query = {}
-        query['path'] = {'query' : folder_path}
-        query['portal_type'] = portal_type
-
+        query = {'path': {'query' : folder_path},
+                 'sort_on': 'getObjPositionInParent',
+                 'sort_order': 'ascending'}
+        query.update(self.viewlet.contentFilter())
         results = portal_catalog.searchResults(query)
         return results
 
