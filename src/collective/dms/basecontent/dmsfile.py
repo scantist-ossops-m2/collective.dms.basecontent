@@ -61,7 +61,7 @@ def titleDefaultValue(data):
     if 'higher_version' not in annotations:
         version_number = 1
     else:
-        version_number = annotations['higher_version'].value
+        version_number = annotations['higher_version'].value + 1
     return unicode(version_number)
 
 
