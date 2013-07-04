@@ -2,7 +2,7 @@ from five import grok
 
 from collective.dms.basecontent.dmsdocument import IDmsDocument
 from collective.dms.basecontent import _
-from collective.dms.basecontent.browser.listing import VersionsTable, TasksTable
+from collective.dms.basecontent.browser.listing import VersionsTable, TasksTable, InformationsTable
 
 from collective.dms.basecontent.browser.table import TableViewlet
 
@@ -82,4 +82,4 @@ class InformationsViewlet(BaseViewlet):
     portal_type = 'information'
     label = _(u"Informations")
     noresult_message = _(u"There is no informations for this document.")
-    __table__ = TasksTable
+    __table__ = InformationsTable

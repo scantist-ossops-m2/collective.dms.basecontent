@@ -2,6 +2,7 @@ from five import grok
 
 from zope.interface import Interface
 from zope.cachedescriptors.property import CachedProperty
+from zope.i18n import translate
 from zope.i18nmessageid import MessageFactory
 
 from Products.CMFCore.utils import getToolByName
@@ -35,6 +36,10 @@ class VersionsTable(BaseTable):
 
 
 class TasksTable(BaseTable):
+    pass
+
+
+class InformationsTable(TasksTable):
     pass
 
 
@@ -83,6 +88,20 @@ class StateColumn(column.StateColumn):
     grok.name('dms.state')
     grok.adapts(Interface, Interface, BaseTable)
     weight = 50
+
+
+class InformationStateColumn(column.StateColumn):
+    """StateColumn for informations"""
+    grok.name('dms.state')
+    grok.adapts(Interface, Interface, InformationsTable)
+    weight = 50
+
+    def renderCell(self, item):
+        title_mapping = {'todo': _(u'To read'),
+                         'done': _(u'Read')
+                         }
+        state_title = title_mapping[item.review_state]
+        return translate(_(state_title), context=self.request)
 
 
 class EnquirerColumn(column.PrincipalColumn):
