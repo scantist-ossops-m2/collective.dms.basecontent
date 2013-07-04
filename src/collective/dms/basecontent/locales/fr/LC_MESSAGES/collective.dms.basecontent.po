@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.dms.basecontent\n"
-"POT-Creation-Date: 2013-07-02 14:17+0000\n"
-"PO-Revision-Date: 2013-04-06 19:01+0100\n"
+"POT-Creation-Date: 2013-07-04 09:41+0000\n"
+"PO-Revision-Date: 2013-07-04 11:43+0100\n"
 "Last-Translator: Cédric Messiant <cedricmessiant@ecreall.com>\n"
 "Language-Team: Ecréall\n"
 "MIME-Version: 1.0\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Domain: collective.dms.basecontent\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
-#: ../browser/viewlets.py:44
+#: ../browser/viewlets.py:48
 msgid "Appendix"
 msgstr "Annexes"
 
-#: ../browser/listing.py:72
+#: ../browser/listing.py:74
 msgid "Author"
 msgstr "Auteur"
 
-#: ../browser/listing.py:110
+#: ../browser/listing.py:126
 msgid "Deadline"
 msgstr "Echéance"
 
@@ -31,15 +31,15 @@ msgstr "Echéance"
 msgid "Download file"
 msgstr "Télécharger"
 
-#: ../browser/listing.py:94
+#: ../browser/listing.py:110
 msgid "Enquirer"
 msgstr "Demandeur"
 
-#: ../dmsfile.py:17
+#: ../dmsfile.py:32
 msgid "File"
 msgstr "Fichier"
 
-#: ../browser/viewlets.py:79
+#: ../browser/viewlets.py:83
 msgid "Informations"
 msgstr "Transmissions pour information"
 
@@ -47,9 +47,13 @@ msgstr "Transmissions pour information"
 msgid "Notes"
 msgstr "Notes"
 
-#: ../browser/viewlets.py:61
+#: ../browser/viewlets.py:65
 msgid "Opinion applications"
 msgstr "Demandes d'avis"
+
+#: ../browser/listing.py:101
+msgid "Read"
+msgstr "Lu"
 
 #: ../dmsdocument.py:38
 msgid "Recipient groups"
@@ -59,31 +63,35 @@ msgstr "Services à informer"
 msgid "Related documents"
 msgstr "Documents en rapport"
 
-#: ../browser/listing.py:102
+#: ../browser/listing.py:118
 msgid "Responsible"
 msgstr "Destinataire"
 
-#: ../browser/viewlets.py:52
+#: ../dmsfile.py:44
+msgid "Signed version"
+msgstr "Version signée"
+
+#: ../browser/viewlets.py:56
 msgid "Tasks"
 msgstr "Tâches"
 
-#: ../browser/viewlets.py:45
+#: ../browser/viewlets.py:49
 msgid "There is no appendix for this document."
 msgstr "Il n'y a aucune annexe."
 
-#: ../browser/viewlets.py:80
+#: ../browser/viewlets.py:84
 msgid "There is no informations for this document."
 msgstr "Il n'y a aucune transmission pour information."
 
-#: ../browser/viewlets.py:62
+#: ../browser/viewlets.py:66
 msgid "There is no opinion applications for this document."
 msgstr "Il n'y a aucune demande d'avis."
 
-#: ../browser/viewlets.py:53
+#: ../browser/viewlets.py:57
 msgid "There is no task for this document."
 msgstr "Il n'y a aucune tâche."
 
-#: ../browser/viewlets.py:71
+#: ../browser/viewlets.py:75
 msgid "There is no validation applications for this document."
 msgstr "Il n'y a aucune demande de validation"
 
@@ -91,13 +99,21 @@ msgstr "Il n'y a aucune demande de validation"
 msgid "There is no version note for this document."
 msgstr "Il n'y a aucun fichier ged."
 
+#: ../browser/listing.py:100
+msgid "To read"
+msgstr "À lire"
+
 #: ../dmsdocument.py:30
 msgid "Treating groups"
 msgstr "Services en charge du traitement"
 
-#: ../browser/viewlets.py:70
+#: ../browser/viewlets.py:74
 msgid "Validation applications"
 msgstr "Demandes de validation"
+
+#: ../dmsfile.py:25
+msgid "Version number"
+msgstr "Numéro de version"
 
 #: ../browser/viewlets.py:36
 msgid "Versions"
