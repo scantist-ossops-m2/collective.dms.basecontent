@@ -23,7 +23,7 @@ class IDmsFile(model.Schema, IFile):
     """Schema for DmsFile"""
     title = schema.TextLine(
         title=_(u'Version number'),
-        required=True
+        required=False
     )
     form.mode(title='hidden')
 
@@ -37,6 +37,13 @@ class DmsFile(Item):
     """DmsFile"""
     implements(IDmsFile)
     __ac_local_roles_block__ = True
+    signed = False
+
+    def Title(self):
+        if self.signed:
+            return _(u"Signed version")
+        else:
+            return self.title
 
 
 class DmsFileSchemaPolicy(DexteritySchemaPolicy):
