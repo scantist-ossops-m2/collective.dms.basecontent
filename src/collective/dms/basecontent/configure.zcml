@@ -17,6 +17,7 @@
   <include package="plone.principalsource" />
   <include package="plone.supermodel" />
   <include package="collective.z3cform.chosen" />
+  <include package="collective.documentviewer" />
 
   <include package=".browser" />
   <include file="permissions.zcml" />
