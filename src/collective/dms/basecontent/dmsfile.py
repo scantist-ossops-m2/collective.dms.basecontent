@@ -38,9 +38,12 @@ class DmsFile(Item):
     implements(IDmsFile)
     __ac_local_roles_block__ = True
     signed = False
+    incomingmail = False
 
     def Title(self):
-        if self.signed:
+        if self.incomingmail:
+            return _(u"Incoming mail")
+        elif self.signed:
             return _(u"Signed version")
         else:
             return self.title
