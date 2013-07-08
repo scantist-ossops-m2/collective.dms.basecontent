@@ -63,6 +63,16 @@ class DownloadColumn(column.DownloadColumn):
     grok.adapts(Interface, Interface, VersionsTable)
 
 
+class EditColumn(column.EditColumn):
+    grok.name('dms.edit')
+    grok.adapts(Interface, Interface, VersionsTable)
+
+
+#class ExternalEditColumn(column.ExternalEditColumn):
+#    grok.name('dms.extedit')
+#    grok.adapts(Interface, Interface, VersionsTable)
+
+
 class DeleteColumn(column.DeleteColumn):
     grok.name('dms.delete')
     grok.adapts(Interface, Interface, VersionsTable)

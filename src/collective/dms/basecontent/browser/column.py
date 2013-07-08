@@ -116,6 +116,44 @@ class DownloadColumn(IconColumn, LinkColumn):
     linkContent = _(u"Download file")
 
 
+class ExternalEditColumn(IconColumn, LinkColumn):
+    grok.baseclass()
+    header = u""
+    weight = 3
+    linkName = "@@external_edit"
+    iconName = "extedit_icon.png"
+    linkContent = PMF(u"Edit with external application")
+
+    def renderCell(self, item):
+        obj = item.getObject()
+        sm = getSecurityManager()
+        if not sm.checkPermission('Modify portal content', obj):
+            return u""
+
+        if not obj.restrictedTraverse('@@externalEditorEnabled').available():
+            return u""
+
+        return super(ExternalEditColumn, self).renderCell(item)
+
+
+class EditColumn(IconColumn, LinkColumn):
+    grok.baseclass()
+    header = u""
+    weight = 2
+    linkName = "edit"
+    iconName = "edit.png"
+    linkContent = PMF(u"Edit")
+    linkCSS = 'overlay-form-reload'
+
+    def renderCell(self, item):
+        obj = item.getObject()
+        sm = getSecurityManager()
+        if not sm.checkPermission('Modify portal content', obj):
+            return u""
+
+        return super(EditColumn, self).renderCell(item)
+
+
 class StateColumn(Column):
     grok.baseclass()
     header = PMF(u"State")
