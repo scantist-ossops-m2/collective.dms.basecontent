@@ -1,3 +1,4 @@
+from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 from five import grok
 from z3c.table import interfaces
@@ -96,6 +97,14 @@ class DeleteColumn(IconColumn, LinkColumn):
     linkCSS = 'edm-delete-popup'
     iconName = "delete_icon.png"
     linkContent = PMF(u"Delete")
+
+    def renderCell(self, item):
+        obj = item.getObject()
+        sm = getSecurityManager()
+        if not sm.checkPermission('Delete objects', obj):
+            return u""
+
+        return super(DeleteColumn, self).renderCell(item)
 
 
 class DownloadColumn(IconColumn, LinkColumn):
