@@ -24,7 +24,10 @@ class BaseViewlet(TableViewlet):
     __table__ = VersionsTable
 
     def contentFilter(self):
-        return {'portal_type': self.portal_type}
+        return {'portal_type': self.portal_type,
+                'sort_on': 'deadline',
+                'sort_order': 'descending'
+                }
 
 
 class VersionsViewlet(BaseViewlet):
@@ -47,6 +50,10 @@ class AppendixViewlet(BaseViewlet):
     portal_type = 'dmsappendixfile'
     label = _(u"Appendix")
     noresult_message = _(u"There is no appendix for this document.")
+    def contentFilter(self):
+        return {'portal_type': self.portal_type,
+                'sort_on': 'getObjPositionInParent',
+                'sort_order': 'ascending'}
 
 
 class TasksViewlet(BaseViewlet):
