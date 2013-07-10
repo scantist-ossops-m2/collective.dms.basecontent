@@ -13,7 +13,19 @@
 </fieldset>
 <script type="text/javascript">
 $(document).ready(function(){
-    $(".version-link:first").closest('tr').addClass('selected');
+    function async_load_dv() {
+      if (!$(".version-link").closest('tr').hasClass('selected')) {
+        // click on the first version if no version was selected by the user
+        // within the 3s.
+        $(".version-link:first").click()
+      }
+    }
+    if (window.documentData && window.documentData.pages == null) {
+      // the version was just added, update DV after 3s
+      setTimeout(async_load_dv, 3000);
+    } else {
+      $(".version-link:first").closest('tr').addClass('selected');
+    }
     $(".version-link").click(function(){
       var trigger = $(this);
       var url = trigger.attr('href') + '/@@dvdata';

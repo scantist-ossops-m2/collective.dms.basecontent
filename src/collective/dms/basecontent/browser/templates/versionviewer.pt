@@ -21,7 +21,6 @@
         </dd>
       </dl>
     </tal:notshow>
-    <tal:show tal:condition="view/enabled">
       <div id="DV-container">
 
       <div class="DV-loadingDocument"><span i18n:translate="">Loading</span></div>
@@ -31,7 +30,6 @@
       </div>
       <div id="overlay"></div>
       <script type="text/javascript" tal:content="structure view/javascript"></script>
-    </tal:show>
 
   </metal:content-core>
 </html>
