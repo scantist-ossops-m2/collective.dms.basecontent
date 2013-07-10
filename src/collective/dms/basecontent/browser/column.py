@@ -1,3 +1,4 @@
+import Missing
 from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 from five import grok
@@ -20,14 +21,28 @@ class Column(z3c.table.column.Column, grok.MultiAdapter):
     grok.provides(interfaces.IColumn)
 
 
+def get_value(item, attribute, default=None):
+    try:
+        value = getattr(item, attribute, default)
+        if value is Missing.Value:
+            return default
+    except AttributeError:
+        obj = item.getObject()
+        value = getattr(obj, attribute, default)
+
+    if callable(value):
+        value = value()
+
+    return value
+
+
 class DateColumn(Column):
     grok.baseclass()
     attribute = NotImplemented
 
-    def renderCell(self, value):
-        obj = value.getObject()
-        date = getattr(obj, self.attribute, None)
-        return self.table.format_date(date)
+    def renderCell(self, item):
+        value = get_value(item, self.attribute)
+        return self.table.format_date(value)
 
 
 class PrincipalColumn(Column):
@@ -35,14 +50,7 @@ class PrincipalColumn(Column):
     attribute = NotImplemented
 
     def renderCell(self, item):
-        try:
-            value = getattr(item, self.attribute)
-        except AttributeError:
-            obj = item.getObject()
-            value = getattr(obj, self.attribute, ())
-
-        if callable(value):
-            value = value()
+        value = get_value(item, self.attribute, default=())
 
         if not isinstance(value, (list, tuple)):
             value = (value,)
