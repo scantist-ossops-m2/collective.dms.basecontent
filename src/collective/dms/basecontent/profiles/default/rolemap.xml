@@ -5,6 +5,7 @@
       <role name="Owner"/>
       <role name="Manager"/>
       <role name="Contributor"/>
+      <role name="Reviewer"/>
       <role name="Site Administrator"/>
     </permission>
   </permissions>
