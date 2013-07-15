@@ -86,7 +86,10 @@ class TitleColumn(LinkColumn):
     weight = 10
 
     def getLinkContent(self, item):
-        return item.Title.decode('utf8')
+        if type(item.Title) is unicode:
+            return item.Title
+        else:
+            return unicode(item.Title, 'latin1')
 
 
 class IconColumn(object):
