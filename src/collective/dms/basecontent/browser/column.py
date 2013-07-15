@@ -8,6 +8,7 @@ from zope.i18n import translate
 import z3c.table.table
 import z3c.table.column
 from Products.CMFCore.WorkflowCore import WorkflowException
+import plone.api
 
 from collective.dms.basecontent import _
 
@@ -55,8 +56,8 @@ class PrincipalColumn(Column):
         if not isinstance(value, (list, tuple)):
             value = (value,)
 
-        gtool = getToolByName(self.context, 'portal_groups')
-        mtool = getToolByName(self.context, 'portal_membership')
+        gtool = getToolByName(plone.api.portal.get(), 'portal_groups')
+        mtool = getToolByName(plone.api.portal.get(), 'portal_membership')
         principals = []
         for principal_id in value:
             user = mtool.getMemberById(principal_id)
@@ -86,10 +87,11 @@ class TitleColumn(LinkColumn):
     weight = 10
 
     def getLinkContent(self, item):
-        if type(item.Title) is unicode:
-            return item.Title
+        title = get_value(item, 'Title')
+        if type(title) is unicode:
+            return title
         else:
-            return unicode(item.Title, 'latin1')
+            return unicode(title, 'latin1')
 
 
 class IconColumn(object):
@@ -173,8 +175,10 @@ class StateColumn(Column):
     def renderCell(self, item):
         try:
             wtool = self.table.wtool
-            state_title = wtool.getTitleForStateOnType(item.review_state,
-                                                       item.portal_type)
+            portal_type = get_value(item, 'portal_type')
+            review_state = get_value(item, 'review_state')
+            state_title = wtool.getTitleForStateOnType(review_state,
+                                                       portal_type)
             return translate(PMF(state_title), context=self.request)
         except WorkflowException:
             return u""
