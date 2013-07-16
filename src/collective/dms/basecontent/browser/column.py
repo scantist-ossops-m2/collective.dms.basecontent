@@ -91,7 +91,7 @@ class TitleColumn(LinkColumn):
         if type(title) is unicode:
             return title
         else:
-            return unicode(title, 'latin1')
+            return unicode(title, 'utf-8', 'ignore')
 
 
 class IconColumn(object):
