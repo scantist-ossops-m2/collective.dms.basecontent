@@ -88,7 +88,7 @@ class TitleColumn(LinkColumn):
 
     def getLinkContent(self, item):
         title = get_value(item, 'Title')
-        if type(title) is unicode:
+        if isinstance(title, unicode):
             return title
         else:
             return unicode(title, 'utf-8', 'ignore')
