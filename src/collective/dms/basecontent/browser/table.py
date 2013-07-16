@@ -7,6 +7,8 @@ from zope.i18nmessageid import MessageFactory
 import z3c.table.table
 import z3c.table.column
 
+import plone.api
+
 
 PMF = MessageFactory('plone')
 
@@ -36,15 +38,15 @@ class Table(z3c.table.table.Table):
 
     @CachedProperty
     def translation_service(self):
-        return getToolByName(self.context, 'translation_service')
+        return getToolByName(plone.api.portal.get(), 'translation_service')
 
     @CachedProperty
     def wtool(self):
-        return getToolByName(self.context, 'portal_workflow')
+        return getToolByName(plone.api.portal.get(), 'portal_workflow')
 
     @CachedProperty
     def portal_url(self):
-        return getToolByName(self.context, 'portal_url')()
+        return plone.api.portal.get().absolute_url()
 
     def update(self):
         super(Table, self).update()
