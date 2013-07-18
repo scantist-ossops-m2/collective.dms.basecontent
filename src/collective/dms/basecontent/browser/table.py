@@ -1,13 +1,12 @@
 import datetime
 
-from Products.CMFCore.utils import getToolByName
 from five import grok
 from zope.cachedescriptors.property import CachedProperty
 from zope.i18nmessageid import MessageFactory
 import z3c.table.table
 import z3c.table.column
 
-import plone.api
+from plone import api
 
 
 PMF = MessageFactory('plone')
@@ -38,15 +37,15 @@ class Table(z3c.table.table.Table):
 
     @CachedProperty
     def translation_service(self):
-        return getToolByName(plone.api.portal.get(), 'translation_service')
+        return api.portal.get_tool('translation_service')
 
     @CachedProperty
     def wtool(self):
-        return getToolByName(plone.api.portal.get(), 'portal_workflow')
+        return api.portal.get_tool('portal_workflow')
 
     @CachedProperty
     def portal_url(self):
-        return plone.api.portal.get().absolute_url()
+        return api.portal.get().absolute_url()
 
     def update(self):
         super(Table, self).update()
