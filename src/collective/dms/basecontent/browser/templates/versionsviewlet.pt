@@ -16,13 +16,13 @@ $(document).ready(function(){
     function async_load_dv() {
       if (!$(".version-link").closest('tr').hasClass('selected')) {
         // click on the first version if no version was selected by the user
-        // within the 3s.
+        // within the 6s.
         $(".version-link:first").click()
       }
     }
     if (window.documentData && window.documentData.pages == null) {
-      // the version was just added, update DV after 3s
-      setTimeout(async_load_dv, 3000);
+      // the version was just added, update DV after 6s
+      setTimeout(async_load_dv, 6000);
     } else {
       $(".version-link:first").closest('tr').addClass('selected');
     }
