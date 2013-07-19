@@ -50,7 +50,12 @@ class BaseTitleColumn(column.TitleColumn):
 
 class VersionsTitleColumn(BaseTitleColumn):
     grok.adapts(Interface, Interface, VersionsTable)
+    domain = 'collective.dms.basecontent'
     linkCSS = 'version-link'
+
+    def getLinkContent(self, item):
+        content = super(VersionsTitleColumn, self).getLinkContent(item)
+        return translate(content, domain=self.domain, context=self.request)
 
 
 class TaskTitleColumn(BaseTitleColumn):

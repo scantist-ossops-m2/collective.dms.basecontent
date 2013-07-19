@@ -96,8 +96,9 @@ class TitleColumn(LinkColumn):
 
 class IconColumn(object):
     def getLinkContent(self, item):
+        content = super(IconColumn, self).getLinkContent(item)
         return u"""<img title="%s" src="%s" />""" % (
-                translate(self.linkContent, context=self.request),
+                content,
                 '%s/%s' % (self.table.portal_url, self.iconName))
 
 
