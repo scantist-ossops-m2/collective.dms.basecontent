@@ -135,7 +135,7 @@ class ResponsibleColumn(column.PrincipalColumn):
     attribute = 'responsible'
 
 
-class DeadlineColumn(column.DateColumn):
+class DeadlineColumn(column.DateTimeColumn):
     grok.name('dms.deadline')
     grok.adapts(Interface, Interface, TasksTable)
     header = _(u"Deadline")

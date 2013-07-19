@@ -46,6 +46,15 @@ class DateColumn(Column):
         return self.table.format_date(value)
 
 
+class DateTimeColumn(Column):
+    grok.baseclass()
+    attribute = NotImplemented
+
+    def renderCell(self, item):
+        value = get_value(item, self.attribute)
+        return self.table.format_date(value, long_format=True)
+
+
 class PrincipalColumn(Column):
     grok.baseclass()
     attribute = NotImplemented

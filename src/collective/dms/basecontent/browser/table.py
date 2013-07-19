@@ -50,17 +50,21 @@ class Table(z3c.table.table.Table):
     def update(self):
         super(Table, self).update()
 
-    def format_date(self, date):
+    def format_date(self, date, long_format=None, time_only=None):
         if date is None:
             return u""
 
-        if isinstance(date, datetime.date):
+        # If date is a datetime object, isinstance(date, datetime.date)
+        # returns True, so we use type here.
+        if type(date) == datetime.date:
             date = date.strftime('%Y/%m/%d')
+        elif type(date) == datetime.datetime:
+            date = date.strftime('%Y/%m/%d %H:%M')
 
         return self.translation_service.ulocalized_time(
             date,
-            long_format=None,
-            time_only=None,
+            long_format=long_format,
+            time_only=time_only,
             context=self.context,
             domain='plonelocales',
             request=self.request)
