@@ -6,7 +6,6 @@ from zope import schema
 from zope.annotation.interfaces import IAnnotations
 from zope.interface import implements
 
-from plone import api
 from plone.autoform import directives as form
 from plone.dexterity.content import Item
 from plone.dexterity.schema import DexteritySchemaPolicy
@@ -58,7 +57,6 @@ class DmsFileSchemaPolicy(DexteritySchemaPolicy):
 
 @default_value(field=IDmsFile['title'])
 def titleDefaultValue(data):
-    catalog = api.portal.get_tool('portal_catalog')
     container = data.context
     annotations = IAnnotations(container)
     if 'higher_version' not in annotations:
