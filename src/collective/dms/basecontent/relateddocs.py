@@ -1,5 +1,6 @@
 from AccessControl import getSecurityManager
 from zope.interface import implements, implementer
+from zope.cachedescriptors.property import CachedProperty
 from zope.component import adapter, getUtility
 from zope.intid.interfaces import IIntIds
 
@@ -32,6 +33,14 @@ class RelatedDocsWidget(MultiContentTreeWidget):
         term = self.terms.getTermByToken(v)
         return term.title
 
+    def update(self):
+        super(RelatedDocsWidget, self).update()
+        if self.mode == 'display':
+            if self.tuples and not self.value:
+                # hack to not have the 'empty' class added to the field
+                self.value = ["don't hide field"]
+
+    @CachedProperty
     def tuples(self):
         refs = [(self.get_url(x), self.get_label(x)) for x in self.value]
         if self.display_backrefs:
