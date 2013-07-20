@@ -1,3 +1,4 @@
+from AccessControl import getSecurityManager
 from zope.interface import implements, implementer
 from zope.component import adapter, getUtility
 from zope.intid.interfaces import IIntIds
@@ -25,7 +26,7 @@ class RelatedDocsWidget(MultiContentTreeWidget):
         super(RelatedDocsWidget, self).__init__(request)
 
     def get_url(self, v):
-        return v
+        return self.request.physicalPathToURL(v)
 
     def get_label(self, v):
         term = self.terms.getTermByToken(v)
@@ -41,16 +42,23 @@ class RelatedDocsWidget(MultiContentTreeWidget):
             except KeyError:
                 pass
             else:
+                sm = getSecurityManager()
                 for ref in catalog.findRelations({'to_id': doc_intid}):
-                    tp = (ref.from_path, ref.from_object.Title())
+                    obj = ref.from_object
+                    if not sm.checkPermission('View', obj):
+                        continue
+                    url = self.get_url(ref.from_path)
+                    tp = (url, obj.Title())
                     if tp not in refs:
                         refs.append(tp)
         return refs
+
 
 @adapter(IRelatedDocs, IFormLayer)
 @implementer(IFieldWidget)
 def RelatedDocsFieldWidget(field, request):
     return FieldWidget(field, RelatedDocsWidget(field.display_backrefs, request))
+
 
 class RelatedDocs(RelationList):
     implements(IRelatedDocs)
@@ -66,4 +74,3 @@ class RelatedDocs(RelationList):
                             title=u'',
                             source=ObjPathSourceBinder(**kw)),
                         **kwargs)
-
