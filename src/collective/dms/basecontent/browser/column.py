@@ -121,10 +121,13 @@ class DeleteColumn(IconColumn, LinkColumn):
     iconName = "delete_icon.png"
     linkContent = PMF(u"Delete")
 
-    def renderCell(self, item):
+    def actionAvailable(self, item):
         obj = item.getObject()
         sm = getSecurityManager()
-        if not sm.checkPermission('Delete objects', obj):
+        return sm.checkPermission('Delete objects', obj)
+
+    def renderCell(self, item):
+        if not self.actionAvailable(item):
             return u""
 
         return super(DeleteColumn, self).renderCell(item)
@@ -147,13 +150,19 @@ class ExternalEditColumn(IconColumn, LinkColumn):
     iconName = "extedit_icon.png"
     linkContent = PMF(u"Edit with external application")
 
-    def renderCell(self, item):
+    def actionAvailable(self, item):
         obj = item.getObject()
         sm = getSecurityManager()
         if not sm.checkPermission('Modify portal content', obj):
-            return u""
+            return False
 
         if not obj.restrictedTraverse('@@externalEditorEnabled').available():
+            return False
+
+        return True
+
+    def renderCell(self, item):
+        if not self.actionAvailable(item):
             return u""
 
         return super(ExternalEditColumn, self).renderCell(item)
@@ -168,10 +177,13 @@ class EditColumn(IconColumn, LinkColumn):
     linkContent = PMF(u"Edit")
     linkCSS = 'overlay-form-reload'
 
-    def renderCell(self, item):
+    def actionAvailable(self, item):
         obj = item.getObject()
         sm = getSecurityManager()
-        if not sm.checkPermission('Modify portal content', obj):
+        return sm.checkPermission('Modify portal content', obj)
+
+    def renderCell(self, item):
+        if not self.actionAvailable(item):
             return u""
 
         return super(EditColumn, self).renderCell(item)
