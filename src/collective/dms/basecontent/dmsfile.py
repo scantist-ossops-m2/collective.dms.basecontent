@@ -1,3 +1,5 @@
+import tempfile
+
 from BTrees.Length import Length
 
 from five import grok
@@ -73,3 +75,47 @@ def update_higher_version(context, event):
     if 'higher_version' not in annotations:
         annotations['higher_version'] = Length()
     annotations['higher_version'].change(1)
+
+
+from plone.dexterity.filerepresentation import ReadFileBase, DefaultWriteFile
+
+from zope.component import adapts
+from ZPublisher.Iterators import IStreamIterator
+from zope.filerepresentation.interfaces import IRawWriteFile
+
+from plone.memoize.instance import memoize
+
+class DmsFileReadFile(ReadFileBase):
+    adapts(IDmsFile)
+
+    @property
+    def mimeType(self):
+        return self.context.file.contentType
+
+    @property
+    def encoding(self):
+        return 'utf-8'
+
+    @property
+    def name(self):
+        return self.context.file.filename
+
+    def size(self):
+        return self.context.file.getSize()
+
+    @memoize
+    def _getStream(self):
+        out = tempfile.TemporaryFile(mode='w+b')
+        out.write(self.context.file.data)
+        out.seek(0)
+        return out
+
+
+class DmsFileWriteFile(DefaultWriteFile):
+    implements(IRawWriteFile)
+    adapts(IDmsFile)
+
+    def close(self):
+        self._message = self._parser.close()
+        self._closed = True
+        self.context.file.data = self._message.get_payload()

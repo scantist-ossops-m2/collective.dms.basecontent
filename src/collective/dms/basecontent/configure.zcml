@@ -51,4 +51,13 @@
       name="schema_policy_dmsfile"
       />
 
+    <adapter
+        for=".dmsfile.IDmsFile"
+        provides="zope.filerepresentation.interfaces.IRawReadFile"
+        factory=".dmsfile.DmsFileReadFile"
+        />
+    <adapter
+        for=".dmsfile.IDmsFile"
+        factory=".dmsfile.DmsFileWriteFile"/>
+
 </configure>

@@ -73,9 +73,9 @@ class EditColumn(column.EditColumn):
     grok.adapts(Interface, Interface, VersionsTable)
 
 
-#class ExternalEditColumn(column.ExternalEditColumn):
-#    grok.name('dms.extedit')
-#    grok.adapts(Interface, Interface, VersionsTable)
+class ExternalEditColumn(column.ExternalEditColumn):
+    grok.name('dms.extedit')
+    grok.adapts(Interface, Interface, VersionsTable)
 
 
 class DeleteColumn(column.DeleteColumn):
