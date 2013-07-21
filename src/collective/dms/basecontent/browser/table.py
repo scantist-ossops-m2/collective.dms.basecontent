@@ -2,12 +2,14 @@ import datetime
 
 from five import grok
 from zope.cachedescriptors.property import CachedProperty
+from zope.component import getMultiAdapter
 from zope.i18nmessageid import MessageFactory
 import z3c.table.table
 import z3c.table.column
+from z3c.table.interfaces import IBatchProvider
 
+from plone.batching.interfaces import IBatch
 from plone import api
-
 
 PMF = MessageFactory('plone')
 
@@ -32,8 +34,20 @@ class Table(z3c.table.table.Table):
     cssClassOdd = u'odd'
     cssClasses = {'table': 'listing nosort'}
     sortOn = None
-    batchSize = 10000
-    startBatchingAt = 10000
+    batchSize = 10000  # not used
+    startBatchingAt = 10000  # not used
+    batchProviderName = 'plonebatch'
+
+    def batchRows(self):
+        # this is not self.rows that is batched, but self.values
+        pass
+
+    def updateBatch(self):
+        if IBatch.providedBy(self.values):
+            self.batchProvider = getMultiAdapter((self.context,
+                self.request, self), IBatchProvider,
+                name=self.batchProviderName)
+            self.batchProvider.update()
 
     @CachedProperty
     def translation_service(self):
