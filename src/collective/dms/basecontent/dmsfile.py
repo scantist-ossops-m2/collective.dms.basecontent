@@ -90,6 +90,8 @@ class DmsFileReadFile(ReadFileBase):
 
     @property
     def mimeType(self):
+        if not self.context.file:
+            return None
         return self.context.file.contentType
 
     @property
@@ -98,13 +100,19 @@ class DmsFileReadFile(ReadFileBase):
 
     @property
     def name(self):
+        if not self.context.file:
+            return None
         return self.context.file.filename
 
     def size(self):
+        if not self.context.file:
+            return None
         return self.context.file.getSize()
 
     @memoize
     def _getStream(self):
+        if not self.context.file:
+            return None
         out = tempfile.TemporaryFile(mode='w+b')
         out.write(self.context.file.data)
         out.seek(0)
