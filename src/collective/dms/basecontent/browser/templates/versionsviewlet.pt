@@ -13,30 +13,43 @@
 </fieldset>
 <script type="text/javascript">
 $(document).ready(function(){
-    function async_load_dv() {
-      if (!$(".version-link").closest('tr').hasClass('selected')) {
-        // click on the first version if no version was selected by the user
-        // within the 6s.
-        $(".version-link:first").click()
-      }
-    }
-    if (window.documentData && window.documentData.pages == null) {
-      // the version was just added, update DV after 6s
-      setTimeout(async_load_dv, 6000);
-    } else {
-      $(".version-link:first").closest('tr').addClass('selected');
-    }
-    $(".version-link").click(function(){
-      var trigger = $(this);
+    var initial_timeout;
+
+    $('.version-link').closest('tr').bind('select-version', function() {
+      /* a version has been selected, disable initial timeout */
+      window.clearTimeout(initial_timeout);
+      initial_timeout = null;
+
+      var trigger = $(this).find('a.version-link');
       var url = trigger.attr('href') + '/@@dvdata';
       $.getJSON(url, function(data) {
-          window.documentData = data;
-          window.initializeDV();
-          trigger.closest('table').find('tr').removeClass('selected');
-          trigger.closest('tr').addClass('selected');
-        });
+        window.documentData = data;
+        window.initializeDV();
+        trigger.closest('table').find('tr').removeClass('selected');
+        trigger.closest('tr').addClass('selected');
+      });
+    });
+
+    function async_load_dv() {
+      // click on the first version if no version was selected by the user
+      // within the 6s.
+      $(".version-link:first").closest('tr').trigger('select-version');
+    }
+
+    if (window.documentData && window.documentData.pages == null) {
+      // the version was just added, update DV after 6s
+      initial_timeout = setTimeout(async_load_dv, 6000);
+    } else {
+      $(".version-link:first").closest('tr').trigger('select-version');
+    }
+
+    $(".version-link").closest('tr').click(function(){
+      $(this).closest('tr').trigger('select-version');
+    });
+    $(".version-link").click(function(){
+      $(this).closest('tr').trigger('select-version');
       return false;
-  });
+    });
 });
 </script>
 </div>
