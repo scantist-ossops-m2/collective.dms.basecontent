@@ -1,3 +1,4 @@
+import os.path
 import Missing
 from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
@@ -154,6 +155,13 @@ class ExternalEditColumn(IconColumn, LinkColumn):
         obj = item.getObject()
         sm = getSecurityManager()
         if not sm.checkPermission('Modify portal content', obj):
+            return False
+
+        if obj.file is None:
+            return False
+
+        ext = os.path.splitext(obj.file.filename)[-1].lower()
+        if ext in (u'.pdf', u'.jpg', '.jpeg'):
             return False
 
         if not obj.restrictedTraverse('@@externalEditorEnabled').available():
