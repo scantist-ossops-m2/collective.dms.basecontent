@@ -13,7 +13,7 @@
 </fieldset>
 <script type="text/javascript">
 $(document).ready(function(){
-    var initial_timeout;
+    var initial_timeout = null;
 
     $('.version-link').closest('tr').bind('select-version', function() {
       /* a version has been selected, disable initial timeout */
@@ -40,7 +40,9 @@ $(document).ready(function(){
       // the version was just added, update DV after 6s
       initial_timeout = setTimeout(async_load_dv, 6000);
     } else {
-      $(".version-link:first").closest('tr').trigger('select-version');
+      // window.documentData is already filled, we don't need to call @@dvdata
+      // We just add the selected class on the first version, that's all.
+      $(".version-link:first").closest('tr').addClass('selected');
     }
 
     $(".version-link").closest('tr').click(function(){
