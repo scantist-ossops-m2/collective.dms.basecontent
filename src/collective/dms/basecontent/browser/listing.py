@@ -141,3 +141,10 @@ class DeadlineColumn(column.DateTimeColumn):
     header = _(u"Deadline")
     attribute = 'deadline'
     weight = 60
+
+class InformationCreationDateColumn(column.DateTimeColumn):
+    grok.name('dms.deadline')
+    grok.adapts(Interface, Interface, InformationsTable)
+    header = _(u"Creation date")
+    attribute = 'created'
+    weight = 60
