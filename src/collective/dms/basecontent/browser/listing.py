@@ -23,7 +23,7 @@ class BaseTable(Table):
     def values(self):
         portal_catalog = getToolByName(self, 'portal_catalog')
         folder_path = '/'.join(self.context.getPhysicalPath())
-        query = {'path': {'query' : folder_path},
+        query = {'path': {'query': folder_path},
                  'sort_on': 'getObjPositionInParent',
                  'sort_order': 'ascending'}
         query.update(self.viewlet.contentFilter())
@@ -33,6 +33,13 @@ class BaseTable(Table):
 
 class VersionsTable(BaseTable):
     pass
+
+
+class DmsAppendixTable(VersionsTable):
+
+    def setUpColumns(self):
+        columns = super(DmsAppendixTable, self).setUpColumns()
+        return [column for column in columns if column.__name__ != 'dms.state']
 
 
 class TasksTable(BaseTable):

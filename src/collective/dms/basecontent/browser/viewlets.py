@@ -2,7 +2,10 @@ from five import grok
 
 from collective.dms.basecontent.dmsdocument import IDmsDocument
 from collective.dms.basecontent import _
-from collective.dms.basecontent.browser.listing import VersionsTable, TasksTable, InformationsTable
+from collective.dms.basecontent.browser.listing import (VersionsTable,
+                                                        TasksTable,
+                                                        InformationsTable,
+                                                        DmsAppendixTable)
 
 from collective.dms.basecontent.browser.table import TableViewlet
 
@@ -38,6 +41,7 @@ class VersionsViewlet(BaseViewlet):
     portal_type = 'dmsmainfile'
     label = _(u"Versions")
     noresult_message = _(u"There is no version note for this document.")
+
     def contentFilter(self):
         return {'portal_type': self.portal_type,
                 'sort_on': 'getObjPositionInParent',
@@ -50,6 +54,8 @@ class AppendixViewlet(BaseViewlet):
     portal_type = 'dmsappendixfile'
     label = _(u"Appendix")
     noresult_message = _(u"There is no appendix for this document.")
+    __table__ = DmsAppendixTable
+
     def contentFilter(self):
         return {'portal_type': self.portal_type,
                 'sort_on': 'getObjPositionInParent',

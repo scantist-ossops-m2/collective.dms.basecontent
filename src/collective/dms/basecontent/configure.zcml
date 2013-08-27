@@ -51,6 +51,11 @@
       name="schema_policy_dmsfile"
       />
 
+  <utility
+      factory=".dmsfile.DmsAppendixFileSchemaPolicy"
+      name="schema_policy_dmsappendixfile"
+      />
+
     <adapter
         for=".dmsfile.IDmsFile"
         provides="zope.filerepresentation.interfaces.IRawReadFile"

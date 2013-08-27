@@ -7,6 +7,7 @@ from five import grok
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
 from zope.interface import implements
+from zope.lifecycleevent.interfaces import IObjectAddedEvent
 
 from plone.autoform import directives as form
 from plone.dexterity.content import Item
@@ -17,7 +18,6 @@ from plone.supermodel import model
 from plone.app.contenttypes.interfaces import IFile
 
 from . import _
-from zope.lifecycleevent.interfaces import IObjectAddedEvent
 
 
 class IDmsFile(model.Schema, IFile):
@@ -33,6 +33,7 @@ class IDmsFile(model.Schema, IFile):
         title=_(u"File"),
         required=True,
     )
+
 
 class DmsFile(Item):
     """DmsFile"""
@@ -55,6 +56,28 @@ class DmsFileSchemaPolicy(DexteritySchemaPolicy):
 
     def bases(self, schemaName, tree):
         return (IDmsFile, )
+
+
+class IDmsAppendixFile(model.Schema, IFile):
+    """Schema for DmsAppendixFile"""
+    model.primary('file')
+    file = NamedBlobFile(
+        title=_(u"File"),
+        required=True,
+    )
+
+
+class DmsAppendixFile(Item):
+    """DmsAppendixFile"""
+    implements(IDmsAppendixFile)
+    __ac_local_roles_block__ = True
+
+
+class DmsAppendixFileSchemaPolicy(DexteritySchemaPolicy):
+    """Schema Policy for DmsAppendixFile"""
+
+    def bases(self, schemaName, tree):
+        return (IDmsAppendixFile, )
 
 
 @default_value(field=IDmsFile['title'])
@@ -80,10 +103,10 @@ def update_higher_version(context, event):
 from plone.dexterity.filerepresentation import ReadFileBase, DefaultWriteFile
 
 from zope.component import adapts
-from ZPublisher.Iterators import IStreamIterator
 from zope.filerepresentation.interfaces import IRawWriteFile
 
 from plone.memoize.instance import memoize
+
 
 class DmsFileReadFile(ReadFileBase):
     adapts(IDmsFile)
