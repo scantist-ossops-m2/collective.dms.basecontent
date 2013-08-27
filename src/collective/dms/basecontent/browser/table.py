@@ -82,3 +82,23 @@ class Table(z3c.table.table.Table):
             context=self.context,
             domain='plonelocales',
             request=self.request)
+
+    def renderRow(self, row, cssClass=None):
+        from .column import StateColumn, get_value
+        isSelected = self.isSelectedRow(row)
+        if isSelected and self.cssClassSelected and cssClass:
+            cssClass = '%s %s' % (self.cssClassSelected, cssClass)
+        elif isSelected and self.cssClassSelected:
+            cssClass = self.cssClassSelected
+        cells = [self.renderCell(item, col, colspan)
+                 for item, col, colspan in row]
+
+        state_column = [x for x in row if isinstance(x[1], StateColumn)]
+        if state_column:
+            state_column = state_column[0]
+            state_value = get_value(state_column[0], 'review_state')
+            if state_value:
+                cssClass += ' state-%s' % state_value
+
+        cssClass = self.getCSSClass('tr', cssClass)
+        return u'\n    <tr%s>%s\n    </tr>' % (cssClass, u''.join(cells))
