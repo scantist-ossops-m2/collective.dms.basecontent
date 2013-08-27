@@ -98,7 +98,7 @@ class Table(z3c.table.table.Table):
             state_column = state_column[0]
             state_value = get_value(state_column[0], 'review_state')
             if state_value:
-                cssClass += ' state-%s' % state_value
+                cssClass += ' row-state-%s' % state_value
 
         cssClass = self.getCSSClass('tr', cssClass)
         return u'\n    <tr%s>%s\n    </tr>' % (cssClass, u''.join(cells))
