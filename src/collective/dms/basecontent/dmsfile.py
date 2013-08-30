@@ -34,12 +34,16 @@ class IDmsFile(model.Schema, IFile):
         required=True,
     )
 
+    signed = schema.Bool(
+        title=_("Signed version"),
+        default=False)
+
 
 class DmsFile(Item):
     """DmsFile"""
     implements(IDmsFile)
     __ac_local_roles_block__ = True
-    signed = False
+
     incomingmail = False
 
     def Title(self):
