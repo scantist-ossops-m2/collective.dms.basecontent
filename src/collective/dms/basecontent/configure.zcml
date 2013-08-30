@@ -7,6 +7,9 @@
 
   <include package="five.grok" />
 
+  <include package="plone.directives.form" file="meta.zcml" />
+  <include package="plone.directives.form" />
+
   <grok:grok package="." />
 
   <i18n:registerTranslations directory="locales" />
