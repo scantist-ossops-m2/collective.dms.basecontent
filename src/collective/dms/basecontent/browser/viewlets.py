@@ -1,13 +1,18 @@
 from five import grok
 
+from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
+
 from collective.dms.basecontent.dmsdocument import IDmsDocument
 from collective.dms.basecontent import _
 from collective.dms.basecontent.browser.listing import (VersionsTable,
                                                         TasksTable,
                                                         InformationsTable,
                                                         DmsAppendixTable)
-
 from collective.dms.basecontent.browser.table import TableViewlet
+
+from zope.interface import Interface
+
+
 
 grok.templatedir('templates')
 grok.context(IDmsDocument)
@@ -96,3 +101,23 @@ class InformationsViewlet(BaseViewlet):
     label = _(u"Informations")
     noresult_message = _(u"There is no informations for this document.")
     __table__ = InformationsTable
+
+
+class ChangeTitleViewlet(grok.Viewlet):
+    grok.name('dms.changetitle')
+    grok.context(Interface)
+    grok.viewletmanager(IHtmlHeadLinks)
+    grok.require('zope2.View')
+
+    def render(self):
+        return u"""
+<script type="text/javascript">
+    (function ($) {
+        $(document).ready(function () {
+            $("body.template-dmsincomingmail label[for='form-widgets-IDublinCore-title']").text('Objet');
+            $("body.template-dmsoutgoingmail label[for='form-widgets-IDublinCore-title']").text('Objet');
+            $("body.template-edit.portaltype-dmsincomingmail label[for='form-widgets-IDublinCore-title']").text('Objet');
+            $("body.template-edit.portaltype-dmsoutgoingmail label[for='form-widgets-IDublinCore-title']").text('Objet');
+        });
+    })(jQuery);
+</script>"""
