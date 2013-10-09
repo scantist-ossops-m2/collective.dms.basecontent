@@ -34,6 +34,11 @@ class IDmsFile(model.Schema, IFile):
         required=True,
     )
 
+    label = schema.TextLine(
+        title=_(u'Label'),
+        required=False,
+    )
+
     signed = schema.Bool(
         title=_("Signed version"),
         default=False)

@@ -25,7 +25,7 @@ class Column(z3c.table.column.Column, grok.MultiAdapter):
 
 def get_value(item, attribute, default=None):
     try:
-        value = getattr(item, attribute, default)
+        value = getattr(item, attribute)
         if value is Missing.Value:
             return default
     except AttributeError:
@@ -214,3 +214,14 @@ class StateColumn(Column):
             return translate(PMF(state_title), context=self.request)
         except WorkflowException:
             return u""
+
+
+class LabelColumn(Column):
+    grok.baseclass()
+    attribute = NotImplemented
+
+    def renderCell(self, item):
+        value = get_value(item, self.attribute)
+        if value is None:
+            value = ''
+        return value

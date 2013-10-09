@@ -155,3 +155,11 @@ class InformationCreationDateColumn(column.DateTimeColumn):
     header = _(u"Creation date")
     attribute = 'created'
     weight = 60
+
+
+class VersionLabelColumn(column.LabelColumn):
+    grok.name('dms.label')
+    grok.adapts(Interface, Interface, VersionsTable)
+    attribute = 'label'
+    header = _(u"Label")
+    weight = 15
