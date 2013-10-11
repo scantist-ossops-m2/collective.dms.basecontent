@@ -21,6 +21,10 @@ $(document).ready(function(){
       initial_timeout = null;
 
       var trigger = $(this).find('a.version-link');
+      if (trigger.closest('tr').hasClass('selected')) {
+        // the version is already selected, no need to reload it
+        return;
+      }
       var url = trigger.attr('href') + '/@@dvdata';
       $.getJSON(url, function(data) {
         window.documentData = data;
@@ -41,8 +45,8 @@ $(document).ready(function(){
       initial_timeout = setTimeout(async_load_dv, 6000);
     } else {
       // window.documentData is already filled, we don't need to call @@dvdata
-      // We just add the selected class on the first version, that's all.
-      $(".version-link:first").closest('tr').addClass('selected');
+      // So we mark it as selected before triggering the select-version event.
+      $(".version-link:first").closest('tr').addClass('selected').trigger('select-version');
     }
 
     $(".version-link").closest('tr').click(function(){
