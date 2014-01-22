@@ -57,9 +57,9 @@
 
     </div>
 
-    <div style="clear:left" />
+    <div style="clear:left"></div>
     <tal:belowcontent replace="structure provider:dms.belowcontent" />
-    <div style="clear:both" />
+    <div style="clear:both"></div>
 
   </metal:content-core>
 </metal:main>
