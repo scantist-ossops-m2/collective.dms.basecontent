@@ -1,5 +1,6 @@
 from zope import schema
 from zope.interface import implements
+from zope.schema.fieldproperty import FieldProperty
 
 from plone.autoform import directives as form
 from plone.dexterity.content import Container
@@ -48,6 +49,9 @@ class DmsDocument(Container):
     implements(IDmsDocument)
     # disable local roles inheritance
     __ac_local_roles_block__ = True
+
+    treating_groups = FieldProperty(IDmsDocument['treating_groups'])
+    recipient_groups = FieldProperty(IDmsDocument['recipient_groups'])
 
 
 class DmsDocumentSchemaPolicy(DexteritySchemaPolicy):

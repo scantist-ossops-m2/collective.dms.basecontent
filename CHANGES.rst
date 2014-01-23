@@ -4,7 +4,8 @@ Changelog
 0.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Update the LocalRolesToPrincipals fields to use zope.schemaevent
+  [mpeeters]
 
 
 0.1.1 (2013-03-08)
