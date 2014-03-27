@@ -27,6 +27,13 @@
       />
 
   <browser:page
+      for="collective.dms.basecontent.dmsdocument.IDmsDocument"
+      name="dmsdocument-edit"
+      class=".views.DmsDocumentEdit"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <browser:page
     name="versionviewer"
     for="plone.app.contenttypes.interfaces.IFile"
     class=".views.VersionViewerView"
