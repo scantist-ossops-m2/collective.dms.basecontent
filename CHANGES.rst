@@ -4,7 +4,10 @@ Changelog
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Correct wrong metadata name in column
+  [sgeulette]
+- Add a dmsdocument edit view including documentviewer to complete attributes after batch import.
+  [sgeulette]
 
 
 0.2 (2014-02-26)
