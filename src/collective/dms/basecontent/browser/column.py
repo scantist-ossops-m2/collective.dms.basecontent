@@ -1,5 +1,6 @@
 import os.path
 import Missing
+from Acquisition import aq_base
 from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 from five import grok
@@ -25,7 +26,7 @@ class Column(z3c.table.column.Column, grok.MultiAdapter):
 
 def get_value(item, attribute, default=None):
     try:
-        value = getattr(item, attribute)
+        value = getattr(aq_base(item), attribute)
         if value is Missing.Value:
             return default
     except AttributeError:

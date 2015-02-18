@@ -16,6 +16,7 @@ from plone.directives.form import default_value
 from plone.namedfile.field import NamedBlobFile
 from plone.supermodel import model
 from plone.app.contenttypes.interfaces import IFile
+from Products.CMFPlone.utils import base_hasattr
 
 from . import _
 
@@ -54,7 +55,7 @@ class DmsFile(Item):
     def Title(self):
         if self.incomingmail:
             return _(u"Incoming mail")
-        elif self.signed:
+        elif base_hasattr(self, 'signed') and self.signed:
             return _(u"Signed version")
         else:
             return self.title
