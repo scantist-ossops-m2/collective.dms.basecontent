@@ -40,7 +40,7 @@
 
     <tal:abovecontent replace="structure provider:dms.abovecontent" />
 
-    <div id="fields" style="float:left">
+    <div id="fields" style="float:left; width: 50%;">
     <tal:block repeat="widget view/widgets/values">
         <tal:block tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description',)">
             <tal:widget tal:replace="structure widget/@@ploneform-render-widget"/>
