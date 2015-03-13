@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.4 (unreleased)
+0.4 (2015-03-13)
 ----------------
 
 -  Fix fields width to 50% to keep fields on the left of the scan preview
