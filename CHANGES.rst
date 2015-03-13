@@ -4,7 +4,10 @@ Changelog
 0.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+-  Fix fields width to 50% to keep fields on the left of the scan preview
+  [sgeulette]
+- Test attribute existence to resolve a recatalog problem
+  [sgeulette]
 
 
 0.3 (2014-10-24)
