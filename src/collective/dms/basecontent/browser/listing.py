@@ -43,14 +43,6 @@ class DmsAppendixTable(VersionsTable):
         return [column for column in columns if column.__name__ != 'dms.state']
 
 
-class TasksTable(BaseTable):
-    pass
-
-
-class InformationsTable(TasksTable):
-    pass
-
-
 class BaseTitleColumn(column.TitleColumn):
     grok.name('dms.title')
     grok.adapts(Interface, Interface, BaseTable)
@@ -64,11 +56,6 @@ class VersionsTitleColumn(BaseTitleColumn):
     def getLinkContent(self, item):
         content = super(VersionsTitleColumn, self).getLinkContent(item)
         return translate(content, domain=self.domain, context=self.request)
-
-
-class TaskTitleColumn(BaseTitleColumn):
-    grok.adapts(Interface, Interface, TasksTable)
-    linkCSS = 'overlay-comment-form'
 
 
 class DownloadColumn(column.DownloadColumn):
@@ -111,51 +98,6 @@ class StateColumn(column.StateColumn):
     grok.name('dms.state')
     grok.adapts(Interface, Interface, BaseTable)
     weight = 50
-
-
-class InformationStateColumn(column.StateColumn):
-    """StateColumn for informations"""
-    grok.name('dms.state')
-    grok.adapts(Interface, Interface, InformationsTable)
-    weight = 50
-
-    def renderCell(self, item):
-        title_mapping = {'todo': _(u'To read'),
-                         'done': _(u'Read')
-                         }
-        state_title = title_mapping[item.review_state]
-        return translate(_(state_title), context=self.request)
-
-
-class EnquirerColumn(column.PrincipalColumn):
-    grok.name('dms.enquirer')
-    grok.adapts(Interface, Interface, TasksTable)
-    header = _(u"Enquirer")
-    weight = 20
-    attribute = 'enquirer'
-
-
-class ResponsibleColumn(column.PrincipalColumn):
-    grok.name('dms.responsible')
-    grok.adapts(Interface, Interface, TasksTable)
-    header = _(u"Responsible")
-    weight = 30
-    attribute = 'responsible'
-
-
-class DeadlineColumn(column.DateTimeColumn):
-    grok.name('dms.deadline')
-    grok.adapts(Interface, Interface, TasksTable)
-    header = _(u"Deadline")
-    attribute = 'deadline'
-    weight = 60
-
-class InformationCreationDateColumn(column.DateTimeColumn):
-    grok.name('dms.deadline')
-    grok.adapts(Interface, Interface, InformationsTable)
-    header = _(u"Creation date")
-    attribute = 'created'
-    weight = 60
 
 
 class VersionLabelColumn(column.LabelColumn):

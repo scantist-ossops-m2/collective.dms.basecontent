@@ -5,8 +5,6 @@ from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
 from collective.dms.basecontent.dmsdocument import IDmsDocument
 from collective.dms.basecontent import _
 from collective.dms.basecontent.browser.listing import (VersionsTable,
-                                                        TasksTable,
-                                                        InformationsTable,
                                                         DmsAppendixTable)
 from collective.dms.basecontent.browser.table import TableViewlet
 
