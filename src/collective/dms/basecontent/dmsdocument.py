@@ -27,7 +27,7 @@ class IDmsDocument(model.Schema):
         roles_to_assign=('Editor',),
         value_type=schema.Choice(vocabulary=u'collective.dms.basecontent.treating_groups',)
     )
-    form.widget(treating_groups=AjaxChosenMultiFieldWidget)
+    # form.widget(treating_groups=AjaxChosenMultiFieldWidget)
 
     recipient_groups = LocalRolesToPrincipals(
         title=_(u"Recipient groups"),
