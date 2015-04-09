@@ -4,8 +4,12 @@ Changelog
 0.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Added treating_groups and recipient_groups catalog index.
+  [sgeulette]
+- Cleaning on task old stuff
+  [cmessiant]
+- Don't use AjaxChosenMultiFieldWidget for treating_groups field
+  [cmessiant]
 
 0.4 (2015-03-13)
 ----------------

@@ -1,6 +1,8 @@
 from ZODB.POSException import ConflictError
 from five import grok
+from OFS.interfaces import IItem
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import base_hasattr
 from plone.indexer import indexer
 
 from .dmsdocument import IDmsDocument
@@ -39,3 +41,17 @@ def document_dynamic_searchable_text_indexer(obj):
 
 grok.global_adapter(document_dynamic_searchable_text_indexer,
                     name='SearchableText')
+
+
+@indexer(IItem)
+def treating_groups_indexer(obj):
+    # skip acquisition for contained elements
+    if base_hasattr(obj, 'treating_groups'):
+        return obj.treating_groups
+
+
+@indexer(IItem)
+def recipient_groups_indexer(obj):
+    # skip acquisition for contained elements
+    if base_hasattr(obj, 'recipient_groups'):
+        return obj.recipient_groups

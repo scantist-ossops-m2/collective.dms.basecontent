@@ -68,4 +68,14 @@
         for=".dmsfile.IDmsFile"
         factory=".dmsfile.DmsFileWriteFile"/>
 
+    <adapter
+        name="treating_groups"
+        factory=".indexers.treating_groups_indexer"
+        />
+
+    <adapter
+        name="recipient_groups"
+        factory=".indexers.recipient_groups_indexer"
+        />
+
 </configure>
