@@ -6,6 +6,8 @@ Changelog
 
 - Added treating_groups and recipient_groups catalog index.
   [sgeulette]
+- Added treating_groups and recipient_groups in p.a.collection columns
+  [sgeulette]
 - Cleaning on task old stuff
   [cmessiant]
 - Don't use AjaxChosenMultiFieldWidget for treating_groups field
