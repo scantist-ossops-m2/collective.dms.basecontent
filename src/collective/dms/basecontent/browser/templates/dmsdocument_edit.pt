@@ -42,6 +42,20 @@
         <metal:formtop fill-slot="formtop">
           <tal:abovecontent replace="structure provider:dms.abovecontent" />
         </metal:formtop>
+        <metal:fields-slot fill-slot="fields">
+            <tal:com define="comment string:'Added to englobe fields by a div when only basic metadata are used'" />
+            <input type="hidden"
+                name="fieldset"
+                tal:define="current_fieldset request/fieldset | python:None"
+                tal:condition="python:has_groups and enable_form_tabbing and current_fieldset is not None"
+                tal:attributes="value current_fieldset"
+                />
+            <div id="all-fields" tal:define="show_default_label show_default_label|nothing"
+                                 tal:omit-tag="show_default_label"
+                                 style="float:left; width: 49%;">
+                <metal:fields use-macro="context/@@ploneform-macros/fields" />
+            </div>
+        </metal:fields-slot>
       </metal:ttlf>
     </div>
   </metal:main>

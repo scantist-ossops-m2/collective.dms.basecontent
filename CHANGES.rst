@@ -4,6 +4,8 @@ Changelog
 0.5 (unreleased)
 ----------------
 
+- Added div with id to fix fields display in edit mode
+  [sgeulette]
 - Added treating_groups and recipient_groups catalog index.
   [sgeulette]
 - Added treating_groups and recipient_groups in p.a.collection columns
@@ -16,7 +18,7 @@ Changelog
 0.4 (2015-03-13)
 ----------------
 
--  Fix fields width to 50% to keep fields on the left of the scan preview
+- Fix fields width to 50% to keep fields on the left of the scan preview
   [sgeulette]
 - Test attribute existence to resolve a recatalog problem
   [sgeulette]
