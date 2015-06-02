@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5 (unreleased)
+0.5 (2015-06-02)
 ----------------
 
 - Added div with id to fix fields display in edit mode
