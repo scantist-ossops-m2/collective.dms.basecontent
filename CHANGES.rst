@@ -4,7 +4,8 @@ Changelog
 0.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Removed old sorting attribute. Added dependency. Changed travis config.
+  [sgeulette]
 
 
 0.5 (2015-06-02)
