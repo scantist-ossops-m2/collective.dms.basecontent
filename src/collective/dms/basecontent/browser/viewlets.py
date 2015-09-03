@@ -31,8 +31,6 @@ class BaseViewlet(TableViewlet):
 
     def contentFilter(self):
         return {'portal_type': self.portal_type,
-                'sort_on': 'deadline',
-                'sort_order': 'descending'
                 }
 
 
