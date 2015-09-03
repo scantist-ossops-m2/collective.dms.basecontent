@@ -45,13 +45,13 @@ grok.global_adapter(document_dynamic_searchable_text_indexer,
 
 @indexer(IItem)
 def treating_groups_indexer(obj):
-    # skip acquisition for contained elements
+    # skip acquisition for contained elements. None is considered as ()
     if base_hasattr(obj, 'treating_groups'):
         return obj.treating_groups
 
 
 @indexer(IItem)
 def recipient_groups_indexer(obj):
-    # skip acquisition for contained elements
+    # skip acquisition for contained elements. None is considered as ()
     if base_hasattr(obj, 'recipient_groups'):
         return obj.recipient_groups
