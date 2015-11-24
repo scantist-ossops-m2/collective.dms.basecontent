@@ -7,6 +7,7 @@ from plone.indexer import indexer
 
 from .dmsdocument import IDmsDocument
 
+
 @indexer(IDmsDocument)
 def document_dynamic_searchable_text_indexer(obj):
     indexed_elements = [obj.title]
