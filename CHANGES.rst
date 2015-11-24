@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.6 (unreleased)
+0.6 (2015-11-24)
 ----------------
 
 - Removed old sorting attribute. Added dependency. Changed travis config.
