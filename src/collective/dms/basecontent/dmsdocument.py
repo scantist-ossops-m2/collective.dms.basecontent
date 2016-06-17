@@ -50,6 +50,7 @@ class DmsDocument(Container):
     # disable local roles inheritance
     __ac_local_roles_block__ = True
 
+    # Needed by collective.z3cform.rolefield
     treating_groups = FieldProperty(IDmsDocument['treating_groups'])
     recipient_groups = FieldProperty(IDmsDocument['recipient_groups'])
 
