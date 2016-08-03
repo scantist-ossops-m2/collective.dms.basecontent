@@ -40,10 +40,6 @@ class IDmsFile(model.Schema, IFile):
         required=False,
     )
 
-    signed = schema.Bool(
-        title=_("Signed version"),
-        default=False)
-
 
 class DmsFile(Item):
     """DmsFile"""
