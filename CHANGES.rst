@@ -4,15 +4,14 @@ Changelog
 0.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+-  Move the signed attribute to collective.dms.scanbehavior.
+  [mpeeters]
 
 0.6 (2015-11-24)
 ----------------
 
 - Removed old sorting attribute. Added dependency. Changed travis config.
   [sgeulette]
-
 
 0.5 (2015-06-02)
 ----------------
@@ -36,7 +35,6 @@ Changelog
 - Test attribute existence to resolve a recatalog problem
   [sgeulette]
 
-
 0.3 (2014-10-24)
 ----------------
 
@@ -44,7 +42,6 @@ Changelog
   [sgeulette]
 - Add a dmsdocument edit view including documentviewer to complete attributes after batch import.
   [sgeulette]
-
 
 0.2 (2014-02-26)
 ----------------
@@ -60,12 +57,10 @@ Changelog
 - Allow tasks to be added to document
   [fpeters, vincentfretin, cedricmessiant]
 
-
 0.1.1 (2013-03-08)
 ------------------
 
 - Corrected MANIFEST.in
-
 
 0.1 (2013-03-06)
 ----------------
