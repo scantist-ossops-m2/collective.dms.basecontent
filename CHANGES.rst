@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.7 (unreleased)
+0.7 (2017-05-30)
 ----------------
 
 -  Move the signed attribute to collective.dms.scanbehavior.
