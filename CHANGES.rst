@@ -4,8 +4,8 @@ Changelog
 0.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Replace collective.z3cform.rolefield by dexterity.localrolesfield. Manual configuration needed. See readme...
+  [sgeulette]
 
 0.7 (2017-05-30)
 ----------------

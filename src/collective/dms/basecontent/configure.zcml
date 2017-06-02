@@ -6,6 +6,7 @@
     i18n_domain="collective.dms.basecontent">
 
   <include package="five.grok" />
+  <include package=".upgrades" />
 
   <include package="plone.directives.form" file="meta.zcml" />
   <include package="plone.directives.form" />
@@ -21,6 +22,7 @@
   <include package="plone.supermodel" />
   <include package="collective.z3cform.chosen" />
   <include package="collective.documentviewer" />
+  <include package="dexterity.localrolesfield" />
 
   <include package=".browser" />
   <include file="permissions.zcml" />
