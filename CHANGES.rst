@@ -4,7 +4,9 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Remove filerepresentation adapters.
+  They are not needed for collective.zopeedit > 1.0.0
+  [gotcha]
 
 
 1.0 (2017-06-02)

@@ -62,15 +62,6 @@
       />
 
     <adapter
-        for=".dmsfile.IDmsFile"
-        provides="zope.filerepresentation.interfaces.IRawReadFile"
-        factory=".dmsfile.DmsFileReadFile"
-        />
-    <adapter
-        for=".dmsfile.IDmsFile"
-        factory=".dmsfile.DmsFileWriteFile"/>
-
-    <adapter
         name="treating_groups"
         factory=".indexers.treating_groups_indexer"
         />
