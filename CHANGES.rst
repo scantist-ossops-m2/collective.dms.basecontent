@@ -7,7 +7,8 @@ Changelog
 - Remove filerepresentation adapters.
   They are not needed for collective.zopeedit > 1.0.0
   [gotcha]
-
+- Replace restrictedTraverse by getMultiAdapter
+  [sgeulette]
 
 1.0 (2017-06-02)
 ----------------

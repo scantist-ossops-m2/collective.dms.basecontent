@@ -5,6 +5,7 @@ from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 from five import grok
 from z3c.table import interfaces
+from zope.component import getMultiAdapter
 from zope.i18nmessageid import MessageFactory
 from zope.i18n import translate
 import z3c.table.table
@@ -165,7 +166,8 @@ class ExternalEditColumn(IconColumn, LinkColumn):
         if ext in (u'.pdf', u'.jpg', '.jpeg'):
             return False
 
-        if not obj.restrictedTraverse('@@externalEditorEnabled').available():
+        view = getMultiAdapter((obj, self.request), name='externalEditorEnabled')
+        if not view.available():
             return False
 
         return True
