@@ -33,7 +33,8 @@ class BaseTable(Table):
 
 
 class VersionsTable(BaseTable):
-    pass
+
+    cssClasses = {'table': 'listing nosort dv'}
 
 
 class DmsAppendixTable(VersionsTable):
