@@ -9,6 +9,8 @@ Changelog
   [gotcha]
 - Replace restrictedTraverse by getMultiAdapter
   [sgeulette]
+- Display related docs with list
+  [sgeulette]
 
 1.0 (2017-06-02)
 ----------------

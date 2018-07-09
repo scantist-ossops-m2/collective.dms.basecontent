@@ -1,4 +1,4 @@
-<span id="" class=""
+<ul id="" class=""
       tal:attributes="id view/id;
                       class view/klass;
                       style view/style;
@@ -13,12 +13,11 @@
                       onmouseout view/onmouseout;
                       onkeypress view/onkeypress;
                       onkeydown view/onkeydown;
-                      onkeyup view/onkeyup"><tal:block
-    tal:repeat="value view/tuples"
-    ><a class="selected-option"
-        href="#"
+                      onkeyup view/onkeyup">
+    <li tal:repeat="value view/tuples">
+        <a href="#"
         tal:content="python:value[1]"
         tal:attributes="href python:value[0]"
-    /><tal:block condition="not:repeat/value/end">, </tal:block
-  ></tal:block
-></span>
+        />
+    </li>
+</ul>
