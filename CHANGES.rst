@@ -4,8 +4,8 @@ Changelog
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Changed french translation to avoid confusion.
+  [sgeulette]
 
 1.1 (2018-07-23)
 ----------------

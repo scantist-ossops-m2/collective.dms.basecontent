@@ -33,7 +33,7 @@ msgstr "Annexe"
 
 #: ../profiles/default/types/dmsdocument.xml
 msgid "DmsDocument"
-msgstr "Document"
+msgstr "Document ged"
 
 #: ../profiles/default/types/dmsmainfile.xml
 msgid "DmsMainFile"
@@ -46,4 +46,3 @@ msgstr "Services en charge du traitement"
 #: ../profiles/default/portal_atct.xml
 msgid "Treating groups"
 msgstr "Services à informer"
-
