@@ -29,7 +29,7 @@ $(document).ready(function(){
       $.getJSON(url, function(data) {
         window.documentData = data;
         window.initializeDV();
-        trigger.closest('table').find('tr').removeClass('selected');
+        $('table.dv').find('tr').removeClass('selected');
         trigger.closest('tr').addClass('selected');
       });
     });
