@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2 (unreleased)
+1.2 (2018-09-05)
 ----------------
 
 - Changed french translation to avoid confusion.
