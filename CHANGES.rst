@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.3 (unreleased)
+1.3 (2018-09-24)
 ----------------
 
 - Use a fade edit pencil to dissuade user click on it.
