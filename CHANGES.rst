@@ -4,8 +4,8 @@ Changelog
 1.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Use a fade edit pencil to dissuade user click on it.
+  [sgeulette]
 
 1.2 (2018-09-05)
 ----------------

@@ -18,6 +18,11 @@
       image="static/img/dmsdocument_icon.png"
       />
 
+  <browser:resource
+      name="fade_edit.png"
+      image="static/img/fade_edit.png"
+      />
+
   <browser:page
       for="collective.dms.basecontent.dmsdocument.IDmsDocument"
       name="view"

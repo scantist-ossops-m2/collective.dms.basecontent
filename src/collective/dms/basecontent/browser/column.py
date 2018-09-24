@@ -184,7 +184,7 @@ class EditColumn(IconColumn, LinkColumn):
     header = u""
     weight = 2
     linkName = "edit"
-    iconName = "edit.png"
+    iconName = "++resource++fade_edit.png"
     linkContent = PMF(u"Edit")
     linkCSS = 'overlay-form-reload'
 
