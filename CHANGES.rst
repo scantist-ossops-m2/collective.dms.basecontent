@@ -4,8 +4,8 @@ Changelog
 1.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Made class inheritance clearer.
+  [sgeulette]
 
 1.3 (2018-09-24)
 ----------------

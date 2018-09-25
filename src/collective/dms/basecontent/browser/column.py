@@ -106,7 +106,8 @@ class TitleColumn(LinkColumn):
             return unicode(title, 'utf-8', 'ignore')
 
 
-class IconColumn(object):
+class IconColumn(LinkColumn):
+    grok.baseclass()
     def getLinkContent(self, item):
         content = super(IconColumn, self).getLinkContent(item)
         return u"""<img title="%s" src="%s" />""" % (
@@ -114,7 +115,7 @@ class IconColumn(object):
                 '%s/%s' % (self.table.portal_url, self.iconName))
 
 
-class DeleteColumn(IconColumn, LinkColumn):
+class DeleteColumn(IconColumn):
     grok.baseclass()
     header = u""
     weight = 9
@@ -136,7 +137,7 @@ class DeleteColumn(IconColumn, LinkColumn):
         return super(DeleteColumn, self).renderCell(item)
 
 
-class DownloadColumn(IconColumn, LinkColumn):
+class DownloadColumn(IconColumn):
     grok.baseclass()
     header = u""
     weight = 1
@@ -145,7 +146,7 @@ class DownloadColumn(IconColumn, LinkColumn):
     linkContent = _(u"Download file")
 
 
-class ExternalEditColumn(IconColumn, LinkColumn):
+class ExternalEditColumn(IconColumn):
     grok.baseclass()
     header = u""
     weight = 3
@@ -179,7 +180,7 @@ class ExternalEditColumn(IconColumn, LinkColumn):
         return super(ExternalEditColumn, self).renderCell(item)
 
 
-class EditColumn(IconColumn, LinkColumn):
+class EditColumn(IconColumn):
     grok.baseclass()
     header = u""
     weight = 2
