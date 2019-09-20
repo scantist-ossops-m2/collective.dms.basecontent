@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.4 (unreleased)
+1.4 (2019-09-20)
 ----------------
 
 - Made class inheritance clearer.
