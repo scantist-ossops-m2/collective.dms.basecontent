@@ -4,8 +4,8 @@ Changelog
 1.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Added css on some columns.
+  [sgeulette]
 
 1.4 (2019-09-20)
 ----------------

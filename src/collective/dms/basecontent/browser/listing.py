@@ -85,6 +85,7 @@ class AuthorColumn(column.PrincipalColumn):
     header = _(u"Author")
     weight = 30
     attribute = 'Creator'
+    cssClasses = {'th': 'th_header_author', 'td': 'td_cell_author'}
 
 
 class UpdateColumn(column.DateColumn):
@@ -93,6 +94,7 @@ class UpdateColumn(column.DateColumn):
     header = PMF(u"listingheader_modified")
     attribute = 'modified'
     weight = 40
+    cssClasses = {'th': 'th_header_modified', 'td': 'td_cell_modified'}
 
 
 class StateColumn(column.StateColumn):
