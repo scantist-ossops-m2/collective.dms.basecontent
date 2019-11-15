@@ -108,11 +108,12 @@ class TitleColumn(LinkColumn):
 
 class IconColumn(LinkColumn):
     grok.baseclass()
+
     def getLinkContent(self, item):
         content = super(IconColumn, self).getLinkContent(item)
         return u"""<img title="%s" src="%s" />""" % (
-                content,
-                '%s/%s' % (self.table.portal_url, self.iconName))
+            content,
+            '%s/%s' % (self.table.portal_url, self.iconName))
 
 
 class DeleteColumn(IconColumn):
