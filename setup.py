@@ -33,7 +33,7 @@ setup(
         "Programming Language :: Python :: 2.7",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    keywords='',
+    keywords='document management system dms viewer',
     author='Ecreall, Entrouvert, IMIO',
     author_email='cedricmessiant@ecreall.com',
     url='https://github.com/collective/collective.dms.basecontent',
