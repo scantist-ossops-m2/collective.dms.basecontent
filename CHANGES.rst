@@ -4,8 +4,8 @@ Changelog
 1.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- RelatedDocs field can handle object_provides criteria.
+  [sgeulette]
 
 1.5 (2019-11-25)
 ----------------

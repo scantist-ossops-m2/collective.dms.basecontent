@@ -72,12 +72,13 @@ def RelatedDocsFieldWidget(field, request):
 class RelatedDocs(RelationList):
     implements(IRelatedDocs)
 
-    def __init__(self, portal_types=None,
-                       display_backrefs=False, **kwargs):
+    def __init__(self, portal_types=None, display_backrefs=False, object_provides=None, **kwargs):
         self.display_backrefs = display_backrefs
         kw = dict()
         if portal_types:
             kw['portal_type'] = portal_types
+        if object_provides:
+            kw['object_provides'] = object_provides
         RelationList.__init__(self,
                         value_type=RelationChoice(
                             title=u'',
