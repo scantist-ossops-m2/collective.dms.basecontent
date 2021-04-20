@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.6 (unreleased)
+1.6 (2021-04-20)
 ----------------
 
 - RelatedDocs field can handle object_provides criteria.
