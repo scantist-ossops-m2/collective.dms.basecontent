@@ -1,19 +1,22 @@
-import os.path
-import Missing
-from Acquisition import aq_base
 from AccessControl import getSecurityManager
-from Products.CMFCore.utils import getToolByName
+from Acquisition import aq_base
+from collective.dms.basecontent import _
 from five import grok
+from html import escape
+from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.WorkflowCore import WorkflowException
+from Products.CMFPlone.utils import safe_unicode
 from z3c.table import interfaces
 from zope.component import getMultiAdapter
-from zope.i18nmessageid import MessageFactory
 from zope.i18n import translate
-import z3c.table.table
-import z3c.table.column
-from Products.CMFCore.WorkflowCore import WorkflowException
-import plone.api
+from zope.i18nmessageid import MessageFactory
 
-from collective.dms.basecontent import _
+import Missing
+import os.path
+import plone.api
+import z3c.table.column
+import z3c.table.table
+
 
 PMF = MessageFactory('plone')
 
@@ -74,11 +77,11 @@ class PrincipalColumn(Column):
         for principal_id in value:
             user = mtool.getMemberById(principal_id)
             if user is not None:
-                principals.append(user.getProperty('fullname', None) or user.getId())
+                principals.append(escape(user.getProperty('fullname', None)) or user.getId())
             else:
                 group = gtool.getGroupById(principal_id)
                 if group is not None:
-                    principals.append(group.getProperty('title', None) or group.getId())
+                    principals.append(escape(group.getProperty('title', None)) or group.getId())
 
         return ', '.join(principals).decode('utf-8')
 
@@ -92,6 +95,16 @@ class LinkColumn(z3c.table.column.LinkColumn, Column):
             return '%s/%s' % (item.getURL(), self.linkName)
         return item.getURL()
 
+    def renderCell(self, item):
+        # setup a tag
+        return '<a href="%s"%s%s%s>%s</a>' % (
+            self.getLinkURL(item),  # originally escaped
+            self.getLinkTarget(item),
+            self.getLinkCSS(item),
+            self.getLinkTitle(item),
+            self.getLinkContent(item),  # originally escaped
+        )
+
 
 class TitleColumn(LinkColumn):
     grok.baseclass()
@@ -100,17 +113,14 @@ class TitleColumn(LinkColumn):
 
     def getLinkContent(self, item):
         title = get_value(item, 'Title')
-        if isinstance(title, unicode):
-            return title
-        else:
-            return unicode(title, 'utf-8', 'ignore')
+        return escape(safe_unicode(title))
 
 
 class IconColumn(LinkColumn):
     grok.baseclass()
 
     def getLinkContent(self, item):
-        content = super(IconColumn, self).getLinkContent(item)
+        content = super(IconColumn, self).getLinkContent(item)  # escaped
         return u"""<img title="%s" src="%s" />""" % (
             content,
             '%s/%s' % (self.table.portal_url, self.iconName))

@@ -49,6 +49,7 @@ setup(
         'five.grok',
         'collective.documentviewer',
         'dexterity.localrolesfield',
+        'future',
         'plone.api',
         'plone.app.dexterity',
         'plone.directives.form',
@@ -59,7 +60,7 @@ setup(
         'plone.formwidget.contenttree',
         'plone.principalsource',
         'collective.z3cform.chosen',
-        'z3c.table',
+        'z3c.table>=2.2',
     ],
     extras_require={
         'test': ['plone.app.testing',

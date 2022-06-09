@@ -4,8 +4,8 @@ Changelog
 1.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Updated columns to work with z3c.table 2.2. Escaped rendering special caracters to avoid xss.
+  [sgeulette]
 
 1.6 (2021-04-20)
 ----------------
