@@ -3,6 +3,7 @@ from Acquisition import aq_base
 from collective.dms.basecontent import _
 from five import grok
 from html import escape
+from plone import api
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CMFPlone.utils import safe_unicode
@@ -61,6 +62,16 @@ class DateTimeColumn(Column):
         return self.table.format_date(value, long_format=True)
 
 
+def get_user_fullname(username):
+    """Get fullname without using getMemberInfo that is slow slow slow..."""
+    storage = api.portal.get_tool('acl_users').mutable_properties._storage
+    data = storage.get(username, None)
+    if data is not None:
+        return data.get('fullname', '') or username
+    else:
+        return username
+
+
 class PrincipalColumn(Column):
     grok.baseclass()
     attribute = NotImplemented
@@ -71,17 +82,18 @@ class PrincipalColumn(Column):
         if not isinstance(value, (list, tuple)):
             value = (value,)
 
-        gtool = getToolByName(plone.api.portal.get(), 'portal_groups')
-        mtool = getToolByName(plone.api.portal.get(), 'portal_membership')
+        # gtool = getToolByName(plone.api.portal.get(), 'portal_groups')
+        # mtool = getToolByName(plone.api.portal.get(), 'portal_membership')
         principals = []
         for principal_id in value:
-            user = mtool.getMemberById(principal_id)
-            if user is not None:
-                principals.append(escape(user.getProperty('fullname', None)) or user.getId())
-            else:
-                group = gtool.getGroupById(principal_id)
-                if group is not None:
-                    principals.append(escape(group.getProperty('title', None)) or group.getId())
+            # user = mtool.getMemberById(principal_id)
+            # if user is not None:
+            #     principals.append(escape(user.getProperty('fullname', None)) or user.getId())
+            # else:
+            #     group = gtool.getGroupById(principal_id)
+            #     if group is not None:
+            #         principals.append(escape(group.getProperty('title', None)) or group.getId())
+            principals.append(escape(get_user_fullname(principal_id)))
 
         return ', '.join(principals).decode('utf-8')
 
@@ -98,7 +110,7 @@ class LinkColumn(z3c.table.column.LinkColumn, Column):
     def renderCell(self, item):
         # setup a tag
         return '<a href="%s"%s%s%s>%s</a>' % (
-            self.getLinkURL(item),  # originally escaped
+            escape(self.getLinkURL(item)),
             self.getLinkTarget(item),
             self.getLinkCSS(item),
             self.getLinkTitle(item),
