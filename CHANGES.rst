@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.7 (unreleased)
+1.7 (2022-06-21)
 ----------------
 
 - Updated columns to work with z3c.table 2.2. Escaped rendering special caracters to avoid xss.
