@@ -67,9 +67,9 @@ def get_user_fullname(username):
     storage = api.portal.get_tool('acl_users').mutable_properties._storage
     data = storage.get(username, None)
     if data is not None:
-        return data.get('fullname', '') or username
+        return safe_unicode(data.get('fullname', '') or username)
     else:
-        return username
+        return safe_unicode(username)
 
 
 class PrincipalColumn(Column):
@@ -95,7 +95,7 @@ class PrincipalColumn(Column):
             #         principals.append(escape(group.getProperty('title', None)) or group.getId())
             principals.append(escape(get_user_fullname(principal_id)))
 
-        return ', '.join(principals).decode('utf-8')
+        return u', '.join(principals)
 
 
 class LinkColumn(z3c.table.column.LinkColumn, Column):

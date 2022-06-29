@@ -4,8 +4,8 @@ Changelog
 1.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Corrected UnicodeEncodeError.
+  [sgeulette]
 
 1.7 (2022-06-21)
 ----------------
