@@ -50,6 +50,8 @@ setup(
         'collective.documentviewer',
         'dexterity.localrolesfield',
         'future',
+        'imio.helpers>=0.42',
+        'pdbpp',
         'plone.api',
         'plone.app.dexterity',
         'plone.directives.form',

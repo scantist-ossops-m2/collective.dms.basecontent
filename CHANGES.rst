@@ -5,7 +5,9 @@ Changelog
 ----------------
 
 - Made buildout running again.
-
+  [sgeulette]
+- Added `DmsDocument.get_mainfiles` to get dmsmainfiles
+  [sgeulette]
 
 1.8 (2022-07-01)
 ----------------

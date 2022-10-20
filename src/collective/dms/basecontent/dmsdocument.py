@@ -1,3 +1,4 @@
+from imio.helpers.content import object_values
 from zope import schema
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
@@ -48,6 +49,9 @@ class DmsDocument(Container):
     implements(IDmsDocument)
     # disable local roles inheritance
     __ac_local_roles_block__ = True
+
+    def get_mainfiles(self):
+        return object_values(self, ['DmsFile'])
 
 
 class DmsDocumentSchemaPolicy(DexteritySchemaPolicy):
