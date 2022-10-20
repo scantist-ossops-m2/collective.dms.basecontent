@@ -4,7 +4,7 @@ Changelog
 1.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Made buildout running again.
 
 
 1.8 (2022-07-01)
