@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.10 (unreleased)
+1.10 (2022-10-28)
 -----------------
 
 - Removed pdbpp as dependency.
