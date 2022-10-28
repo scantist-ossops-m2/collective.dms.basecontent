@@ -4,8 +4,8 @@ Changelog
 1.10 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Removed pdbpp as dependency.
+  [sgeulette]
 
 1.9 (2022-10-28)
 ----------------
