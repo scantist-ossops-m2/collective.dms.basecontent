@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.9 (unreleased)
+1.9 (2022-10-28)
 ----------------
 
 - Made buildout running again.
