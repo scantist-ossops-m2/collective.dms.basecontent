@@ -4,8 +4,8 @@ Changelog
 1.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Replaced subscriber grok declaration by zcml.
+  [sgeulette]
 
 1.10 (2022-10-28)
 -----------------

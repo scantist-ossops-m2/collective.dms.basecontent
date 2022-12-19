@@ -71,4 +71,10 @@
         factory=".indexers.recipient_groups_indexer"
         />
 
+    <subscriber
+        for="collective.dms.basecontent.dmsfile.IDmsFile
+             zope.lifecycleevent.interfaces.IObjectAddedEvent"
+        handler=".dmsfile.update_higher_version"
+        />
+
 </configure>
