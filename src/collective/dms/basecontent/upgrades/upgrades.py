@@ -32,3 +32,14 @@ def v2(context):
                     else:
                         # either use manage_delLocalRoles
                         obj.manage_delLocalRoles((local_principal, ))
+
+
+def v3(context):
+    # install product
+    setup = api.portal.get_tool('portal_setup')
+    setup.runAllImportStepsFromProfile('profile-collective.js.chosen:uninstall',
+                                       dependency_strategy='new')
+    setup.runAllImportStepsFromProfile('profile-collective.z3cform.chosen:uninstall',
+                                       dependency_strategy='new')
+    setup.runAllImportStepsFromProfile('profile-collective.z3cform.select2:default',
+                                       dependency_strategy='new')

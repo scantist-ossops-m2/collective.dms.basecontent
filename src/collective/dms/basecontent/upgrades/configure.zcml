@@ -11,4 +11,12 @@
       handler=".upgrades.v2"
       profile="collective.dms.basecontent:default" />
 
+  <genericsetup:upgradeStep
+      title="Migration profile for collective.dms.basecontent to 3"
+      description="Upgrade from 2 to 3"
+      source="2"
+      destination="3"
+      handler=".upgrades.v3"
+      profile="collective.dms.basecontent:default" />
+
 </configure>
