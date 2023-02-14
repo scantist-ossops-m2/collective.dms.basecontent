@@ -25,6 +25,7 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Plone",
+        "Framework :: Plone :: Addon",
         "Framework :: Plone :: 4.2",
         "Framework :: Plone :: 4.3",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
