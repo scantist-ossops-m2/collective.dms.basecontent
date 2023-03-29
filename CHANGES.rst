@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.11 (unreleased)
+1.11 (2023-03-29)
 -----------------
 
 - Replaced subscriber grok declaration by zcml.
