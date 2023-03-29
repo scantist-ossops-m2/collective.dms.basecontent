@@ -6,6 +6,9 @@ Changelog
 
 - Replaced subscriber grok declaration by zcml.
   [sgeulette]
+- Replaced collective.z3cform.chosen widget by collective.z3cform.select2.
+  Must remove "chosen" packages in next release.
+  [sgeulette]
 
 1.10 (2022-10-28)
 -----------------

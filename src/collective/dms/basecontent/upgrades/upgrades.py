@@ -32,3 +32,16 @@ def v2(context):
                     else:
                         # either use manage_delLocalRoles
                         obj.manage_delLocalRoles((local_principal, ))
+
+
+def v3(context):
+    # uninstall chosen products
+    pqi = api.portal.get_tool("portal_quickinstaller")
+    inst_prd = [dic['id'] for dic in pqi.listInstalledProducts() if dic['status'] == 'installed']
+    for prd in ('collective.z3cform.chosen', 'collective.js.chosen'):
+        if prd in inst_prd:
+            pqi.uninstallProducts([prd])
+    # install select2
+    setup = api.portal.get_tool('portal_setup')
+    setup.runAllImportStepsFromProfile('profile-collective.z3cform.select2:default',
+                                       dependency_strategy='new')
