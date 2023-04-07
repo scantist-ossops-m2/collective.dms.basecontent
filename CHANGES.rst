@@ -4,8 +4,9 @@ Changelog
 1.12 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Customised dmsdocument view template so the description is inside a span. So it can be displayed as multilines by
+  using dms-description class.
+  [sgeulette]
 
 1.11 (2023-03-29)
 -----------------
