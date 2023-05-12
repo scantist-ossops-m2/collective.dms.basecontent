@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.12 (unreleased)
+1.12 (2023-05-12)
 -----------------
 
 - Customised dmsdocument view template so the description is inside a span. So it can be displayed as multilines by
