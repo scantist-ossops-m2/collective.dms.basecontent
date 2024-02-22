@@ -20,7 +20,6 @@
   <include package="plone.app.relationfield" />
   <include package="plone.principalsource" />
   <include package="plone.supermodel" />
-  <include package="collective.z3cform.chosen" />
   <include package="collective.z3cform.select2" />
   <include package="collective.documentviewer" />
   <include package="dexterity.localrolesfield" />

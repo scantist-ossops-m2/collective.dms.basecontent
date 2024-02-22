@@ -4,8 +4,8 @@ Changelog
 1.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Removed `collective.z3cform.chosen` dependency.
+  [sgeulette]
 
 1.12 (2023-05-12)
 -----------------

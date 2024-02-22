@@ -61,7 +61,6 @@ setup(
         'plone.app.relationfield',
         'plone.formwidget.contenttree',
         'plone.principalsource',
-        'collective.z3cform.chosen',
         'collective.z3cform.select2',
         'z3c.table>=2.2',
     ],
