@@ -1,24 +1,19 @@
-import datetime
-
-from five import grok
+from plone import api
+from plone.app.layout.viewlets.common import ViewletBase
+from plone.batching.interfaces import IBatch
+from z3c.table.interfaces import IBatchProvider
 from zope.cachedescriptors.property import CachedProperty
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import MessageFactory
-import z3c.table.table
-import z3c.table.column
-from z3c.table.interfaces import IBatchProvider
 
-from plone.batching.interfaces import IBatch
-from plone import api
+import datetime
+import z3c.table.table
+
 
 PMF = MessageFactory('plone')
 
-grok.templatedir('templates')
 
-
-class TableViewlet(grok.Viewlet):
-    grok.baseclass()
-    grok.template('filesviewlet')
+class TableViewlet(ViewletBase):
     __table__ = NotImplemented
     label = NotImplemented
     noresult_message = NotImplemented
@@ -84,7 +79,8 @@ class Table(z3c.table.table.Table):
             request=self.request)
 
     def renderRow(self, row, cssClass=None):
-        from .column import StateColumn, get_value
+        from .column import get_value
+        from .column import StateColumn
         isSelected = self.isSelectedRow(row)
         if isSelected and self.cssClassSelected and cssClass:
             cssClass = '%s %s' % (self.cssClassSelected, cssClass)

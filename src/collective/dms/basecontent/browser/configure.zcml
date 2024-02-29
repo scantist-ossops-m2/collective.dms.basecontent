@@ -3,6 +3,46 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="plone">
 
+    <browser:viewletManager
+        name="dms.abovecontent"
+        provides="collective.dms.basecontent.browser.viewlets.IDmsAboveContent"
+        permission="zope2.View"
+        class="Products.Five.viewlet.manager.ViewletManagerBase"
+    />
+
+    <browser:viewletManager
+        name="dms.belowcontent"
+        provides="collective.dms.basecontent.browser.viewlets.IDmsBelowContent"
+        permission="zope2.View"
+        class="Products.Five.viewlet.manager.ViewletManagerBase"
+    />
+
+    <browser:viewlet
+        name="dms.files"
+        for="collective.dms.basecontent.dmsdocument.IDmsDocument"
+        manager="collective.dms.basecontent.browser.viewlets.IDmsAboveContent"
+        class=".viewlets.VersionsViewlet"
+        template="templates/versionsviewlet.pt"
+        permission="zope2.View"
+        />
+
+    <browser:viewlet
+        name="dms.appendix"
+        for="collective.dms.basecontent.dmsdocument.IDmsDocument"
+        manager="collective.dms.basecontent.browser.viewlets.IDmsBelowContent"
+        class=".viewlets.AppendixViewlet"
+        template="templates/filesviewlet.pt"
+        permission="zope2.View"
+        />
+
+    <!--browser:viewlet
+        name="dms.changetitle"
+        for="zope.interface.interface.Interface"
+        manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
+        class=".viewlets.ChangeTitleViewlet"
+        permission="zope2.View"
+        /-->
+
   <browser:resource
       name="dmsappendixfile_icon.png"
       image="static/img/dmsappendixfile_icon.png"

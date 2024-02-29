@@ -1,32 +1,21 @@
-from five import grok
-
-from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
-
-from collective.dms.basecontent.dmsdocument import IDmsDocument
 from collective.dms.basecontent import _
-from collective.dms.basecontent.browser.listing import (VersionsTable,
-                                                        DmsAppendixTable)
+from collective.dms.basecontent.browser.listing import DmsAppendixTable
+from collective.dms.basecontent.browser.listing import VersionsTable
 from collective.dms.basecontent.browser.table import TableViewlet
-
-from zope.interface import Interface
-
-
-
-grok.templatedir('templates')
-grok.context(IDmsDocument)
+from plone.app.layout.viewlets.common import ViewletBase
+from zope.viewlet.interfaces import IViewletManager
 
 
-class DmsAboveContentViewletManager(grok.ViewletManager):
-    grok.name('dms.abovecontent')
+class IDmsAboveContent(IViewletManager):
+    """A viewlet manager that sits above the content area"""
 
 
-class DmsBelowContentViewletManager(grok.ViewletManager):
-    grok.name('dms.belowcontent')
+class IDmsBelowContent(IViewletManager):
+    """A viewlet manager that sits below the content area"""
 
 
 class BaseViewlet(TableViewlet):
-    grok.baseclass()
-    grok.viewletmanager(DmsBelowContentViewletManager)
+
     __table__ = VersionsTable
 
     def contentFilter(self):
@@ -35,10 +24,6 @@ class BaseViewlet(TableViewlet):
 
 
 class VersionsViewlet(BaseViewlet):
-    grok.name('dms.files')
-    grok.template('versionsviewlet')
-    grok.viewletmanager(DmsAboveContentViewletManager)
-    grok.order(10)
     portal_type = 'dmsmainfile'
     label = _(u"Versions")
     noresult_message = _(u"There is no version note for this document.")
@@ -50,8 +35,6 @@ class VersionsViewlet(BaseViewlet):
 
 
 class AppendixViewlet(BaseViewlet):
-    grok.name('dms.appendix')
-    grok.order(20)
     portal_type = 'dmsappendixfile'
     label = _(u"Appendix")
     noresult_message = _(u"There is no appendix for this document.")
@@ -63,11 +46,7 @@ class AppendixViewlet(BaseViewlet):
                 'sort_order': 'ascending'}
 
 
-class ChangeTitleViewlet(grok.Viewlet):
-    grok.name('dms.changetitle')
-    grok.context(Interface)
-    grok.viewletmanager(IHtmlHeadLinks)
-    grok.require('zope2.View')
+class ChangeTitleViewlet(ViewletBase):
 
     def render(self):
         return u"""
