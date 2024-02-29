@@ -8,7 +8,7 @@ Changelog
   [sgeulette]
 - Removed grok for viewlets. Commented `dms.changetitle` viewlet definition.
   [sgeulette]
-- Removed grok for columns.
+- Removed grok for columns, batch adapter.
   [sgeulette]
 
 1.12 (2023-05-12)

@@ -93,16 +93,16 @@
         permission="zope2.View"
         layer="collective.documentviewer.interfaces.ILayer" />
 
-    <!-- columns -->
-    <!--adapter
+      <!-- batch provider -->
+    <adapter
+        name="plonebatch"
+        factory="collective.dms.basecontent.browser.batch.PloneBatchProvider"
         for="zope.interface.Interface
-             zope.interface.Interface
-             collective.dms.basecontent.browser.listing.BaseTable"
-        factory=".listing.BaseTitleColumn"
-        provides="z3c.table.interfaces.IColumn"
-        name="dms.title"
-        /-->
+             zope.publisher.interfaces.browser.IBrowserRequest
+             z3c.table.interfaces.ITable"
+        />
 
+    <!-- columns -->
     <adapter
         for="zope.interface.Interface
              zope.interface.Interface

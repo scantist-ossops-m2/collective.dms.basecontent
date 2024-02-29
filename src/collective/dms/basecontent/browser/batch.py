@@ -1,18 +1,10 @@
-from five import grok
 from z3c.table.interfaces import IBatchProvider
-from zope.interface import Interface
-import zope.publisher.interfaces.browser
-import z3c.table.interfaces
+from zope.interface import implementer
 from ZTUtils import make_query
 
 
-class PloneBatchProvider(grok.MultiAdapter):
-    grok.name('plonebatch')
-    grok.implements(IBatchProvider)
-    grok.adapts(
-        Interface,
-        zope.publisher.interfaces.browser.IBrowserRequest,
-        z3c.table.interfaces.ITable)
+@implementer(IBatchProvider)
+class PloneBatchProvider(object):
     batchformkeys = None
     defaultBatchLinkCSS = u''
     batchLinkCSS = {'previous': u'previous',
@@ -114,7 +106,6 @@ class PloneBatchProvider(grok.MultiAdapter):
 
 
 class BootstrapPloneBatchProvider(PloneBatchProvider):
-    grok.baseclass()
     batchLinkCSS = {'previous': u'previous',
                     'next': u'next',
                     'first': u'first',
