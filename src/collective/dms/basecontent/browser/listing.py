@@ -1,19 +1,11 @@
 # -*- coding: utf-8 -*-
-from five import grok
-
-from zope.interface import Interface
-from zope.cachedescriptors.property import CachedProperty
-from zope.i18n import translate
-from zope.i18nmessageid import MessageFactory
-
-from Products.CMFCore.utils import getToolByName
-
 from collective.dms.basecontent import _
 from collective.dms.basecontent.browser import column
 from collective.dms.basecontent.browser.table import Table
-
-
-grok.templatedir('templates')
+from Products.CMFCore.utils import getToolByName
+from zope.cachedescriptors.property import CachedProperty
+from zope.i18n import translate
+from zope.i18nmessageid import MessageFactory
 
 PMF = MessageFactory('plone')
 
@@ -44,13 +36,7 @@ class DmsAppendixTable(VersionsTable):
         return [column for column in columns if column.__name__ != 'dms.state']
 
 
-class BaseTitleColumn(column.TitleColumn):
-    grok.name('dms.title')
-    grok.adapts(Interface, Interface, BaseTable)
-
-
-class VersionsTitleColumn(BaseTitleColumn):
-    grok.adapts(Interface, Interface, VersionsTable)
+class VersionsTitleColumn(column.TitleColumn):
     domain = 'collective.dms.basecontent'
     linkCSS = 'version-link'
 
@@ -59,29 +45,7 @@ class VersionsTitleColumn(BaseTitleColumn):
         return translate(content, domain=self.domain, context=self.request)
 
 
-class DownloadColumn(column.DownloadColumn):
-    grok.name('dms.download')
-    grok.adapts(Interface, Interface, VersionsTable)
-
-
-class EditColumn(column.EditColumn):
-    grok.name('dms.edit')
-    grok.adapts(Interface, Interface, VersionsTable)
-
-
-class ExternalEditColumn(column.ExternalEditColumn):
-    grok.name('dms.extedit')
-    grok.adapts(Interface, Interface, VersionsTable)
-
-
-class DeleteColumn(column.DeleteColumn):
-    grok.name('dms.delete')
-    grok.adapts(Interface, Interface, VersionsTable)
-
-
 class AuthorColumn(column.PrincipalColumn):
-    grok.name('dms.author')
-    grok.adapts(Interface, Interface, VersionsTable)
     header = _(u"Author")
     weight = 30
     attribute = 'Creator'
@@ -89,8 +53,6 @@ class AuthorColumn(column.PrincipalColumn):
 
 
 class UpdateColumn(column.DateColumn):
-    grok.name('dms.update')
-    grok.adapts(Interface, Interface, VersionsTable)
     header = PMF(u"listingheader_modified")
     attribute = 'modified'
     weight = 40
@@ -98,14 +60,10 @@ class UpdateColumn(column.DateColumn):
 
 
 class StateColumn(column.StateColumn):
-    grok.name('dms.state')
-    grok.adapts(Interface, Interface, BaseTable)
     weight = 50
 
 
 class VersionLabelColumn(column.LabelColumn):
-    grok.name('dms.label')
-    grok.adapts(Interface, Interface, VersionsTable)
     attribute = 'label'
     header = _(u"Label")
     weight = 15

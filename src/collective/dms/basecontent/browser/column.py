@@ -1,32 +1,21 @@
 from AccessControl import getSecurityManager
-from Acquisition import aq_base
+from Acquisition import aq_base  # noqa
 from collective.dms.basecontent import _
-from five import grok
 from html import escape
 from plone import api
-from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CMFPlone.utils import safe_unicode
-from z3c.table import interfaces
+from z3c.table.column import Column
 from zope.component import getMultiAdapter
 from zope.i18n import translate
 from zope.i18nmessageid import MessageFactory
 
 import Missing
 import os.path
-import plone.api
-import z3c.table.column
 import z3c.table.table
 
 
 PMF = MessageFactory('plone')
-
-grok.templatedir('templates')
-
-
-class Column(z3c.table.column.Column, grok.MultiAdapter):
-    grok.baseclass()
-    grok.provides(interfaces.IColumn)
 
 
 def get_value(item, attribute, default=None):
@@ -45,7 +34,6 @@ def get_value(item, attribute, default=None):
 
 
 class DateColumn(Column):
-    grok.baseclass()
     attribute = NotImplemented
 
     def renderCell(self, item):
@@ -54,7 +42,6 @@ class DateColumn(Column):
 
 
 class DateTimeColumn(Column):
-    grok.baseclass()
     attribute = NotImplemented
 
     def renderCell(self, item):
@@ -73,7 +60,6 @@ def get_user_fullname(username):
 
 
 class PrincipalColumn(Column):
-    grok.baseclass()
     attribute = NotImplemented
 
     def renderCell(self, item):
@@ -98,8 +84,7 @@ class PrincipalColumn(Column):
         return u', '.join(principals)
 
 
-class LinkColumn(z3c.table.column.LinkColumn, Column):
-    grok.baseclass()
+class LinkColumn(z3c.table.column.LinkColumn):
 
     def getLinkURL(self, item):
         """Setup link url."""
@@ -119,7 +104,6 @@ class LinkColumn(z3c.table.column.LinkColumn, Column):
 
 
 class TitleColumn(LinkColumn):
-    grok.baseclass()
     header = PMF("Title")
     weight = 10
 
@@ -129,7 +113,6 @@ class TitleColumn(LinkColumn):
 
 
 class IconColumn(LinkColumn):
-    grok.baseclass()
 
     def getLinkContent(self, item):
         content = super(IconColumn, self).getLinkContent(item)  # escaped
@@ -139,7 +122,6 @@ class IconColumn(LinkColumn):
 
 
 class DeleteColumn(IconColumn):
-    grok.baseclass()
     header = u""
     weight = 9
     linkName = "delete_confirmation"
@@ -161,7 +143,6 @@ class DeleteColumn(IconColumn):
 
 
 class DownloadColumn(IconColumn):
-    grok.baseclass()
     header = u""
     weight = 1
     linkName = "@@download"
@@ -170,7 +151,6 @@ class DownloadColumn(IconColumn):
 
 
 class ExternalEditColumn(IconColumn):
-    grok.baseclass()
     header = u""
     weight = 3
     linkName = "@@external_edit"
@@ -204,7 +184,6 @@ class ExternalEditColumn(IconColumn):
 
 
 class EditColumn(IconColumn):
-    grok.baseclass()
     header = u""
     weight = 2
     linkName = "edit"
@@ -225,7 +204,6 @@ class EditColumn(IconColumn):
 
 
 class StateColumn(Column):
-    grok.baseclass()
     header = PMF(u"State")
     weight = 50
 
@@ -244,7 +222,6 @@ class StateColumn(Column):
 
 
 class LabelColumn(Column):
-    grok.baseclass()
     attribute = NotImplemented
 
     def renderCell(self, item):

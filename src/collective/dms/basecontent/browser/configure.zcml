@@ -93,4 +93,95 @@
         permission="zope2.View"
         layer="collective.documentviewer.interfaces.ILayer" />
 
+    <!-- columns -->
+    <!--adapter
+        for="zope.interface.Interface
+             zope.interface.Interface
+             collective.dms.basecontent.browser.listing.BaseTable"
+        factory=".listing.BaseTitleColumn"
+        provides="z3c.table.interfaces.IColumn"
+        name="dms.title"
+        /-->
+
+    <adapter
+        for="zope.interface.Interface
+             zope.interface.Interface
+             collective.dms.basecontent.browser.listing.VersionsTable"
+        factory=".listing.VersionsTitleColumn"
+        provides="z3c.table.interfaces.IColumn"
+        name="dms.title"
+        />
+
+    <adapter
+        for="zope.interface.Interface
+             zope.interface.Interface
+             collective.dms.basecontent.browser.listing.VersionsTable"
+        factory=".column.DownloadColumn"
+        provides="z3c.table.interfaces.IColumn"
+        name="dms.download"
+        />
+
+    <adapter
+        for="zope.interface.Interface
+             zope.interface.Interface
+             collective.dms.basecontent.browser.listing.VersionsTable"
+        factory=".column.EditColumn"
+        provides="z3c.table.interfaces.IColumn"
+        name="dms.edit"
+        />
+
+    <adapter
+        for="zope.interface.Interface
+             zope.interface.Interface
+             collective.dms.basecontent.browser.listing.VersionsTable"
+        factory=".column.ExternalEditColumn"
+        provides="z3c.table.interfaces.IColumn"
+        name="dms.extedit"
+        />
+
+    <adapter
+        for="zope.interface.Interface
+             zope.interface.Interface
+             collective.dms.basecontent.browser.listing.VersionsTable"
+        factory=".column.DeleteColumn"
+        provides="z3c.table.interfaces.IColumn"
+        name="dms.delete"
+        />
+
+    <adapter
+        for="zope.interface.Interface
+             zope.interface.Interface
+             collective.dms.basecontent.browser.listing.VersionsTable"
+        factory=".listing.AuthorColumn"
+        provides="z3c.table.interfaces.IColumn"
+        name="dms.author"
+        />
+
+    <adapter
+        for="zope.interface.Interface
+             zope.interface.Interface
+             collective.dms.basecontent.browser.listing.VersionsTable"
+        factory=".listing.UpdateColumn"
+        provides="z3c.table.interfaces.IColumn"
+        name="dms.update"
+        />
+
+    <adapter
+        for="zope.interface.Interface
+             zope.interface.Interface
+             collective.dms.basecontent.browser.listing.BaseTable"
+        factory=".listing.StateColumn"
+        provides="z3c.table.interfaces.IColumn"
+        name="dms.state"
+        />
+
+    <adapter
+        for="zope.interface.Interface
+             zope.interface.Interface
+             collective.dms.basecontent.browser.listing.VersionLabelColumn"
+        factory=".listing.VersionLabelColumn"
+        provides="z3c.table.interfaces.IColumn"
+        name="dms.label"
+        />
+
 </configure>
