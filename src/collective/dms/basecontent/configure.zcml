@@ -1,17 +1,13 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.dms.basecontent">
 
-  <include package="five.grok" />
   <include package=".upgrades" />
 
   <include package="plone.directives.form" file="meta.zcml" />
   <include package="plone.directives.form" />
-
-  <grok:grok package="." />
 
   <i18n:registerTranslations directory="locales" />
 
@@ -61,6 +57,7 @@
       name="schema_policy_dmsappendixfile"
       />
 
+    <!-- indexers -->
     <adapter
         name="treating_groups"
         factory=".indexers.treating_groups_indexer"
@@ -71,6 +68,28 @@
         factory=".indexers.recipient_groups_indexer"
         />
 
+    <adapter
+        name="SearchableText"
+        factory=".indexers.document_dynamic_searchable_text_indexer"
+        />
+
+    <!--vocabularies-->
+    <utility
+        name="dms.principals"
+        factory="collective.dms.basecontent.source.PrincipalsVocabularyFactory"
+        />
+
+    <utility
+        name="collective.dms.basecontent.treating_groups"
+        factory="collective.dms.basecontent.source.TreatingGroupsVocabulary"
+        />
+
+    <utility
+        name="collective.dms.basecontent.recipient_groups"
+        factory="collective.dms.basecontent.source.RecipientGroupsVocabulary"
+        />
+
+    <!--various-->
     <subscriber
         for="collective.dms.basecontent.dmsfile.IDmsFile
              zope.lifecycleevent.interfaces.IObjectAddedEvent"

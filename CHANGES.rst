@@ -6,9 +6,9 @@ Changelog
 
 - Removed `collective.z3cform.chosen` dependency.
   [sgeulette]
-- Removed grok for viewlets. Commented `dms.changetitle` viewlet definition.
+- Removed grok from viewlets. Commented `dms.changetitle` viewlet definition.
   [sgeulette]
-- Removed grok for columns, batch adapter.
+- Removed grok from columns, batch adapter, vocabularies, index.
   [sgeulette]
 
 1.12 (2023-05-12)

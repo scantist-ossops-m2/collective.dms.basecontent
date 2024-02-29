@@ -47,7 +47,6 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
-        'five.grok',
         'collective.documentviewer',
         'dexterity.localrolesfield',
         'future',

@@ -1,4 +1,4 @@
-from five import grok
+from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from plone.principalsource.source import PrincipalSourceBinder, PrincipalSource
 
@@ -17,7 +17,7 @@ class PrincipalSource(PrincipalSource):
     @property
     def _search(self):
         if self.users and self.groups:
-#            return self.acl_users.searchPrincipals
+            # return self.acl_users.searchPrincipals
             return self.search_principals
         elif self.users:
             return self.acl_users.searchUsers
@@ -31,20 +31,18 @@ class PrincipalSourceBinder(PrincipalSourceBinder):
         return PrincipalSource(context, self.users, self.groups)
 
 
-class PrincipalsVocabularyFactory(grok.GlobalUtility):
+@implementer(IVocabularyFactory)
+class PrincipalsVocabularyFactory(object):
     """Vocabulary for principals"""
-    grok.name('dms.principals')
-    grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
         principals = PrincipalSourceBinder(users=True, groups=True)
         return principals(context)
 
 
-class TreatingGroupsVocabulary(grok.GlobalUtility):
+@implementer(IVocabularyFactory)
+class TreatingGroupsVocabulary(object):
     """Vocabulary for treating groups"""
-    grok.name('collective.dms.basecontent.treating_groups')
-    grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
         principals = PrincipalSourceBinder(users=True, groups=True)
@@ -52,12 +50,11 @@ class TreatingGroupsVocabulary(grok.GlobalUtility):
         return principals(context)
 
 
-class RecipientGroupsVocabulary(grok.GlobalUtility):
+@implementer(IVocabularyFactory)
+class RecipientGroupsVocabulary(object):
     """Vocabulary for recipient groups"""
-    grok.name('collective.dms.basecontent.recipient_groups')
-    grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
-#        principals = queryUtility(IVocabularyFactory, name=u'plone.principalsource.Principals')
+        # principals = queryUtility(IVocabularyFactory, name=u'plone.principalsource.Principals')
         principals = PrincipalSourceBinder(users=True, groups=True)
         return principals(context)
