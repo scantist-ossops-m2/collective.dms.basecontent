@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.13 (unreleased)
+1.13 (2024-03-01)
 -----------------
 
 - Removed `collective.z3cform.chosen` dependency.
