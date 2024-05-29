@@ -12,6 +12,7 @@ from Products.CMFPlone.utils import base_hasattr
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
 from zope.interface import implementer
+import six
 
 
 class IDmsFile(model.Schema, IFile):
@@ -87,7 +88,7 @@ def titleDefaultValue(data):
         version_number = 1
     else:
         version_number = annotations['higher_version'].value + 1
-    return unicode(version_number)
+    return six.text_type(version_number)
 
 
 def update_higher_version(context, event):
