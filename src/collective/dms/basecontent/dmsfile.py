@@ -11,7 +11,7 @@ from plone.supermodel import model
 from Products.CMFPlone.utils import base_hasattr
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
-from zope.interface import implements
+from zope.interface import implementer
 
 
 class IDmsFile(model.Schema, IFile):
@@ -34,9 +34,9 @@ class IDmsFile(model.Schema, IFile):
     )
 
 
+@implementer(IDmsFile)
 class DmsFile(Item):
     """DmsFile"""
-    implements(IDmsFile)
     __ac_local_roles_block__ = True
 
     incomingmail = False
@@ -66,9 +66,9 @@ class IDmsAppendixFile(model.Schema, IFile):
     )
 
 
+@implementer(IDmsAppendixFile)
 class DmsAppendixFile(Item):
     """DmsAppendixFile"""
-    implements(IDmsAppendixFile)
     __ac_local_roles_block__ = True
 
 
