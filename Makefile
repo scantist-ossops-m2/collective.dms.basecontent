@@ -4,7 +4,7 @@
 # The original Makefile can be found on https://github.com/IMIO/scripts-buildout
 
 SHELL=/bin/bash
-plones=4.3 6.0
+plones=4.3 5.2 6.0
 b_o=
 old_plone=$(shell [ -e .plone-version ] && cat .plone-version)
 
@@ -15,8 +15,11 @@ endif
 ifndef plone
 ifeq (,$(filter setup,$(MAKECMDGOALS)))
   plone=$(old_plone)
-  b_o=-N
 endif
+endif
+
+ifneq ($(wildcard bin/instance),)
+    b_o=-N
 endif
 
 ifndef python
