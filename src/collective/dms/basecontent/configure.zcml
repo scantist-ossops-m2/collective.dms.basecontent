@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="collective.dms.basecontent">
 
   <include package=".upgrades" />
@@ -14,10 +15,11 @@
   <include package="plone.api" />
   <include package="plone.app.dexterity" />
   <include package="plone.app.relationfield" />
-  <include package="plone.principalsource" />
+  <include package="plone.principalsource" zcml:condition="not-have plone-5"/>
   <include package="plone.supermodel" />
   <include package="collective.z3cform.select2" />
   <include package="collective.documentviewer" />
+  <include package="collective.externaleditor" />
   <include package="dexterity.localrolesfield" />
 
   <include package=".browser" />
