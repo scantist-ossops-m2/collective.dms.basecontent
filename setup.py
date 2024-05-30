@@ -50,6 +50,7 @@ setup(
     install_requires=[
         'setuptools',
         'collective.documentviewer',
+        'collective.externaleditor',
         'dexterity.localrolesfield',
         'future',
         'imio.helpers>=0.42',
